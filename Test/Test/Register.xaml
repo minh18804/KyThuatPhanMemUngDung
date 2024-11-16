@@ -5,66 +5,72 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Test"
         mc:Ignorable="d"
-        Title="Window1" Height="450" Width="800">
+        Title="Window1" Height="450" Width="800" Background="Orange">
     <Grid>
         <StackPanel         HorizontalAlignment="Center"
                             VerticalAlignment="Center">
 
-            <Label          Content="Hệ thống quản lý giống và thức ăn chăn nuôi"
-                            FontSize="28"
+            <Label          Content="Hệ thống quản lý chăn nuôi"
+                            FontSize="22"
                             FontWeight="Bold"
-                            Background="LightGreen"/>
+                            Background="Orange"/>
 
             <Label          Content="Trang đăng ký"
+                            FontStyle="Italic"
                             HorizontalAlignment="Center"
-                            FontSize="22"/>
+                            FontSize="19"/>
 
             <Label          Content="Họ:"
-                            HorizontalAlignment="Center"/>
+                            FontSize="16"/>
             <TextBox        x:Name="FirstName" 
                             Padding="5" 
-                            Width="179"
+                            Width="180"
                             Background="Beige"/>
 
             <Label          Content="Tên:"
-                            HorizontalAlignment="Center"/>
+                            FontSize="16"/>
             <TextBox        x:Name="LastName" 
                             Padding="5" 
                             Width="179"
                             Background="Beige"/>
 
-            <Label          Content="Chức vụ"
-                            HorizontalAlignment="Center"/>
+            <Label          Content="Chức vụ:"
+                            FontSize="16"/>
             <ComboBox       x:Name="Roles"
                             Width="130"
                             Loaded="Roles_Loaded"/>
 
-            <Label          Content="Username:"
-                            HorizontalAlignment="Center"/>
+            <Label          Content="Tên đăng nhập:"
+                            FontSize="16"/>
 
             <TextBox        x:Name="Username" 
                             Padding="5" 
                             Width="179"
                             Background="Beige"/>
 
-            <Label          Content="Password:"
-                            HorizontalAlignment="Center"/>
+            <Label          Content="Mật khẩu:"
+                            FontSize="16"/>
+            
             <PasswordBox    x:Name="Password" 
                             Padding="5" 
                             Width="179"
                             Background="Beige"/>
+
+            <TextBox        BorderThickness="0" Background="Orange" />
             
-            <TextBox        BorderThickness="0"/>
             <Button         x:Name="Register" 
                             Content="Đăng ký"
                             Click="Register_Click"
                             Background="LightSteelBlue"
-                            Width="130"/>   
+                            Width="130"/>
 
+            <TextBox        BorderThickness="0" Background="Orange" />
+            
             <Button         x:Name="Return"
                             Content="Quay lại"
                             Click="Return_Click"
-                            Background="LightBlue"
+                            Background="Orange"
+                            BorderThickness="0"
                             Width="130"/>
         </StackPanel>
     </Grid>

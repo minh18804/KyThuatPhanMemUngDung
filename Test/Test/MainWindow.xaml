@@ -5,39 +5,48 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Test"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Background="Orange">
     <Grid>
         <StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Center">
             
-            <Label          Content="Hệ thống quản lý giống và thức ăn chăn nuôi"
+            <Label          Content="Hệ thống quản lý chăn nuôi"
                             FontSize="28"
                             FontWeight="Bold"
-                            Background="LightGreen"/>
+                            Background="Orange"/>
 
             <Label          Content="Trang đăng nhập"
-                            HorizontalAlignment="Center"/>   
+                            HorizontalAlignment="Center"
+                            FontStyle="Italic"
+                            FontSize="18"/>   
 
-            <Label          Content="Username:"/>
+            <Label          Content="Tên đăng nhập:"
+                            FontSize="16"/>
             
             <TextBox        x:Name="Username" 
                             Padding="5" 
                             Width="179"
                             Background="Beige"/>
             
-            <Label          Content="Password:"/>
+            <Label          Content="Mật khẩu:"
+                            FontSize="16"/>
             <PasswordBox    x:Name="Password" 
                             Padding="5" 
                             Width="179"
                             Background="Beige"/>
-            <TextBox BorderThickness="0"/>
+            <TextBox BorderThickness="0" Background="Orange"/>
             <Button x:Name="Login"
                     Content="Đăng nhập"
                     Click="Login_Click"
                     Width="130"/>
+            <TextBox BorderThickness="0"
+                     Padding="6"
+                     Background="Orange"/>
             <Button x:Name="Register" 
                     Content="Đăng ký"
                     Click="Register_Click"
+                    Background="Orange"
+                    BorderThickness="0"
                     Width="130"/>
             
         </StackPanel>
