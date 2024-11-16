@@ -1,0 +1,195 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\levie\\source\\repos\\Test\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|c:\\users\\levie\\source\\repos\\test\\test\\window1.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|solutionrelative:test\\window1.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|c:\\users\\levie\\source\\repos\\test\\test\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|solutionrelative:test\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|c:\\users\\levie\\source\\repos\\test\\test\\window1.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|solutionrelative:test\\window1.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|c:\\users\\levie\\source\\repos\\test\\test\\window1.xaml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|solutionrelative:test\\window1.xaml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|c:\\users\\levie\\source\\repos\\test\\test\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|solutionrelative:test\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|c:\\users\\levie\\source\\repos\\test\\test\\window2.xaml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|solutionrelative:test\\window2.xaml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|c:\\users\\levie\\source\\repos\\test\\test\\window2.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|solutionrelative:test\\window2.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|C:\\Users\\levie\\source\\repos\\Test\\test\\mainwindow.xaml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|solutionrelative:test\\mainwindow.xaml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Window1.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\levie\\source\\repos\\Test\\Test\\Window1.xaml.cs",
+              "RelativeDocumentMoniker": "Test\\Window1.xaml.cs",
+              "ToolTip": "C:\\Users\\levie\\source\\repos\\Test\\Test\\Window1.xaml.cs",
+              "RelativeToolTip": "Test\\Window1.xaml.cs",
+              "ViewState": "AgIAACMAAAAAAAAAAAAgwDIAAACZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-16T13:49:22.901Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Window1.xaml",
+              "DocumentMoniker": "C:\\Users\\levie\\source\\repos\\Test\\Test\\Window1.xaml",
+              "RelativeDocumentMoniker": "Test\\Window1.xaml",
+              "ToolTip": "C:\\Users\\levie\\source\\repos\\Test\\Test\\Window1.xaml",
+              "RelativeToolTip": "Test\\Window1.xaml",
+              "ViewState": "AgIAABkAAAAAAAAAAAAlwCcAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-11-16T13:48:11.674Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Window2.xaml",
+              "DocumentMoniker": "C:\\Users\\levie\\source\\repos\\Test\\Test\\Window2.xaml",
+              "RelativeDocumentMoniker": "Test\\Window2.xaml",
+              "ToolTip": "C:\\Users\\levie\\source\\repos\\Test\\Test\\Window2.xaml",
+              "RelativeToolTip": "Test\\Window2.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-11-16T14:14:44.908Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\levie\\source\\repos\\Test\\Test\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "Test\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\levie\\source\\repos\\Test\\Test\\MainWindow.xaml.cs",
+              "RelativeToolTip": "Test\\MainWindow.xaml.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAApwCQAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-26T23:47:07.647Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\levie\\source\\repos\\Test\\Test\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "Test\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\levie\\source\\repos\\Test\\Test\\MainWindow.xaml",
+              "RelativeToolTip": "Test\\MainWindow.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-09-26T15:04:02.684Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "FloatingWindowState": {
+        "Id": "9f6ef39c-60ba-4b33-bfa3-ac0c44a10425",
+        "Display": 1,
+        "X": 163,
+        "Y": 104,
+        "Width": 756,
+        "Height": 570,
+        "WindowState": 0
+      },
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\levie\\source\\repos\\Test\\Test\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "Test\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\levie\\source\\repos\\Test\\Test\\MainWindow.xaml",
+              "RelativeToolTip": "Test\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-09-20T00:25:50.129Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "FloatingWindowState": {
+        "Id": "c4cbab97-ac0e-46b2-8ba8-16d746470709",
+        "Display": 1,
+        "X": -5,
+        "Y": 288,
+        "Width": 1450,
+        "Height": 568,
+        "WindowState": 0
+      },
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Window2.xaml",
+              "DocumentMoniker": "C:\\Users\\levie\\source\\repos\\Test\\Test\\Window2.xaml",
+              "RelativeDocumentMoniker": "Test\\Window2.xaml",
+              "ToolTip": "C:\\Users\\levie\\source\\repos\\Test\\Test\\Window2.xaml",
+              "RelativeToolTip": "Test\\Window2.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-11-16T14:15:51.861Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Window1.xaml",
+              "DocumentMoniker": "C:\\Users\\levie\\source\\repos\\Test\\Test\\Window1.xaml",
+              "RelativeDocumentMoniker": "Test\\Window1.xaml",
+              "ToolTip": "C:\\Users\\levie\\source\\repos\\Test\\Test\\Window1.xaml",
+              "RelativeToolTip": "Test\\Window1.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-11-16T13:47:55.321Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
