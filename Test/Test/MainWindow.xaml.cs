@@ -30,7 +30,7 @@ namespace Test
         {
             string username = Username.Text;
             string password = Password.Password;
-
+            int roles;
             if(String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password))
             {
                 MessageBox.Show("Không được để trống Username hoặc Password");
@@ -47,7 +47,30 @@ namespace Test
 
                 if (count == 1)
                 {
-                    MessageBox.Show("Đăng nhập thành công!");
+                    query = "SELECT Roles, FirstName, LastName FROM Users WHERE Username=@username AND Password=@password";
+                    cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@username", username);
+                    cmd.Parameters.AddWithValue("@password", password);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    reader.Read();
+                    switch ((int)reader["Roles"])
+                    {
+                        case 0:
+                            Window2 _GiamDoc = new Window2(username, password, (string)reader["LastName"]);
+                            _GiamDoc.Show();
+                            this.Close();
+                            break;
+                        case 1:
+                            Window3 _NhanVien = new Window3(username, password, (string)reader["LastName"]);
+                            _NhanVien.Show();
+                            this.Close();
+                            break;
+                        case 2:
+                            Window4 _Khach = new Window4(username, password, (string)reader["LastName"]);
+                            _Khach.Show();
+                            this.Close();
+                            break;
+                    }
                 }
                 else
                 {

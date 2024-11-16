@@ -13,7 +13,11 @@ C:\Users\levie\source\repos\Test\Test\obj\Debug\Test.exe
 C:\Users\levie\source\repos\Test\Test\obj\Debug\Test.pdb
 C:\Users\levie\source\repos\Test\Test\obj\Debug\MainWindow.g.cs
 C:\Users\levie\source\repos\Test\Test\obj\Debug\MainWindow.baml
-C:\Users\levie\source\repos\Test\Test\obj\Debug\Window1.g.cs
-C:\Users\levie\source\repos\Test\Test\obj\Debug\Window1.baml
-C:\Users\levie\source\repos\Test\Test\obj\Debug\Window2.g.cs
-C:\Users\levie\source\repos\Test\Test\obj\Debug\Window2.baml
+C:\Users\levie\source\repos\Test\Test\obj\Debug\Register.g.cs
+C:\Users\levie\source\repos\Test\Test\obj\Debug\GiamDoc.g.cs
+C:\Users\levie\source\repos\Test\Test\obj\Debug\NhanVien.g.cs
+C:\Users\levie\source\repos\Test\Test\obj\Debug\Khach.g.cs
+C:\Users\levie\source\repos\Test\Test\obj\Debug\Register.baml
+C:\Users\levie\source\repos\Test\Test\obj\Debug\GiamDoc.baml
+C:\Users\levie\source\repos\Test\Test\obj\Debug\NhanVien.baml
+C:\Users\levie\source\repos\Test\Test\obj\Debug\Khach.baml
