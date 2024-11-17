@@ -5,73 +5,131 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Test"
         mc:Ignorable="d"
-        Title="Window1" Height="450" Width="800" Background="Orange">
-    <Grid>
-        <StackPanel         HorizontalAlignment="Center"
-                            VerticalAlignment="Center">
-
-            <Label          Content="Hệ thống quản lý chăn nuôi"
+        Title="Đăng ký" Height="450" Width="800" Background="Orange">
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Label          Content="Hệ thống quản lý chăn nuôi"
                             FontSize="22"
                             FontWeight="Bold"
-                            Background="Orange"/>
+                            Background="Orange"
+                            Grid.Row="0" Grid.Column="0"/>
 
-            <Label          Content="Trang đăng ký"
+        <Label          Content="Trang đăng ký"
                             FontStyle="Italic"
                             HorizontalAlignment="Center"
-                            FontSize="19"/>
+                            FontSize="19"
+                            Grid.Row="1" Grid.Column="0"/>
 
-            <Label          Content="Họ:"
-                            FontSize="16"/>
-            <TextBox        x:Name="FirstName" 
+        <Label          Content="Họ:"
+                            FontSize="16"
+                            Grid.Row="2" Grid.Column="0"/>
+        <TextBox        x:Name="FirstName" 
                             Padding="5" 
                             Width="180"
-                            Background="Beige"/>
+                            Background="Beige"
+                            Grid.Row="2" Grid.Column="0" Margin="119,5,-2,0"/>
 
-            <Label          Content="Tên:"
-                            FontSize="16"/>
-            <TextBox        x:Name="LastName" 
+        <Label        BorderThickness="0" 
+                      Padding="10"
+                            Grid.Row="3" Grid.Column="0"
+                            Background="Orange" />
+
+        <Label          Content="Tên:"
+                            FontSize="16"
+                            Grid.Row="4" Grid.Column="0"/>
+
+        <TextBox        x:Name="LastName" 
                             Padding="5" 
                             Width="179"
-                            Background="Beige"/>
+                            Background="Beige"
+                            Grid.Row="3" Grid.Column="0" Margin="119,22,-1,20" Grid.RowSpan="3"/>
 
-            <Label          Content="Chức vụ:"
-                            FontSize="16"/>
-            <ComboBox       x:Name="Roles"
+        <Label        BorderThickness="0" 
+                      Padding="10"
+                            Grid.Row="5" Grid.Column="0"
+                            Background="Orange" />
+
+        <Label          Content="Chức vụ:"
+                            FontSize="16"
+                            Grid.Row="6" Grid.Column="0"/>
+        <ComboBox       x:Name="Roles"
                             Width="130"
-                            Loaded="Roles_Loaded"/>
+                            Loaded="Roles_Loaded"
+                            Grid.Row="5" Grid.Column="0" Margin="118,19,49,1" Grid.RowSpan="2"/>
 
-            <Label          Content="Tên đăng nhập:"
-                            FontSize="16"/>
+        <Label        BorderThickness="0" 
+                      Padding="10"
+                            Grid.Row="7" Grid.Column="0"
+                            Background="Orange" />
 
-            <TextBox        x:Name="Username" 
+        <Label          Content="Tên đăng nhập:"
+                            FontSize="16"
+                            Grid.Row="8" Grid.Column="0"/>
+
+        <TextBox        x:Name="Username" 
                             Padding="5" 
                             Width="179"
-                            Background="Beige"/>
+                            Background="Beige"
+                            Grid.Row="7" Grid.Column="0" Margin="118,20,0,20" Grid.RowSpan="3"/>
 
-            <Label          Content="Mật khẩu:"
-                            FontSize="16"/>
-            
-            <PasswordBox    x:Name="Password" 
+        <Label        BorderThickness="0" 
+                      Padding="10"
+                            Grid.Row="9" Grid.Column="0"
+                            Background="Orange" />
+
+        <Label          Content="Mật khẩu:"
+                            FontSize="16"
+                            Grid.Row="10" Grid.Column="0"/>
+
+        <PasswordBox    x:Name="Password" 
                             Padding="5" 
                             Width="179"
-                            Background="Beige"/>
+                            Background="Beige"
+                            Grid.Row="10" Grid.Column="0" Margin="118,0,0,20" Grid.RowSpan="2"/>
 
-            <TextBox        BorderThickness="0" Background="Orange" />
-            
-            <Button         x:Name="Register" 
+        <Button         x:Name="Register" 
                             Content="Đăng ký"
                             Click="Register_Click"
                             Background="LightSteelBlue"
-                            Width="130"/>
+                            Width="130"
+                        FontSize="20"
+                            Grid.Row="12" Grid.Column="0"/>
 
-            <TextBox        BorderThickness="0" Background="Orange" />
-            
-            <Button         x:Name="Return"
+        <Label        BorderThickness="0" 
+                      Padding="10"
+                            Grid.Row="13" Grid.Column="0"
+                            Background="Orange" />
+
+        <Button         x:Name="Return"
                             Content="Quay lại"
                             Click="Return_Click"
                             Background="Orange"
                             BorderThickness="0"
-                            Width="130"/>
-        </StackPanel>
+                            Width="130"
+                            Grid.Row="14" Grid.Column="0"/>
     </Grid>
 </Window>

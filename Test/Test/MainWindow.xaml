@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Test"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Background="Orange">
+        Title="Đăng nhập" Height="450" Width="800" Background="Orange">
     <Grid>
         <StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Center">
-            
+
             <Label          Content="Hệ thống quản lý chăn nuôi"
                             FontSize="28"
                             FontWeight="Bold"
@@ -18,37 +18,58 @@
             <Label          Content="Trang đăng nhập"
                             HorizontalAlignment="Center"
                             FontStyle="Italic"
-                            FontSize="18"/>   
+                            FontSize="18"/>
 
-            <Label          Content="Tên đăng nhập:"
-                            FontSize="16"/>
-            
-            <TextBox        x:Name="Username" 
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label      Content="Tên đăng nhập:" 
+                            Grid.Row="0" 
+                            Grid.Column="0" 
+                            FontSize="16" 
+                            VerticalAlignment="Center"/>
+                
+                <TextBox    x:Name="Username" 
+                            Grid.Row="0" 
+                            Grid.Column="1" 
                             Padding="5" 
-                            Width="179"
+                            Width="179" 
                             Background="Beige"/>
-            
-            <Label          Content="Mật khẩu:"
-                            FontSize="16"/>
-            <PasswordBox    x:Name="Password" 
-                            Padding="5" 
-                            Width="179"
-                            Background="Beige"/>
-            <TextBox BorderThickness="0" Background="Orange"/>
+
+                <Label      Content="Mật khẩu:" 
+                            Grid.Row="1" 
+                            Grid.Column="0" 
+                            FontSize="16" 
+                            VerticalAlignment="Center"/>
+                
+                <PasswordBox x:Name="Password" 
+                             Grid.Row="1" 
+                             Grid.Column="1" 
+                             Padding="5" 
+                             Width="179" 
+                             Background="Beige"/>
+            </Grid>
+
             <Button x:Name="Login"
                     Content="Đăng nhập"
                     Click="Login_Click"
-                    Width="130"/>
-            <TextBox BorderThickness="0"
-                     Padding="6"
-                     Background="Orange"/>
+                    Width="130"
+                    Margin="10"/>
             <Button x:Name="Register" 
                     Content="Đăng ký"
                     Click="Register_Click"
                     Background="Orange"
                     BorderThickness="0"
-                    Width="130"/>
-            
+                    Width="130"
+                    Margin="10"/>
+
         </StackPanel>
     </Grid>
 </Window>

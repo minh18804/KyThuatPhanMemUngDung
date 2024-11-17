@@ -30,7 +30,6 @@ namespace Test
         {
             string username = Username.Text;
             string password = Password.Password;
-            int roles;
             if(String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password))
             {
                 MessageBox.Show("Không được để trống Username hoặc Password");
@@ -58,17 +57,17 @@ namespace Test
                         case 0:
                             Window2 _GiamDoc = new Window2(username, password, (string)reader["LastName"]);
                             _GiamDoc.Show();
-                            this.Close();
+                            Close();
                             break;
                         case 1:
                             Window3 _NhanVien = new Window3(username, password, (string)reader["LastName"]);
                             _NhanVien.Show();
-                            this.Close();
+                            Close();
                             break;
                         case 2:
                             Window4 _Khach = new Window4(username, password, (string)reader["LastName"]);
                             _Khach.Show();
-                            this.Close();
+                            Close();
                             break;
                     }
                 }
@@ -83,8 +82,7 @@ namespace Test
         {
             Window1 register = new Window1();
             register.Show();
-            this.Hide();
-
+            Hide();
         }
     }
 }

@@ -31,6 +31,28 @@ namespace Test
             NhanVien,
             Khach
         }
+        private int GenerateID(EnumRoles role)
+        {
+            Random random = new Random();
+            string prefix;
+            switch (role)
+            {
+                case EnumRoles.GiamDoc:
+                    prefix = "0";
+                    break;
+                case EnumRoles.NhanVien:
+                    prefix = "1";
+                    break;
+                case EnumRoles.Khach:
+                    prefix = "2";
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            string randomNumber = random.Next(100000, 999999).ToString();
+            return int.Parse(prefix + randomNumber);
+        }
+
         private void Register_Click(object sender, RoutedEventArgs e)
         {
             string username = Username.Text;
@@ -38,16 +60,25 @@ namespace Test
             string firstname = FirstName.Text;
             string lastname = LastName.Text;
             string _roles = Roles.SelectedItem.ToString();
-            EnumRoles temproles = (EnumRoles)Enum.Parse(typeof(EnumRoles), _roles);
+            EnumRoles temproles = (EnumRoles)Enum.Parse(typeof(EnumRoles), _roles); 
             int roles = (int)temproles;
-            if(String.IsNullOrWhiteSpace(username) || String.IsNullOrWhiteSpace(password))
+            if (String.IsNullOrWhiteSpace(username) || String.IsNullOrWhiteSpace(password))
             {
-                MessageBox.Show("Không được để trống username hoặc password");
+                MessageBox.Show("Không được để trống username hoặc password", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }  
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
+                string checkQuery = "SELECT COUNT(*) FROM Users WHERE Username = @username"; 
+                SqlCommand checkCmd = new SqlCommand(checkQuery, conn); 
+                checkCmd.Parameters.AddWithValue("@username", username); 
+                int userCount = (int)checkCmd.ExecuteScalar(); 
+                if (userCount > 0) { 
+                    MessageBox.Show("Username đã tồn tại. Vui lòng chọn username khác.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error); 
+                    return; 
+                }
+
                 string query = "INSERT INTO Users (Username, Password, FirstName, Lastname, Roles) VALUES (@username, @password, @firstname, @lastname, @roles)";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@username", username);
@@ -57,7 +88,7 @@ namespace Test
                 cmd.Parameters.AddWithValue("@roles", roles);
                 cmd.ExecuteNonQuery();
 
-                MessageBox.Show("Đăng ký thành công");
+                MessageBox.Show("Đăng ký thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.None);
 
                 MainWindow login = new MainWindow();
                 login.Show();
@@ -69,7 +100,7 @@ namespace Test
         {
             MainWindow login = new MainWindow();
             login.Show();
-            this.Close();
+            Close();
         }
 
         private void Roles_Loaded(object sender, RoutedEventArgs e)
