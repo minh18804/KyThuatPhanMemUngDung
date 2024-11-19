@@ -79,5 +79,20 @@ namespace Test
             Info.Show();
             Hide() ;
         }
+
+        private void QLNS_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void test_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void testt_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
