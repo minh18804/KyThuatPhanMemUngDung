@@ -72,7 +72,8 @@
                     HorizontalOffset="10" 
                     VerticalOffset="10">
                 <StackPanel Background="LightGray" Width="200" HorizontalAlignment="Right">
-                    <Button Content="Đổi mật khẩu" 
+                    <Button 
+Content="Đổi mật khẩu" 
                             Click="Button_Click_3"
                             FontWeight="Normal"/>
                     <Button Content="Thông tin người dùng" 
@@ -105,9 +106,9 @@
                StaysOpen="False" 
                Placement="Bottom">
             <StackPanel Background="LightGray" Width="200" HorizontalAlignment="Left">
-                <Button Content="Quản lý nhân sự" Click="Button_Click"/>
-                <Button Content="Test" Click="Button_Click_1"/>
-                <Button Content="Test1" Click="Button_Click_2"/>
+                <Button x:Name="QLNS" Content="Quản lý nhân sự" Click="QLNS_Click"/>
+                <Button x:Name="test" Content="Test" Click="test_Click"/>
+                <Button x:Name="testt" Click="testt_Click"/>
             </StackPanel>
         </Popup>
     </Grid>

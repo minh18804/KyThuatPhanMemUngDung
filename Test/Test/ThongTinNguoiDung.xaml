@@ -96,26 +96,81 @@
                StaysOpen="False" 
                Placement="Bottom">
                     <StackPanel Background="LightGray" Width="200" HorizontalAlignment="Left">
-                        <Button Content="Quản lý nhân sự" Click="Button_Click"/>
-                        <Button Content="Test" Click="Button_Click_1"/>
-                        <Button Content="Test1" Click="Button_Click_2"/>
+                        <Button x:Name="test1" Content="Quản lý nhân sự" Click="test1_Click"/>
+                        <Button x:Name="test2" Content="Test" Click="test2_Click"/>
+                        <Button x:Name="test3" Content="Test1" Click="test3_Click"/>
                     </StackPanel>
                 </Popup>
-        <StackPanel Grid.Row="1" Grid.Column="1">
-            <TextBlock Text="Thông tin người dùng" FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
-            <TextBlock Text="Họ: " FontWeight="Bold"/>
-            <TextBlock x:Name="FirstNameText" Margin="0,0,0,10"/>
-            <TextBlock Text="Tên: " FontWeight="Bold"/>
-            <TextBlock x:Name="LastNameText" Margin="0,0,0,10"/>
-            <TextBlock Text="Vai trò: " FontWeight="Bold"/>
-            <TextBlock x:Name="RolesText" Margin="0,0,0,10"/>
-            <TextBlock Text="Tên đăng nhập: " FontWeight="Bold"/>
-            <TextBlock x:Name="UsernameText" Margin="0,0,0,10"/>
-            <TextBlock Text="Mật khẩu: " FontWeight="Bold"/>
-            <StackPanel Orientation="Horizontal">
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <TextBlock Text="Thông tin người dùng" 
+                       FontSize="28" 
+                       FontWeight="Bold" 
+                       Margin="0,0,0,10"
+                       Grid.Row="0" Grid.Column="0"/>
+            
+            <TextBlock Text="Họ: " 
+                       FontWeight="Bold"
+                       Grid.Row="1"/>
+            <TextBlock x:Name="FirstNameText" 
+                       Margin="0,0,0,10"
+                       Grid.Row="1" Grid.Column="1"/>
+            <TextBlock Text="Tên: " 
+                       FontWeight="Bold"
+                       Grid.Row="2" Grid.Column="0"/>
+            <TextBlock x:Name="LastNameText" 
+                       Margin="0,0,0,10"
+                       Grid.Row="2" Grid.Column="1"/>
+            <TextBlock Text="Vai trò: " 
+                       FontWeight="Bold"
+                       Grid.Row="3" Grid.Column="0"/>
+            <TextBlock x:Name="RolesText" 
+                       Margin="0,0,0,10"
+                       Grid.Row="3" Grid.Column="1"/>
+            <TextBlock Text="Tên đăng nhập: " 
+                       FontWeight="Bold"
+                       Grid.Row="4" Grid.Column="0"/>
+            <TextBlock x:Name="UsernameText" 
+                       Margin="0,0,0,10"
+                       Grid.Row="4" Grid.Column="1"/>
+            <TextBlock Text="Mật khẩu: " 
+                       FontWeight="Bold"
+                       Grid.Row="5" Grid.Column="0"/>
+            <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="1">
                 <TextBlock x:Name="PasswordText" Text="***" Margin="0,0,10,0"/>
                 <Button x:Name="ShowHideButton"  Content="Hiện" Click="Button_Click"/>
             </StackPanel>
-        </StackPanel>
+            <Button x:Name="return" 
+                    Content="Quay lại"
+                    Grid.Row="6" Grid.Column="0"
+                    Width="130"
+                    HorizontalAlignment="Left"
+                    Background="White"
+                    BorderThickness="0"
+                    Padding="7"
+                    Click="return_Click"/>
+            <Button x:Name="changeInfo"
+                    Content="Thay đổi thông tin"
+                    Grid.Row="6" Grid.Column="1"
+                    Width="130"
+                    Padding="7"
+                    Background="White"
+                    BorderThickness="0"
+                    Foreground="Blue"
+                    Click="changeInfo_Click"/>
+        </Grid>
      </Grid>
 </Window>

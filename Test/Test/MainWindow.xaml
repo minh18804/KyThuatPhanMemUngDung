@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="Đăng nhập" Height="450" Width="800" Background="Orange">
     <Grid>
-        <StackPanel HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
+        <StackPanel         HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
 
             <Label          Content="Hệ thống quản lý chăn nuôi"
                             FontSize="28"

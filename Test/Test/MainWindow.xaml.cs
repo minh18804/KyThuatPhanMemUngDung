@@ -24,8 +24,8 @@ namespace Test
         {
             InitializeComponent();
         }
-
-        private string connectionString = "Data Source=localhost;Initial Catalog=contact;Integrated Security=True";
+        //
+        private string connectionString = "Data Source=localhost; Initial Catalog=contact; Integrated Security=True";
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {

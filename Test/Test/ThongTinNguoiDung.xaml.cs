@@ -20,10 +20,13 @@ namespace Test
     /// </summary>
     public partial class Window6 : Window
     {
+        //Khởi tạo các biến toàn cục
         private string _username;
         private string _password;
         private Window _previousWindow;
         private bool _isPasswordVisible;
+        //
+        //Lưu dữ liệu nhận được từ cửa sổ trước vào các biến toàn cục
         public Window6(string username, Window previousWindow)
         {
             InitializeComponent();
@@ -32,8 +35,10 @@ namespace Test
             LoadUserInfo();
         }
 
+        //Lấy dữ liệu người dùng từ SQL
         private void LoadUserInfo()
         {
+            //Tạo query để lấy dữ liệu từ SQL
             string connectionString = "Data Source=localhost;Initial Catalog=contact;Integrated Security=True";
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
@@ -41,12 +46,21 @@ namespace Test
                 string query = "SELECT FirstName, LastName, Roles, Username, Password FROM Users WHERE Username=@username";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@username", _username);
+                
+                //Tạo biến nhận dữ liệu trả về từ SQL
                 SqlDataReader reader = cmd.ExecuteReader();
+
+                //Lấy dữ liệu từ biến reader
                 if (reader.Read())
                 {
                     FirstNameText.Text = reader["FirstName"].ToString();
                     LastNameText.Text = reader["LastName"].ToString();
-                    RolesText.Text = reader["Roles"].ToString();
+
+                    //Phân chia chức vụ
+                    if ((int)reader["Roles"] == 0) RolesText.Text = "Admin";
+                    else if ((int)reader["Roles"] == 1) RolesText.Text = "Nhân viên";
+                    else RolesText.Text = "Khách";
+
                     UsernameText.Text = reader["Username"].ToString();
                     _password = reader["Password"].ToString();
                 }
@@ -105,6 +119,31 @@ namespace Test
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
             // Handle Thông tin người dùng button click
+        }
+
+        private void return_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void changeInfo_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void test1_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void test2_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void test3_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
