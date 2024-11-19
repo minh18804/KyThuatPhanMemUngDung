@@ -20,11 +20,15 @@ namespace Test
     /// </summary>
     public partial class Window2 : Window
     {
+        string _username;
+        string _password;
         public Window2(string username, string password, string lastname)
         {
             InitializeComponent();
-            Greeting.Content = $"Xin chào, Giám đốc {lastname}";
+            Greeting.Content = $"Xin chào, Admin {lastname}";
             InfoButton.Content = lastname[0].ToString();
+            _username = username;
+            _password = password;
         }
 
         private void hamburgerButton_Click(object sender, RoutedEventArgs e)
@@ -42,6 +46,16 @@ namespace Test
             Close();
         }
 
+        private void InfoButton_Click(object sender, RoutedEventArgs e)
+        {
+            popupInfoMenu.IsOpen = !popupInfoMenu.IsOpen;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
 
@@ -54,12 +68,16 @@ namespace Test
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-
+            Window5 doiMatKhau = new Window5(_username, _password, this);
+            doiMatKhau.Show();
+            Hide();
         }
 
-        private void InfoButton_Click(object sender, RoutedEventArgs e)
+        private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            
+            Window6 Info = new Window6(_username, this);
+            Info.Show();
+            Hide() ;
         }
     }
 }

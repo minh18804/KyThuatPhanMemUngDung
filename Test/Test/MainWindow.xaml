@@ -35,30 +35,32 @@
                             Grid.Column="0" 
                             FontSize="16" 
                             VerticalAlignment="Center"/>
-                
+
                 <TextBox    x:Name="Username" 
                             Grid.Row="0" 
                             Grid.Column="1" 
                             Padding="5" 
                             Width="179" 
-                            Background="Beige"/>
+                            Background="Beige"
+                            KeyDown="Username_KeyDown"/>
 
                 <Label      Content="Mật khẩu:" 
                             Grid.Row="1" 
                             Grid.Column="0" 
                             FontSize="16" 
                             VerticalAlignment="Center"/>
-                
+
                 <PasswordBox x:Name="Password" 
                              Grid.Row="1" 
                              Grid.Column="1" 
                              Padding="5" 
                              Width="179" 
-                             Background="Beige"/>
+                             Background="Beige"
+                             KeyDown="Password_KeyDown"/>
             </Grid>
 
             <Button x:Name="Login"
-                    Content="Đăng nhập"
+                    Content="Đăng nhập" 
                     Click="Login_Click"
                     Width="130"
                     Margin="10"/>
@@ -69,7 +71,13 @@
                     BorderThickness="0"
                     Width="130"
                     Margin="10"/>
-
+            <Button x:Name="PasswordChange" 
+                    Content="Đổi mật khẩu"
+                    Click="PasswordChange_Click"
+                    Background="Orange"
+                    BorderThickness="0"
+                    Width="130"
+                    Margin="10"/>
         </StackPanel>
     </Grid>
 </Window>
