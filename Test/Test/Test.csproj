@@ -58,14 +58,20 @@
     <Compile Include="Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GiamDoc.xaml.cs">
-      <DependentUpon>GiamDoc.xaml</DependentUpon>
+    <Compile Include="Admin.xaml.cs">
+      <DependentUpon>Admin.xaml</DependentUpon>
     </Compile>
     <Compile Include="NhanVien.xaml.cs">
       <DependentUpon>NhanVien.xaml</DependentUpon>
     </Compile>
     <Compile Include="Khach.xaml.cs">
       <DependentUpon>Khach.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DoiMatKhau.xaml.cs">
+      <DependentUpon>DoiMatKhau.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ThongTinNguoiDung.xaml.cs">
+      <DependentUpon>ThongTinNguoiDung.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -83,7 +89,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GiamDoc.xaml">
+    <Page Include="Admin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -92,6 +98,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Khach.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DoiMatKhau.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ThongTinNguoiDung.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

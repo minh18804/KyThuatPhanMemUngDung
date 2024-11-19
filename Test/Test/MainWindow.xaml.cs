@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
-
 namespace Test
 {
     /// <summary>
@@ -25,12 +24,42 @@ namespace Test
         {
             InitializeComponent();
         }
+
         private string connectionString = "Data Source=localhost;Initial Catalog=contact;Integrated Security=True";
+
         private void Login_Click(object sender, RoutedEventArgs e)
+        {
+            PerformLogin();
+        }
+
+        private void Register_Click(object sender, RoutedEventArgs e)
+        {
+            Window1 register = new Window1();
+            register.Show();
+            Hide();
+        }
+
+        private void Username_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                PerformLogin();
+            }
+        }
+
+        private void Password_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                PerformLogin();
+            }
+        }
+
+        private void PerformLogin()
         {
             string username = Username.Text;
             string password = Password.Password;
-            if(String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password))
+            if (String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password))
             {
                 MessageBox.Show("Không được để trống Username hoặc Password");
                 return;
@@ -78,10 +107,10 @@ namespace Test
             }
         }
 
-        private void Register_Click(object sender, RoutedEventArgs e)
+        private void PasswordChange_Click(object sender, RoutedEventArgs e)
         {
-            Window1 register = new Window1();
-            register.Show();
+            Window5 DoiMatKhau = new Window5(null, null, this);
+            DoiMatKhau.Show();
             Hide();
         }
     }
