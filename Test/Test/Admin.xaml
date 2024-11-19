@@ -1,4 +1,4 @@
-﻿<Window x:Class="Test.Window2"
+﻿<Window x:Class="Test.AdminWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -43,9 +43,15 @@
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Grid>
-                        <Ellipse Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}"/>
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <Image Source="pack://application:,,,/imageicon/logout.png" Width="16" Height="16" Margin="0,0,5,0"/>
+                        <Ellipse Fill="{TemplateBinding Background}" 
+                                 Stroke="{TemplateBinding BorderBrush}" 
+                                 StrokeThickness="{TemplateBinding BorderThickness}"/>
+                        <ContentPresenter HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center"/>
+                        <Image Source="pack://application:,,,/imageicon/logout.png" 
+                               Width="16" 
+                               Height="16" 
+                               Margin="0,0,5,0"/>
                     </Grid>
                 </ControlTemplate>
             </Button.Template>
@@ -71,25 +77,33 @@
                     Placement="Bottom" 
                     HorizontalOffset="10" 
                     VerticalOffset="10">
-                <StackPanel Background="LightGray" Width="200" HorizontalAlignment="Right">
-                    <Button 
-Content="Đổi mật khẩu" 
-                            Click="Button_Click_3"
+                <StackPanel Background="LightGray" 
+                            Width="200"
+                            HorizontalAlignment="Right">
+                    <Button x:Name="changePassword"
+                            Content="Đổi mật khẩu" 
+                            Click="changePassword_Click"
                             FontWeight="Normal"/>
-                    <Button Content="Thông tin người dùng" 
-                            Click="Button_Click_4"
+                    
+                    <Button x:Name="personInfo"
+                            Content="Thông tin người dùng" 
+                            Click="personInfo_Click"
                             FontWeight="Normal"/>
                 </StackPanel>
             </Popup>
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Grid>
-                        <Ellipse Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}"/>
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Ellipse Fill="{TemplateBinding Background}" 
+                                 Stroke="{TemplateBinding BorderBrush}" 
+                                 StrokeThickness="{TemplateBinding BorderThickness}"/>
+                        <ContentPresenter HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center"/>
                     </Grid>
                 </ControlTemplate>
             </Button.Template>
         </Button>
+        
         <Button x:Name="hamburgerButton"
                 Width="30" 
                 Height="30" 
@@ -105,10 +119,18 @@ Content="Đổi mật khẩu"
                PlacementTarget="{Binding ElementName=hamburgerButton}" 
                StaysOpen="False" 
                Placement="Bottom">
-            <StackPanel Background="LightGray" Width="200" HorizontalAlignment="Left">
-                <Button x:Name="QLNS" Content="Quản lý nhân sự" Click="QLNS_Click"/>
-                <Button x:Name="test" Content="Test" Click="test_Click"/>
-                <Button x:Name="testt" Click="testt_Click"/>
+            <StackPanel Background="LightGray"
+                        Width="200" 
+                        HorizontalAlignment="Left">
+                <Button x:Name="QLNS"  
+                        Content="Quản lý nhân sự" 
+                        Click="QLNS_Click"/>
+                <Button x:Name="test"  
+                        Content="Test"
+                        Click="test_Click"/>
+                <Button x:Name="testt" 
+                        Content="Test"
+                        Click="testt_Click"/>
             </StackPanel>
         </Popup>
     </Grid>

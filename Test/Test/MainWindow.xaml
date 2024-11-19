@@ -1,11 +1,11 @@
-﻿<Window x:Class="Test.MainWindow"
+﻿<Window x:Class="Test.LoginWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Test"
         mc:Ignorable="d"
-        Title="Đăng nhập" Height="450" Width="800" Background="Orange">
+        Title="Đăng nhập" Height="450" Width="800" Background="White">
     <Grid>
         <StackPanel         HorizontalAlignment="Center"
                             VerticalAlignment="Center">
@@ -13,18 +13,39 @@
             <Label          Content="Hệ thống quản lý chăn nuôi"
                             FontSize="28"
                             FontWeight="Bold"
-                            Background="Orange"/>
+                            Background="White"/>
 
             <Label          Content="Trang đăng nhập"
                             HorizontalAlignment="Center"
                             FontStyle="Italic"
                             FontSize="18"/>
+            <Label          Content="   "
+                            Height="15"/>
+            
+            <Label          Content="Quyền truy cập"/>
+            <StackPanel>
+                <RadioButton x:Name="admin"
+                             Content="Admin"
+                             GroupName="Roles"
+                             IsChecked="True"/>
+                <Label Content="    "/>
+                <RadioButton x:Name="nhanVien"
+                             Content="Cấp xã"
+                             GroupName="Roles"/>
+                <Label Content="    "/>
+                <RadioButton x:Name="khach"
+                             Content="Cấp huyện"
+                             GroupName="Roles"/>
+            </StackPanel>
 
             <Grid Margin="10">
+                
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="15"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
+                
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
@@ -41,43 +62,50 @@
                             Grid.Column="1" 
                             Padding="5" 
                             Width="179" 
-                            Background="Beige"
-                            KeyDown="Username_KeyDown"/>
+                            Background="White"
+                            KeyDown="username_KeyDown"/>
 
                 <Label      Content="Mật khẩu:" 
-                            Grid.Row="1" 
+                            Grid.Row="2" 
                             Grid.Column="0" 
                             FontSize="16" 
                             VerticalAlignment="Center"/>
 
                 <PasswordBox x:Name="Password" 
-                             Grid.Row="1" 
+                             Grid.Row="2" 
                              Grid.Column="1" 
                              Padding="5" 
                              Width="179" 
-                             Background="Beige"
-                             KeyDown="Password_KeyDown"/>
+                             Background="White"
+                             KeyDown="password_KeyDown"/>
             </Grid>
 
-            <Button x:Name="Login"
+            <Button x:Name="login"
                     Content="Đăng nhập" 
-                    Click="Login_Click"
-                    Width="130"
+                    Click="login_Click"
+                    Width="230"
+                    FontSize="18"
+                    FontWeight="Bold"
+                    Background="White"
+                    BorderThickness="0"
                     Margin="10"/>
-            <Button x:Name="Register" 
+            
+            <Button x:Name="register" 
                     Content="Đăng ký"
-                    Click="Register_Click"
-                    Background="Orange"
+                    Click="register_Click"
+                    Background="White"
                     BorderThickness="0"
                     Width="130"
                     Margin="10"/>
-            <Button x:Name="PasswordChange" 
+            
+            <Button x:Name="passwordChange" 
                     Content="Đổi mật khẩu"
-                    Click="PasswordChange_Click"
-                    Background="Orange"
+                    Click="passwordChange_Click"
+                    Background="White"
                     BorderThickness="0"
                     Width="130"
                     Margin="10"/>
+            
         </StackPanel>
     </Grid>
 </Window>
