@@ -16,28 +16,52 @@ using System.Data.SqlClient;
 namespace Test
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for RegisterWindow.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class RegisterWindow : Window
     {
-        public Window1()
-        {
-            InitializeComponent();
-        }
-        private string connectionString = "Data Source=localhost;Initial Catalog=contact;Integrated Security=True";
+        /// <summary>
+        /// Tạo cấp độ chức vụ từ 0->2 tương ứng từ Admin->Khach
+        /// </summary>
         public enum EnumRoles
         {
-            GiamDoc,
+            Admin,
             NhanVien,
             Khach
         }
+        public RegisterWindow()
+        {
+            InitializeComponent();
+        }
+        /// <summary>
+        /// Chi tiết ở MainWindow.xaml.cs
+        /// </summary>
+        private string connectionString = "Data Source=localhost;Initial Catalog=contact;Integrated Security=True";
+
+        /// <summary>
+        /// Thêm các lựa chọn cho ComboBox chức vụ
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Roles_Loaded(object sender, RoutedEventArgs e)
+        {
+            Roles.Items.Add("Admin");
+            Roles.Items.Add("NhanVien");
+            Roles.Items.Add("Khach");
+        }
+        /// <summary>
+        /// Hàm tạo mã số nhân viên
+        /// </summary>
+        /// <param name="role"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         private int GenerateID(EnumRoles role)
         {
             Random random = new Random();
             string prefix;
             switch (role)
             {
-                case EnumRoles.GiamDoc:
+                case EnumRoles.Admin:
                     prefix = "0";
                     break;
                 case EnumRoles.NhanVien:
@@ -53,8 +77,33 @@ namespace Test
             return int.Parse(prefix + randomNumber);
         }
 
+        /// <summary>
+        /// Hàm xử lý sự kiện register
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Register_Click(object sender, RoutedEventArgs e)
         {
+            if (String.IsNullOrWhiteSpace(Username.Text) || String.IsNullOrWhiteSpace(Password.Password))
+            {
+                MessageBox.Show("Không được để trống username hoặc password", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(FirstName.Text) || string.IsNullOrWhiteSpace(LastName.Text))
+            {
+                MessageBox.Show("Không được để trống họ và tên", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (Roles.SelectedItem == null)
+            {
+                MessageBox.Show("Vui lòng chọn chức vụ", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if(Username.Text.Length < 8 || Password.Password.Length < 8)
+            {
+                MessageBox.Show("Username hoặc password quá ngắn", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             string username = Username.Text;
             string password = Password.Password;
             string firstname = FirstName.Text;
@@ -62,11 +111,7 @@ namespace Test
             string _roles = Roles.SelectedItem.ToString();
             EnumRoles temproles = (EnumRoles)Enum.Parse(typeof(EnumRoles), _roles); 
             int roles = (int)temproles;
-            if (String.IsNullOrWhiteSpace(username) || String.IsNullOrWhiteSpace(password))
-            {
-                MessageBox.Show("Không được để trống username hoặc password", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }  
+
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
@@ -90,24 +135,22 @@ namespace Test
 
                 MessageBox.Show("Đăng ký thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.None);
 
-                MainWindow login = new MainWindow();
-                login.Show();
-                this.Close();
+                LoginWindow loginWindow = new LoginWindow();
+                loginWindow.Show();
+                Close();
             }
         }
 
+        /// <summary>
+        /// Hàm xử lý sự kiện back
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Return_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow login = new MainWindow();
-            login.Show();
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.Show();
             Close();
-        }
-
-        private void Roles_Loaded(object sender, RoutedEventArgs e)
-        {
-            Roles.Items.Add("GiamDoc");
-            Roles.Items.Add("NhanVien");
-            Roles.Items.Add("Khach");
         }
     }
 }

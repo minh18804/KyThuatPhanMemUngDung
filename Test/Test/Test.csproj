@@ -67,11 +67,11 @@
     <Compile Include="Khach.xaml.cs">
       <DependentUpon>Khach.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DoiMatKhau.xaml.cs">
-      <DependentUpon>DoiMatKhau.xaml</DependentUpon>
+    <Compile Include="ChangePassword.xaml.cs">
+      <DependentUpon>ChangePassword.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ThongTinNguoiDung.xaml.cs">
-      <DependentUpon>ThongTinNguoiDung.xaml</DependentUpon>
+    <Compile Include="UserInfo.xaml.cs">
+      <DependentUpon>UserInfo.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -101,11 +101,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DoiMatKhau.xaml">
+    <Page Include="ChangePassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ThongTinNguoiDung.xaml">
+    <Page Include="UserInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

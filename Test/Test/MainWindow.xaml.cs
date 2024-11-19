@@ -16,49 +16,39 @@ using System.Data.SqlClient;
 namespace Test
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for LoginWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LoginWindow : Window
     {
-        public MainWindow()
+        public LoginWindow()
         {
             InitializeComponent();
         }
-        //
+        /// <summary>
+        /// Chuỗi Initialize kết nối tới SQL:
+        /// <param name="Data Source">: Nếu sử dụng cơ sở dữ liệu từ máy local thì sử dụng "localhost" còn không thì điền IP của CSDL </param>
+        /// <param name="Initial Catalog">: Tên CSDL</param>
+        /// <param name="Integrated Security">: luôn để True </param>
+        /// </summary>
         private string connectionString = "Data Source=localhost; Initial Catalog=contact; Integrated Security=True";
 
-        private void Login_Click(object sender, RoutedEventArgs e)
-        {
-            PerformLogin();
-        }
-
-        private void Register_Click(object sender, RoutedEventArgs e)
-        {
-            Window1 register = new Window1();
-            register.Show();
-            Hide();
-        }
-
-        private void Username_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            if (e.Key == System.Windows.Input.Key.Enter)
-            {
-                PerformLogin();
-            }
-        }
-
-        private void Password_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            if (e.Key == System.Windows.Input.Key.Enter)
-            {
-                PerformLogin();
-            }
-        }
-
+        /// <summary>
+        /// Hàm xử lý login: Nếu username hoặc password trống thì hiện cảnh báo
+        /// Nếu thông tin đúng thì bắt đầu phần quyền từ case 0 đến case 2 tương ứng chức vụ từ cao đến thấp
+        /// </summary>
         private void PerformLogin()
         {
             string username = Username.Text;
             string password = Password.Password;
+            bool? isAdmin = admin.IsChecked;
+            bool? isCapXa = nhanVien.IsChecked;
+            bool? isCapHuyen = khach.IsChecked;
+            int roles;
+            if (isAdmin == true) roles = 0;
+            else if (isCapXa == true) roles = 1;
+            else if (isCapHuyen == true) roles = 2;
+            else roles = 3;
+
             if (String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password))
             {
                 MessageBox.Show("Không được để trống Username hoặc Password");
@@ -67,10 +57,11 @@ namespace Test
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                string query = "SELECT COUNT(1) FROM Users WHERE Username=@username AND Password=@password";
+                string query = "SELECT COUNT(1) FROM Users WHERE Username=@username AND Password=@password AND Roles = @roles";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@username", username);
                 cmd.Parameters.AddWithValue("@password", password);
+                cmd.Parameters.AddWithValue("@roles", roles);
                 int count = Convert.ToInt32(cmd.ExecuteScalar());
 
                 if (count == 1)
@@ -84,18 +75,18 @@ namespace Test
                     switch ((int)reader["Roles"])
                     {
                         case 0:
-                            Window2 _GiamDoc = new Window2(username, password, (string)reader["LastName"]);
-                            _GiamDoc.Show();
+                            AdminWindow adminWindow = new AdminWindow(username, password, (string)reader["LastName"]);
+                            adminWindow.Show();
                             Close();
                             break;
                         case 1:
-                            Window3 _NhanVien = new Window3(username, password, (string)reader["LastName"]);
-                            _NhanVien.Show();
+                            NhanVienWindow nhanVienWindow = new NhanVienWindow(username, password, (string)reader["LastName"]);
+                            nhanVienWindow.Show();
                             Close();
                             break;
                         case 2:
-                            Window4 _Khach = new Window4(username, password, (string)reader["LastName"]);
-                            _Khach.Show();
+                            KhachWindow khachWindow = new KhachWindow(username, password, (string)reader["LastName"]);
+                            khachWindow.Show();
                             Close();
                             break;
                     }
@@ -107,10 +98,54 @@ namespace Test
             }
         }
 
-        private void PasswordChange_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Hàm xử lý sự kiện login
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void login_Click(object sender, RoutedEventArgs e)
         {
-            Window5 DoiMatKhau = new Window5(null, null, this);
-            DoiMatKhau.Show();
+            PerformLogin();
+        }
+        /// <summary>
+        /// Hàm xử lý sự kiện register: chuyển sang màn hình register
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void register_Click(object sender, RoutedEventArgs e)
+        {
+            RegisterWindow register = new RegisterWindow();
+            register.Show();
+            Hide();
+        }
+        /// <summary>
+        /// Hàm xử lý sự kiện bấm Enter là tự động đăng nhập
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void username_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                PerformLogin();
+            }
+        }
+        private void password_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                PerformLogin();
+            }
+        }
+        /// <summary>
+        /// Hàm xử lý sự kiện changePassword: chuyển sang màn hình thay đổi mật khẩu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void passwordChange_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePasswordWindow ChangePasswordWindow = new ChangePasswordWindow(this);
+            ChangePasswordWindow.Show();
             Hide();
         }
     }
