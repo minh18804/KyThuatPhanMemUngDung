@@ -41,9 +41,6 @@ namespace Test
                 bool isCollapsed = NewPasswordPanel.Visibility == Visibility.Collapsed;
                 NewPasswordPanel.Visibility = isCollapsed ? Visibility.Visible : Visibility.Collapsed;
         }
-
-
-
         private void showHide_Click(object sender, RoutedEventArgs e)
         {
             if (_isPasswordVisible)
@@ -94,23 +91,24 @@ namespace Test
                     }
                     string hasPasswordQuery = "UPDATE Users SET Username = @newusername, Password = @password, FirstName = @firstname, Lastname = @lastname, Roles = @roles WHERE Username = @oldusername";
                     SqlCommand hasPasswordCommand = new SqlCommand(hasPasswordQuery, conn);
-                    hasPasswordCommand.Parameters.AddWithValue("@newusername", UsernameTextBox.Text);
+                    hasPasswordCommand.Parameters.AddWithValue("@newusername", _username);
                     hasPasswordCommand.Parameters.AddWithValue("@password", NewPasswordTextBox.Text);
-                    hasPasswordCommand.Parameters.AddWithValue("@firstname", FirstNameTextBox.Text);
-                    hasPasswordCommand.Parameters.AddWithValue("@lastname", LastNameTextBox.Text);
+                    hasPasswordCommand.Parameters.AddWithValue("@firstname", _firstname);
+                    hasPasswordCommand.Parameters.AddWithValue("@lastname", _lastname);
                     hasPasswordCommand.Parameters.AddWithValue("@roles", roles);
                     hasPasswordCommand.Parameters.AddWithValue("@oldusername", user.Username);
                     hasPasswordCommand.ExecuteNonQuery();
 
                     MessageBox.Show("Thay đổi thông tin thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
+
                 else
                 {
                     string hasPasswordQuery = "UPDATE Users SET Username = @newusername, FirstName = @firstname, LastName = @lastname, Roles = @roles WHERE Username = @oldusername";
                     SqlCommand hasPasswordCommand = new SqlCommand(hasPasswordQuery, conn);
                     hasPasswordCommand.Parameters.AddWithValue("@newusername", UsernameTextBox.Text);
-                    hasPasswordCommand.Parameters.AddWithValue("@firstname", FirstNameTextBox.Text);
-                    hasPasswordCommand.Parameters.AddWithValue("@lastname", LastNameTextBox.Text);
+                    hasPasswordCommand.Parameters.AddWithValue("@firstname", _firstname);
+                    hasPasswordCommand.Parameters.AddWithValue("@lastname", _lastname);
                     hasPasswordCommand.Parameters.AddWithValue("@roles", roles);
                     hasPasswordCommand.Parameters.AddWithValue("@oldusername", user.Username);
 

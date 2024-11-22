@@ -26,7 +26,6 @@ namespace Test
             Greeting.Content = $"Xin chào, Admin {adminUser.Lastname}";
             InfoButton.Content = adminUser.Lastname[0];
             AdminUser = adminUser;
-            LoadUserData();
 
             string connectionString = "Data Source=localhost;Initial Catalog=contact;Integrated Security=true";
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -37,9 +36,15 @@ namespace Test
                 numberOfUser.Content = command.ExecuteScalar();
             }
         }
+        private void AdminWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadUserData();
+        }
 
         private void LoadUserData()
         {
+            userDataGrid.ItemsSource = null;
+
             users = new List<User>();
             string connectionString = "Data Source=localhost;Initial Catalog=contact;Integrated Security=True";
 

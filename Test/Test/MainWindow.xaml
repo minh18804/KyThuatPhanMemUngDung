@@ -7,109 +7,99 @@
         mc:Ignorable="d"
         Title="Đăng nhập" Height="450" Width="800" Background="White">
     <Grid>
-        <StackPanel         HorizontalAlignment="Center"
-                            VerticalAlignment="Center">
-
-            <Label          Content="Hệ thống quản lý chăn nuôi"
+        <Grid.Background>
+            <ImageBrush ImageSource="images/background.jpg"/>
+        </Grid.Background>
+        <Label          Content="Hệ thống quản lý chăn nuôi"
                             FontSize="28"
-                            FontWeight="Bold"
-                            Background="White"/>
-
-            <Label          Content="Trang đăng nhập"
-                            HorizontalAlignment="Center"
-                            FontStyle="Italic"
-                            FontSize="18"/>
-            <Label          Content="   "
-                            Height="15"/>
-            
-            <Label          Content="Quyền truy cập"/>
-            <StackPanel>
-                <RadioButton x:Name="admin"
-                             Content="Admin"
-                             GroupName="Roles"
-                             IsChecked="True"/>
-                <Label Content="    "
-                       Height="10"/>
-                <RadioButton x:Name="nhanVien"
-                             Content="Cấp xã"
-                             GroupName="Roles"/>
-                <Label Content="    "
-                       Height="10"/>
-                <RadioButton x:Name="khach"
-                             Content="Cấp huyện"
-                             GroupName="Roles"/>
-                <Label Content="   "
-                       Height="10"/>
-            </StackPanel>
-
-            <Grid Margin="10">
-                
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="15"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <Label      Content="Tên đăng nhập:" 
-                            Grid.Row="0" 
+                            Foreground="BurlyWood"
+                            FontWeight="Bold" Margin="10,60,400,298"/>
+        <Label      Content="Tên đăng nhập:" 
                             Grid.Column="0" 
-                            FontSize="16" 
-                            VerticalAlignment="Center"/>
+                            FontSize="14" 
+                            VerticalAlignment="Top" 
+                            Margin="438,101,246,0"
+                            Height="30"/>
 
-                <TextBox    x:Name="Username" 
-                            Grid.Row="0" 
-                            Grid.Column="1" 
-                            Padding="5" 
-                            Width="179" 
-                            Background="White"
-                            KeyDown="username_KeyDown"/>
+        <TextBox    x:Name="Username" 
+                            Background="Beige"
+                            KeyDown="username_KeyDown" 
+                            VerticalAlignment="Top" 
+                            Margin="554,104,34,0" Height="24"/>
 
-                <Label      Content="Mật khẩu:" 
-                            Grid.Row="2" 
+        <Label      Content="Mật khẩu:" 
                             Grid.Column="0" 
-                            FontSize="16" 
-                            VerticalAlignment="Center"/>
+                            FontSize="14" 
+                            VerticalAlignment="Top" 
+                            Margin="438,139,279,0" 
+                            Height="30" />
 
-                <PasswordBox x:Name="Password" 
-                             Grid.Row="2" 
-                             Grid.Column="1" 
-                             Padding="5" 
-                             Width="179" 
-                             Background="White"
-                             KeyDown="password_KeyDown"/>
-            </Grid>
-
-            <Button x:Name="login"
+        <PasswordBox x:Name="Password" 
+                            Background="Beige"
+                            KeyDown="password_KeyDown" 
+                            VerticalAlignment="Top" 
+                            Margin="554,145,34,0" Height="24"/>
+        <Button x:Name="login"
                     Content="Đăng nhập" 
                     Click="login_Click"
-                    Width="230"
-                    FontSize="18"
+                    FontSize="14"
                     FontWeight="Bold"
-                    Background="White"
+                    Background="Green"
+                    VerticalAlignment="Top" 
+                    HorizontalAlignment="Left"
+                    Foreground="White"
                     BorderThickness="0"
-                    Margin="10"/>
-            
-            <Button x:Name="register" 
+                    Width="106" 
+                    Margin="494,236,0,0" Height="32"/>
+        <Button x:Name="register" 
                     Content="Đăng ký"
                     Click="register_Click"
-                    Background="White"
+                    Foreground="White"
+                    FontWeight="Bold"
+                    FontSize="14"
+                    VerticalAlignment="Top" 
+                    HorizontalAlignment="Left"
+                    Background="Orange"
                     BorderThickness="0"
-                    Width="130"
-                    Margin="10"/>
-            
-            <Button x:Name="passwordChange" 
-                    Content="Đổi mật khẩu"
+                    Width="106"
+                    Margin="660,236,0,0" Height="32"/>
+        <Button x:Name="passwordChange" 
+                    Content="Đổi mật khẩu?"
                     Click="passwordChange_Click"
+                    VerticalAlignment="Top" 
+                    FontSize="10"
+                    Foreground="Blue"
                     Background="White"
                     BorderThickness="0"
-                    Width="130"
-                    Margin="10"/>
-            
-        </StackPanel>
+                    Margin="691,193,34,0"/>
+        <Grid Height="80" Margin="438,2,234,0" VerticalAlignment="Top">
+            <StackPanel Margin="0,0,0,3"/>
+            <RadioButton x:Name="khach"
+                Content="Cấp huyện"
+                GroupName="Roles" 
+                Margin="0,65,19,0"
+                VerticalAlignment="Top"/>
+            <RadioButton x:Name="nhanVien"
+                Content="Cấp xã"
+                GroupName="Roles" 
+                Checked="nhanVien_Checked"
+                Margin="0,46,0,0"
+                VerticalAlignment="Top"/>
+            <RadioButton x:Name="admin"
+                Content="Admin"
+                GroupName="Roles"
+                IsChecked="True" 
+                VerticalAlignment="Top"
+                Margin="0,26,0,0"/>
+            <Label          Content="Quyền truy cập" 
+                Margin="4,0,0,0"
+                FontWeight="Bold"
+                VerticalAlignment="Top"/>
+            <Label          Content="Trang đăng nhập" 
+                Margin="133,13,-229,0"
+                FontWeight="Bold"
+                FontSize="24"
+                VerticalAlignment="Top"/>
+        </Grid>
     </Grid>
 </Window>

@@ -152,5 +152,10 @@ namespace Test
             ChangePasswordWindow.Show();
             Hide();
         }
+
+        private void nhanVien_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
