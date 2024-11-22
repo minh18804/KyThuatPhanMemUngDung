@@ -177,10 +177,15 @@
 
         <DataGrid x:Name="userDataGrid" Grid.Row="2" Grid.Column="1" IsReadOnly="true">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Username" Binding="{Binding Username}"/>
-                <DataGridTextColumn Header="Roles" Binding="{Binding Roles}"/>
-                <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}"/>
-                <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}"/>
+                <DataGridTemplateColumn Header="ShowPassword">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox Checked="CheckBox_Checked"
+                                      Unchecked="CheckBox_Unchecked"
+                                      Tag="{Binding Username}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

@@ -141,6 +141,51 @@ namespace Test
             userInfoConfigWindow.Show();
             Hide();
         }
+        private string GetPasswordFromDatabase(string username) { 
+            string password = ""; 
+            string connectionString = "Data Source=localhost;Initial Catalog=contact;Integrated Security=True"; 
+            using (SqlConnection conn = new SqlConnection(connectionString)) 
+            { 
+                conn.Open(); 
+                string query = "SELECT Password FROM Users WHERE Username = @Username"; 
+                SqlCommand cmd = new SqlCommand(query, conn); 
+                cmd.Parameters.AddWithValue("@Username", username); 
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read()) 
+                { 
+                    password = reader["Password"].ToString(); 
+                } 
+
+            } 
+            return password; 
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            CheckBox checkBox = sender as CheckBox;
+            string username = checkBox.Tag.ToString();
+            User user = users.FirstOrDefault(u => u.Username == username);
+            if (user != null)
+            {
+                user.Password = GetPasswordFromDatabase(user.Username);
+                userDataGrid.ItemsSource = null;
+                userDataGrid.ItemsSource = users;
+            }
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            CheckBox checkBox = sender as CheckBox;
+            string username = checkBox.Tag.ToString();
+            User user = users.FirstOrDefault(u => u.Username == username);
+            if (user != null)
+            {
+                user.Password = "***";
+                userDataGrid.ItemsSource= null;
+                userDataGrid.ItemsSource = users;
+            }
+        }
     }
     public class User
     {

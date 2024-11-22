@@ -23,33 +23,47 @@ namespace Test
     {
         string connectionString = "Data Source=localhost;Initial Catalog=contact;Integrated Security=True";
         User user;
-        public UserInfoConfigWindow(User _user, Window previousWindow)
+        Window previousWindow;
+        bool _isPasswordVisible = false;
+        public UserInfoConfigWindow(User _user, Window _previousWindow)
         {
             user = _user;
+            previousWindow = _previousWindow;
             InitializeComponent();
             FirstNameTextBox.Text = user.Firstname;
             LastNameTextBox.Text = user.Lastname;
             Roles.SelectedIndex = user.Roles;
-            UsernameTextBox.Text = user.Username;   
+            UsernameTextBox.Text = user.Username; 
         }
 
         private void changePasswordBtn_Click(object sender, RoutedEventArgs e)
-        {
-            NewPasswordPanel.Visibility = Visibility.Visible; 
-            PasswordTextBox.IsReadOnly = false; 
-            PasswordTextBox.Text = "";
+        { 
+                bool isCollapsed = NewPasswordPanel.Visibility == Visibility.Collapsed;
+                NewPasswordPanel.Visibility = isCollapsed ? Visibility.Visible : Visibility.Collapsed;
         }
 
 
 
         private void showHide_Click(object sender, RoutedEventArgs e)
         {
-
+            if (_isPasswordVisible)
+            {
+                PasswordTextBox.Text = "***";
+                showHide.Content = "Hiện";
+                _isPasswordVisible = false;
+            }
+            else
+            {
+                PasswordTextBox.Text = user.Password;
+                showHide.Content = "Ẩn";
+                _isPasswordVisible = true;
+            }
         }
 
         private void return_Click(object sender, RoutedEventArgs e)
         {
-
+            previousWindow.Show();
+            Close();
         }
 
         private void saveChanges_Click(object sender, RoutedEventArgs e)
@@ -63,7 +77,7 @@ namespace Test
             int roles = (int)temproles;
             int minimumLength = 8;
 
-            if(_username.Length > minimumLength || ((_password.Length > minimumLength) && (NewPasswordPanel.Visibility == Visibility.Visible)) )
+            if(UsernameTextBox.Text.Length < minimumLength || ((NewPasswordTextBox.Text.Length < minimumLength) && (NewPasswordPanel.Visibility == Visibility.Visible)) )
             {
                 MessageBox.Show("Username hoặc mật khẩu thay đổi quá ngắn", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -73,21 +87,34 @@ namespace Test
                 conn.Open();
                 if (NewPasswordPanel.Visibility == Visibility.Visible)
                 {
-                    if(PasswordTextBox != NewPasswordTextBox)
+                    if(ConfirmNewPasswordTextBox.Text != NewPasswordTextBox.Text)
                     {
                         MessageBox.Show("Mật khẩu xác nhận không trùng nhau", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
                     string hasPasswordQuery = "UPDATE Users SET Username = @newusername, Password = @password, FirstName = @firstname, Lastname = @lastname, Roles = @roles WHERE Username = @oldusername";
                     SqlCommand hasPasswordCommand = new SqlCommand(hasPasswordQuery, conn);
-                    hasPasswordCommand.Parameters.AddWithValue("@newusername", _username);
-                    hasPasswordCommand.Parameters.AddWithValue("@password", _password);
-                    hasPasswordCommand.Parameters.AddWithValue("@firstname", _firstname);
-                    hasPasswordCommand.Parameters.AddWithValue("@lastname", _lastname);
+                    hasPasswordCommand.Parameters.AddWithValue("@newusername", UsernameTextBox.Text);
+                    hasPasswordCommand.Parameters.AddWithValue("@password", NewPasswordTextBox.Text);
+                    hasPasswordCommand.Parameters.AddWithValue("@firstname", FirstNameTextBox.Text);
+                    hasPasswordCommand.Parameters.AddWithValue("@lastname", LastNameTextBox.Text);
+                    hasPasswordCommand.Parameters.AddWithValue("@roles", roles);
+                    hasPasswordCommand.Parameters.AddWithValue("@oldusername", user.Username);
+                    hasPasswordCommand.ExecuteNonQuery();
+
+                    MessageBox.Show("Thay đổi thông tin thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    string hasPasswordQuery = "UPDATE Users SET Username = @newusername, FirstName = @firstname, LastName = @lastname, Roles = @roles WHERE Username = @oldusername";
+                    SqlCommand hasPasswordCommand = new SqlCommand(hasPasswordQuery, conn);
+                    hasPasswordCommand.Parameters.AddWithValue("@newusername", UsernameTextBox.Text);
+                    hasPasswordCommand.Parameters.AddWithValue("@firstname", FirstNameTextBox.Text);
+                    hasPasswordCommand.Parameters.AddWithValue("@lastname", LastNameTextBox.Text);
                     hasPasswordCommand.Parameters.AddWithValue("@roles", roles);
                     hasPasswordCommand.Parameters.AddWithValue("@oldusername", user.Username);
 
-                    MessageBox.Show("Thay đổi thông tin thành công", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Thay đổi thông tin thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
         }
@@ -135,11 +162,6 @@ namespace Test
         }
 
         private void changePassword_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void changePasswordBtn_Click_1(object sender, RoutedEventArgs e)
         {
 
         }
