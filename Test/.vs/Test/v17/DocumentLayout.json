@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\User\\source\\repos\\minh18804\\KyThuatPhanMemUngDung\\Test\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|c:\\users\\user\\source\\repos\\minh18804\\kythuatphanmemungdung\\test\\test\\register.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|solutionrelative:test\\register.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|C:\\Users\\User\\source\\repos\\minh18804\\KyThuatPhanMemUngDung\\Test\\test\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|solutionrelative:test\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|c:\\users\\user\\source\\repos\\minh18804\\kythuatphanmemungdung\\test\\test\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|solutionrelative:test\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|c:\\users\\user\\source\\repos\\minh18804\\kythuatphanmemungdung\\test\\test\\register.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|solutionrelative:test\\register.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,7 +34,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Register.xaml",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\minh18804\\KyThuatPhanMemUngDung\\Test\\Test\\Register.xaml",
               "RelativeDocumentMoniker": "Test\\Register.xaml",
@@ -46,7 +46,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\minh18804\\KyThuatPhanMemUngDung\\Test\\Test\\MainWindow.xaml",
               "RelativeDocumentMoniker": "Test\\MainWindow.xaml",
