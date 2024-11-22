@@ -10,101 +10,75 @@
         <Grid.Background>
             <ImageBrush ImageSource="images/background-register.jpg"/>
         </Grid.Background>
-        <Label              Content="Hệ thống quản lý chăn nuôi"
-                            FontSize="22"
-                            FontWeight="Bold"                         
-                            HorizontalAlignment="Left"
-                            Grid.Row="0" 
-                            Grid.Column="0" 
-                            Margin="473,172,0,209"/>
 
         <Label              Content="Trang đăng ký"
-                            FontStyle="Italic"                         
-                            HorizontalAlignment="Left"
-                            FontSize="19" 
-                            Grid.Column="0" 
-                            Margin="485,117,0,257"/>
+                            FontWeight="DemiBold"
+                            FontSize="16"             
+                            Margin="252,0,422,375"/>
+        <Grid Margin="29,70,608,12">
 
-        <Label              Content="Họ:"
-                            FontSize="16" 
-                            Grid.Column="0" 
-                            Margin="89,22,0,361"                          
-                            HorizontalAlignment="Left"/>
+            <Label              Content="Họ:"
+                FontSize="16"                             
+                Margin="0,0,76,238"/>
 
-        <TextBox            x:Name="FirstName" 
-                            Padding="5" 
-                            Background="Beige" 
-                            Grid.Column="0"                          
-                            HorizontalAlignment="Left"
-                            Margin="100,255,0,103" Width="165"/>
+            <Label              Content="Tên:"
+                FontSize="16"                            
+                Margin="0,57,76,168"/>
 
-        <Label              Content="Tên:"
-                            FontSize="16" 
-                            Grid.Column="0" 
-                            Margin="62,87,0,309"           
-                            HorizontalAlignment="Left"/>
+            <Label              Content="Chức vụ:"
+                FontSize="16"   
+                Margin="0,115,36,146"/>
 
-        <TextBox            x:Name="LastName" 
-                            Padding="5" 
-                            Background="Beige"
-                            Width="180"            
-                            HorizontalAlignment="Left"
-                            Margin="335,350,0,40"/>
+            <Label              Content="Tên đăng nhập:"
+                FontSize="16" 
+                Margin="0,184,0,76"/>
 
-        <Label              Content="Chức vụ:"
-                            FontSize="16" 
-                            Grid.Column="0" 
-                            Margin="480,255,0,80"      
-                            HorizontalAlignment="Left"/>
-        <ComboBox           x:Name="Roles"
-                            Width="206"
-                            Loaded="Roles_Loaded" 
-                            Grid.Column="0"     
-                            HorizontalAlignment="Left"
-                            Margin="564,239,0,163"/>
+            <Label              Content="Mật khẩu:"
+                FontSize="16"     
+                Margin="0,245,65,28" Width="98"/>
 
-        <Label              Content="Tên đăng nhập:"
-                            FontSize="16" 
-                            Grid.Column="0"       
-                            HorizontalAlignment="Left"
-                            Margin="282,233,0,132"/>
+        </Grid>
+        <Grid Margin="197,41,293,-60" Width="NaN">
+            <TextBox            x:Name="FirstName" 
+                Padding="5" 
+                Background="Beige" 
+                Margin="56,39,43,363"/>
 
-        <TextBox            x:Name="Username" 
-                            Padding="5" 
-                            Background="Beige"
-                            HorizontalAlignment="Left"
-                            Width="179" 
-                            Grid.Column="0" 
-                            Margin="541,339,0,40"/>
+            <TextBox            x:Name="LastName" 
+                Padding="5" 
+                Background="Beige"            
+                Margin="56,90,43,307"/>
+            <ComboBox           x:Name="Roles"
+                Loaded="Roles_Loaded"
+                Margin="56,151,43,246"/>
 
-        <Label              Content="Mật khẩu:"
-                            FontSize="16"     
-                            HorizontalAlignment="Left"
-                            Grid.Column="0" 
-                            Margin="485,37,0,361" Width="112"/>
+            <TextBox            x:Name="Username" 
+                Padding="5" 
+                Background="Beige" 
+                Margin="56,270,43,130" TextChanged="Username_TextChanged"/>
 
-        <PasswordBox        x:Name="Password" 
-                            Padding="5" 
-                            Background="Beige"
-                            HorizontalAlignment="Left"
-                            Width="193"
-                            Margin="597,22,0,354"/>
+            <PasswordBox        x:Name="Password" 
+                Padding="5" 
+                Background="Beige"
+                Margin="56,212,43,188"/>
+
+        </Grid>
 
         <Button             x:Name="Register" 
                             Content="Đăng ký"
                             Click="Register_Click"
                             FontWeight="Bold"
-                            HorizontalAlignment="Left"
-                            Background="White"
+                            Foreground="White"
+                            Background="Orange"
                             BorderThickness="0"
-                            FontSize="20" Grid.Column="0" Margin="331,121,0,217"/>
-
+                            FontSize="20"  Margin="252,367,422,12"/>
         <Button             x:Name="Return"
                             Content="Quay lại"
+                            HorizontalAlignment="Left"
                             Click="Return_Click"
                             Background="White"
-                            HorizontalAlignment="Left"
-                            BorderThickness="0"
-                            Width="130" Grid.Column="0" Margin="306,55,0,309"/>
+                            Foreground="Blue"          
+                            BorderThickness="0"  
+                            Margin="10,10,711,375"/>
     </Grid>
 </Window>
