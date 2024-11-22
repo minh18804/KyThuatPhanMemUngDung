@@ -28,14 +28,18 @@
                              Content="Admin"
                              GroupName="Roles"
                              IsChecked="True"/>
-                <Label Content="    "/>
+                <Label Content="    "
+                       Height="10"/>
                 <RadioButton x:Name="nhanVien"
                              Content="Cấp xã"
                              GroupName="Roles"/>
-                <Label Content="    "/>
+                <Label Content="    "
+                       Height="10"/>
                 <RadioButton x:Name="khach"
                              Content="Cấp huyện"
                              GroupName="Roles"/>
+                <Label Content="   "
+                       Height="10"/>
             </StackPanel>
 
             <Grid Margin="10">
