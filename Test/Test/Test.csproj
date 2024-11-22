@@ -142,5 +142,9 @@
   <ItemGroup>
     <Resource Include="imageicon\logout.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\background-register.jpg" />
+    <Resource Include="Images\background.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

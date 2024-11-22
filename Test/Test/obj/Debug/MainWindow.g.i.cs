@@ -41,7 +41,7 @@ namespace Test {
     public partial class LoginWindow : System.Windows.Window, System.Windows.Markup.IComponentConnector {
         
         
-        #line 27 "..\..\MainWindow.xaml"
+        #line 30 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.RadioButton admin;
         
@@ -49,7 +49,7 @@ namespace Test {
         #line hidden
         
         
-        #line 32 "..\..\MainWindow.xaml"
+        #line 35 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.RadioButton nhanVien;
         
@@ -57,7 +57,7 @@ namespace Test {
         #line hidden
         
         
-        #line 36 "..\..\MainWindow.xaml"
+        #line 39 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.RadioButton khach;
         
@@ -65,7 +65,7 @@ namespace Test {
         #line hidden
         
         
-        #line 60 "..\..\MainWindow.xaml"
+        #line 63 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox Username;
         
@@ -73,7 +73,7 @@ namespace Test {
         #line hidden
         
         
-        #line 74 "..\..\MainWindow.xaml"
+        #line 77 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.PasswordBox Password;
         
@@ -81,7 +81,7 @@ namespace Test {
         #line hidden
         
         
-        #line 83 "..\..\MainWindow.xaml"
+        #line 86 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button login;
         
@@ -89,7 +89,7 @@ namespace Test {
         #line hidden
         
         
-        #line 93 "..\..\MainWindow.xaml"
+        #line 96 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button register;
         
@@ -97,7 +97,7 @@ namespace Test {
         #line hidden
         
         
-        #line 101 "..\..\MainWindow.xaml"
+        #line 104 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button passwordChange;
         
@@ -146,7 +146,7 @@ namespace Test {
             case 4:
             this.Username = ((System.Windows.Controls.TextBox)(target));
             
-            #line 66 "..\..\MainWindow.xaml"
+            #line 69 "..\..\MainWindow.xaml"
             this.Username.KeyDown += new System.Windows.Input.KeyEventHandler(this.username_KeyDown);
             
             #line default
@@ -155,7 +155,7 @@ namespace Test {
             case 5:
             this.Password = ((System.Windows.Controls.PasswordBox)(target));
             
-            #line 80 "..\..\MainWindow.xaml"
+            #line 83 "..\..\MainWindow.xaml"
             this.Password.KeyDown += new System.Windows.Input.KeyEventHandler(this.password_KeyDown);
             
             #line default
@@ -164,7 +164,7 @@ namespace Test {
             case 6:
             this.login = ((System.Windows.Controls.Button)(target));
             
-            #line 85 "..\..\MainWindow.xaml"
+            #line 88 "..\..\MainWindow.xaml"
             this.login.Click += new System.Windows.RoutedEventHandler(this.login_Click);
             
             #line default
@@ -173,7 +173,7 @@ namespace Test {
             case 7:
             this.register = ((System.Windows.Controls.Button)(target));
             
-            #line 95 "..\..\MainWindow.xaml"
+            #line 98 "..\..\MainWindow.xaml"
             this.register.Click += new System.Windows.RoutedEventHandler(this.register_Click);
             
             #line default
@@ -182,7 +182,7 @@ namespace Test {
             case 8:
             this.passwordChange = ((System.Windows.Controls.Button)(target));
             
-            #line 103 "..\..\MainWindow.xaml"
+            #line 106 "..\..\MainWindow.xaml"
             this.passwordChange.Click += new System.Windows.RoutedEventHandler(this.passwordChange_Click);
             
             #line default

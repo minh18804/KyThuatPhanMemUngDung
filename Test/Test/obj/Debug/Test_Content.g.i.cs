@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("imageicon/%e2%80%94pngtree%e2%80%94vector%20logout%20icon_4187233.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/background-register.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/background.jpg")]
 
 
