@@ -102,7 +102,7 @@ namespace Test
                     MessageBox.Show("Thay đổi thông tin thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
 
-                else
+                else if(NewPasswordPanel.Visibility == Visibility.Collapsed)
                 {
                     string hasPasswordQuery = "UPDATE Users SET Username = @newusername, FirstName = @firstname, LastName = @lastname, Roles = @roles WHERE Username = @oldusername";
                     SqlCommand hasPasswordCommand = new SqlCommand(hasPasswordQuery, conn);

@@ -52,7 +52,7 @@ namespace Test
 
             if (String.IsNullOrEmpty(user.Username) || String.IsNullOrEmpty(user.Password))
             {
-                MessageBox.Show("Không được để trống Username hoặc Password");
+                MessageBox.Show("Không được để trống Username hoặc Password", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -97,7 +97,7 @@ namespace Test
                 }
                 else
                 {
-                    MessageBox.Show("Username hoặc password không đúng");
+                    MessageBox.Show("Username hoặc password không đúng", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Question);
                 }
             }
         }

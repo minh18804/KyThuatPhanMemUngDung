@@ -247,7 +247,7 @@
                         Width="130"
                         Background="White"
                         Padding="7"
-                        Foreground="Blue"
+                        Foreground="Green"
                         Click="saveChanges_Click"/>
             </StackPanel>
         </Grid>
