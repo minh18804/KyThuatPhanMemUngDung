@@ -3,32 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\levie\\OneDrive - Hanoi University of Science and Technology\\Desktop\\KyThuatPhanMem\\Test\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|C:\\Users\\levie\\OneDrive - Hanoi University of Science and Technology\\Desktop\\KyThuatPhanMem\\Test\\test\\userinfoconfig.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|solutionrelative:test\\userinfoconfig.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|C:\\Users\\levie\\OneDrive - Hanoi University of Science and Technology\\Desktop\\KyThuatPhanMem\\Test\\test\\admin.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|solutionrelative:test\\admin.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|c:\\users\\levie\\onedrive - hanoi university of science and technology\\desktop\\kythuatphanmem\\test\\test\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|solutionrelative:test\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|C:\\Users\\levie\\OneDrive - Hanoi University of Science and Technology\\Desktop\\KyThuatPhanMem\\Test\\test\\userinfoconfig.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|solutionrelative:test\\userinfoconfig.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|C:\\Users\\levie\\OneDrive - Hanoi University of Science and Technology\\Desktop\\KyThuatPhanMem\\Test\\test\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|solutionrelative:test\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|C:\\Users\\levie\\OneDrive - Hanoi University of Science and Technology\\Desktop\\KyThuatPhanMem\\Test\\test\\admin.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|solutionrelative:test\\admin.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|C:\\Users\\levie\\OneDrive - Hanoi University of Science and Technology\\Desktop\\KyThuatPhanMem\\Test\\test\\register.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|solutionrelative:test\\register.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\levie\\OneDrive - Hanoi University of Science and Technology\\Desktop\\KyThuatPhanMem\\Test\\Test\\MainWindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Test\\MainWindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -50,44 +26,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UserInfoConfig.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\levie\\OneDrive - Hanoi University of Science and Technology\\Desktop\\KyThuatPhanMem\\Test\\Test\\UserInfoConfig.xaml.cs",
-              "RelativeDocumentMoniker": "Test\\UserInfoConfig.xaml.cs",
-              "ToolTip": "C:\\Users\\levie\\OneDrive - Hanoi University of Science and Technology\\Desktop\\KyThuatPhanMem\\Test\\Test\\UserInfoConfig.xaml.cs",
-              "RelativeToolTip": "Test\\UserInfoConfig.xaml.cs",
-              "ViewState": "AgIAACIAAAAAAAAAAAAQwHQAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-22T15:19:32.488Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "UserInfoConfig.xaml",
-              "DocumentMoniker": "C:\\Users\\levie\\OneDrive - Hanoi University of Science and Technology\\Desktop\\KyThuatPhanMem\\Test\\Test\\UserInfoConfig.xaml",
-              "RelativeDocumentMoniker": "Test\\UserInfoConfig.xaml",
-              "ToolTip": "C:\\Users\\levie\\OneDrive - Hanoi University of Science and Technology\\Desktop\\KyThuatPhanMem\\Test\\Test\\UserInfoConfig.xaml",
-              "RelativeToolTip": "Test\\UserInfoConfig.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-11-22T15:10:43.445Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Admin.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\levie\\OneDrive - Hanoi University of Science and Technology\\Desktop\\KyThuatPhanMem\\Test\\Test\\Admin.xaml.cs",
-              "RelativeDocumentMoniker": "Test\\Admin.xaml.cs",
-              "ToolTip": "C:\\Users\\levie\\OneDrive - Hanoi University of Science and Technology\\Desktop\\KyThuatPhanMem\\Test\\Test\\Admin.xaml.cs",
-              "RelativeToolTip": "Test\\Admin.xaml.cs",
-              "ViewState": "AgIAAH4AAAAAAAAAAAAIwI8AAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-22T15:26:47.189Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "C:\\Users\\levie\\OneDrive - Hanoi University of Science and Technology\\Desktop\\KyThuatPhanMem\\Test\\Test\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "Test\\MainWindow.xaml.cs",
@@ -97,39 +36,6 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-21T16:46:06.428Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\levie\\OneDrive - Hanoi University of Science and Technology\\Desktop\\KyThuatPhanMem\\Test\\Test\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "Test\\MainWindow.xaml",
-              "ToolTip": "C:\\Users\\levie\\OneDrive - Hanoi University of Science and Technology\\Desktop\\KyThuatPhanMem\\Test\\Test\\MainWindow.xaml",
-              "RelativeToolTip": "Test\\MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-11-22T15:53:13.721Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Admin.xaml",
-              "DocumentMoniker": "C:\\Users\\levie\\OneDrive - Hanoi University of Science and Technology\\Desktop\\KyThuatPhanMem\\Test\\Test\\Admin.xaml",
-              "RelativeDocumentMoniker": "Test\\Admin.xaml",
-              "ToolTip": "C:\\Users\\levie\\OneDrive - Hanoi University of Science and Technology\\Desktop\\KyThuatPhanMem\\Test\\Test\\Admin.xaml",
-              "RelativeToolTip": "Test\\Admin.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-11-22T15:51:56.496Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Register.xaml",
-              "DocumentMoniker": "C:\\Users\\levie\\OneDrive - Hanoi University of Science and Technology\\Desktop\\KyThuatPhanMem\\Test\\Test\\Register.xaml",
-              "RelativeDocumentMoniker": "Test\\Register.xaml",
-              "ToolTip": "C:\\Users\\levie\\OneDrive - Hanoi University of Science and Technology\\Desktop\\KyThuatPhanMem\\Test\\Test\\Register.xaml",
-              "RelativeToolTip": "Test\\Register.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-11-22T15:08:31.062Z"
             }
           ]
         }
