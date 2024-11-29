@@ -3,12 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\User\\source\\repos\\minh18804\\KyThuatPhanMemUngDung\\Test\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|C:\\Users\\User\\source\\repos\\minh18804\\KyThuatPhanMemUngDung\\Test\\test\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|C:\\Users\\User\\source\\repos\\minh18804\\KyThuatPhanMemUngDung\\Test\\test\\changepassword.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|solutionrelative:test\\changepassword.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|c:\\users\\user\\source\\repos\\minh18804\\kythuatphanmemungdung\\test\\test\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|solutionrelative:test\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|c:\\users\\user\\source\\repos\\minh18804\\kythuatphanmemungdung\\test\\test\\register.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|solutionrelative:test\\register.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|C:\\Users\\User\\source\\repos\\minh18804\\KyThuatPhanMemUngDung\\Test\\test\\admin.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|solutionrelative:test\\admin.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|C:\\Users\\User\\source\\repos\\minh18804\\KyThuatPhanMemUngDung\\Test\\test\\userinfo.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{14C468A5-4558-46FC-AF8A-99DC0A266061}|Test\\Test.csproj|solutionrelative:test\\userinfo.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,19 +42,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Register.xaml",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\minh18804\\KyThuatPhanMemUngDung\\Test\\Test\\Register.xaml",
-              "RelativeDocumentMoniker": "Test\\Register.xaml",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\minh18804\\KyThuatPhanMemUngDung\\Test\\Test\\Register.xaml",
-              "RelativeToolTip": "Test\\Register.xaml",
+              "DocumentIndex": 2,
+              "Title": "Admin.xaml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\minh18804\\KyThuatPhanMemUngDung\\Test\\Test\\Admin.xaml",
+              "RelativeDocumentMoniker": "Test\\Admin.xaml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\minh18804\\KyThuatPhanMemUngDung\\Test\\Test\\Admin.xaml",
+              "RelativeToolTip": "Test\\Admin.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-11-22T03:49:53.844Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-27T06:31:38.367Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UserInfo.xaml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\minh18804\\KyThuatPhanMemUngDung\\Test\\Test\\UserInfo.xaml",
+              "RelativeDocumentMoniker": "Test\\UserInfo.xaml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\minh18804\\KyThuatPhanMemUngDung\\Test\\Test\\UserInfo.xaml",
+              "RelativeToolTip": "Test\\UserInfo.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-11-27T06:31:21.909Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "ChangePassword.xaml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\minh18804\\KyThuatPhanMemUngDung\\Test\\Test\\ChangePassword.xaml",
+              "RelativeDocumentMoniker": "Test\\ChangePassword.xaml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\minh18804\\KyThuatPhanMemUngDung\\Test\\Test\\ChangePassword.xaml",
+              "RelativeToolTip": "Test\\ChangePassword.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-11-27T06:29:28.425Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\minh18804\\KyThuatPhanMemUngDung\\Test\\Test\\MainWindow.xaml",
               "RelativeDocumentMoniker": "Test\\MainWindow.xaml",

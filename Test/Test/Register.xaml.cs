@@ -152,5 +152,10 @@ namespace Test
             loginWindow.Show();
             Close();
         }
+
+        private void Username_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
