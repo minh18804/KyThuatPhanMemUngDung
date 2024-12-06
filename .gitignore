@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Test/.vs/Test/v17/.suo
+*.json
+*.vsidx
+/Test/Test/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+/Test/Test/obj/Debug/Test_MarkupCompile.i.cache
+/Test/.vs/Test/v17/DocumentLayout.json
