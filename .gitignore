@@ -2,13 +2,6 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/Test/.vs/Test/FileContentIndex/48ea2793-cab1-425d-b995-6f6a3beb18ad.vsidx
-/Test/.vs/Test/FileContentIndex/563529c2-62c3-4031-b283-d8e7ac0d2e79.vsidx
-/Test/.vs/Test/FileContentIndex/59598b8b-7c18-4f18-b1af-725116a3ed55.vsidx
-/Test/.vs/Test/FileContentIndex/6ea93327-d6fe-42a1-8cdf-7b773b619f06.vsidx
-/Test/.vs/Test/FileContentIndex/7f8f89e1-4d6d-4994-b857-0125c7804325.vsidx
-/Test/.vs/Test/FileContentIndex/8b06918a-dfa2-461d-90b6-9c0e3aa9ac2c.vsidx
-/Test/.vs/Test/FileContentIndex/db9d4411-732e-41f1-ae23-07195f714c04.vsidx
-/Test/.vs/Test/FileContentIndex/2a3f7f19-e0e9-435d-9211-713f5f09a212.vsidx
-/Test/.vs/Test/FileContentIndex/78fdad44-1466-4edc-bc8c-1dea27bcdf7f.vsidx
-/Test/.vs/Test/FileContentIndex/9e2cfef0-c912-4f5f-909b-59238fa4f08d.vsidx
+/Test/.vs/Test/v17/.suo
+/Test/.vs/Test/v17/DocumentLayout.backup.json
+/Test/.vs/Test/v17/DocumentLayout.json
