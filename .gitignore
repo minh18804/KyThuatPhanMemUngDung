@@ -16,3 +16,4 @@
 /Test/.vs/Test/v17/DocumentLayout.backup.json
 /Test/.vs/Test/v17/.suo
 *.vsidx
+/Test/Test/obj/Debug/MainWindow.g.i.cs
