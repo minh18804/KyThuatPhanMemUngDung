@@ -15,29 +15,81 @@ using System.Data.SqlClient;
 
 namespace Test
 {
-    /// <summary>
-    /// Interaction logic for Window2.xaml
-    /// </summary>
     public partial class AdminWindow : Window
     {
-        /// <summary>
-        /// Tạo các biến toàn cục và lưu thông tin từ cửa số trước
-        /// </summary>
-        string username;
-        string password;
-        public AdminWindow(string _username, string _password, string _lastname)
+        private List<User> users = new List<User>();
+        public User AdminUser;
+
+        public AdminWindow(User adminUser)
         {
             InitializeComponent();
-            Greeting.Content = $"Xin chào, Admin {_lastname}";                   
-            InfoButton.Content = _lastname[0].ToString();                        
-            username = _username;
-            password = _password;
+            Greeting.Content = $"Xin chào, Admin {adminUser.Lastname}";
+            InfoButton.Content = adminUser.Lastname[0];
+            AdminUser = adminUser;
+
+            LoadUserData();
+
+            string connectionString = "Data Source=localhost;Initial Catalog=contact;Integrated Security=true";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string numberOfUserQuery = "SELECT COUNT(*) FROM Users";
+                SqlCommand command = new SqlCommand(numberOfUserQuery, conn);
+                numberOfUser.Content = command.ExecuteScalar();
+            }
         }
-        /// <summary>
-        /// Đăng xuất
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        private void LoadUserData()
+        {
+            userDataGrid.ItemsSource = null;
+
+            users = new List<User>();
+            string connectionString = "Data Source=localhost;Initial Catalog=contact;Integrated Security=True";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = "SELECT Username, Roles, FirstName, LastName, Password FROM Users";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    users.Add(new User
+                    {
+                        Username = reader["Username"]?.ToString(),
+                        Roles = reader["Roles"] != DBNull.Value ? (int)reader["Roles"] : -1,
+                        Firstname = reader["FirstName"]?.ToString(),
+                        Lastname = reader["LastName"]?.ToString(),
+                        Password = "***"
+                    });
+                }
+            }
+
+            userDataGrid.ItemsSource = users;
+        }
+        private void 
+
+        private List<User> SearchUsers(string searchText)
+        {
+            return users.Where(user => (user.Username?.ToLower().Contains(searchText) ?? false) ||
+                                       (user.Firstname?.ToLower().Contains(searchText) ?? false) ||
+                                       (user.Lastname?.ToLower().Contains(searchText) ?? false)).ToList();
+        }
+
+        private void searchButton_Click(object sender, RoutedEventArgs e)
+        {
+            string searchText = searchTextBox.Text.ToLower();
+            if (string.IsNullOrEmpty(searchText))
+            {
+                userDataGrid.ItemsSource = users;
+            }
+            else
+            {
+                var filteredUsers = SearchUsers(searchText);
+                userDataGrid.ItemsSource = filteredUsers;
+            }
+        }
+
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Bạn có muốn đăng xuất không?", "Xác nhận đăng xuất", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -49,19 +101,10 @@ namespace Test
             loginWindow.Show();
             Close();
         }
-        /// <summary>
-        /// Menu chức năng
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void hamburgerButton_Click(object sender, RoutedEventArgs e)    
+
+        private void hamburgerButton_Click(object sender, RoutedEventArgs e)
         {
             popupMenu.IsOpen = !popupMenu.IsOpen;
-        }
-
-        private void QLNS_Click(object sender, RoutedEventArgs e)
-        {
-            //Chưa phát triển
         }
 
         private void test_Click(object sender, RoutedEventArgs e)
@@ -73,37 +116,87 @@ namespace Test
         {
             //Chưa phát triển
         }
-        /// <summary>
-        /// Nút thông tin cá nhân (nút có hình là chữ cái đầu tiên của tên người dùng)
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void InfoButton_Click(object sender, RoutedEventArgs e)         
+
+        private void InfoButton_Click(object sender, RoutedEventArgs e)
         {
             popupInfoMenu.IsOpen = !popupInfoMenu.IsOpen;
         }
-        /// <summary>
-        /// Nút thông tin người dùng
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void personInfo_Click(object sender, RoutedEventArgs e)         
+
+        private void personInfo_Click(object sender, RoutedEventArgs e)
         {
-            UserInfoWindow userInfoWindow = new UserInfoWindow(username, this);
-            userInfoWindow.Show();
-            popupInfoMenu.IsOpen = false;
-            Hide();
+            //popupInfoMenu.IsOpen = false;
+            //UserInfoWindow userInfoWindow = new UserInfoWindow(username, this);
+            //userInfoWindow.Show();
+            //Hide();
         }
-        /// <summary>
-        /// Nút thay đổi thông tin 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void changePassword_Click(object sender, RoutedEventArgs e)     
+
+        private void changePassword_Click(object sender, RoutedEventArgs e)
         {
             ChangePasswordWindow changePasswordWindow = new ChangePasswordWindow(this);
             changePasswordWindow.Show();
             Hide();
         }
+
+        private void userInfoConfig_Click(object sender, RoutedEventArgs e)
+        {
+            popupInfoMenu.IsOpen = false;
+            UserInfoConfigWindow userInfoConfigWindow = new UserInfoConfigWindow(AdminUser, this);
+            userInfoConfigWindow.Show();
+            Hide();
+        }
+        private string GetPasswordFromDatabase(string username) { 
+            string password = ""; 
+            string connectionString = "Data Source=localhost;Initial Catalog=contact;Integrated Security=True"; 
+            using (SqlConnection conn = new SqlConnection(connectionString)) 
+            { 
+                conn.Open(); 
+                string query = "SELECT Password FROM Users WHERE Username = @Username"; 
+                SqlCommand cmd = new SqlCommand(query, conn); 
+                cmd.Parameters.AddWithValue("@Username", username); 
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read()) 
+                { 
+                    password = reader["Password"].ToString(); 
+                } 
+
+            } 
+            return password; 
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            CheckBox checkBox = sender as CheckBox;
+            string username = checkBox.Tag.ToString();
+            User user = users.FirstOrDefault(u => u.Username == username);
+            if (user != null)
+            {
+                user.Password = GetPasswordFromDatabase(user.Username);
+                userDataGrid.ItemsSource = null;
+                userDataGrid.ItemsSource = users;
+            }
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            CheckBox checkBox = sender as CheckBox;
+            string username = checkBox.Tag.ToString();
+            User user = users.FirstOrDefault(u => u.Username == username);
+            if (user != null)
+            {
+                user.Password = "***";
+                userDataGrid.ItemsSource= null;
+                userDataGrid.ItemsSource = users;
+            }
+        }
+    }
+    public class User
+    {
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string Firstname { get; set; }
+        public string Lastname { get; set; }
+        public int Roles { get; set; }
     }
 }
+

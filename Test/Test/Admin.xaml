@@ -10,6 +10,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -84,7 +85,7 @@
                             Content="Đổi mật khẩu" 
                             Click="changePassword_Click"
                             FontWeight="Normal"/>
-                    
+
                     <Button x:Name="personInfo"
                             Content="Thông tin người dùng" 
                             Click="personInfo_Click"
@@ -103,7 +104,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        
+
         <Button x:Name="hamburgerButton"
                 Width="30" 
                 Height="30" 
@@ -122,9 +123,9 @@
             <StackPanel Background="LightGray"
                         Width="200" 
                         HorizontalAlignment="Left">
-                <Button x:Name="QLNS"  
-                        Content="Quản lý nhân sự" 
-                        Click="QLNS_Click"/>
+                <Button x:Name="userInfoConfig"  
+                        Content="Chỉnh sửa thông tin người dùng" 
+                        Click="userInfoConfig_Click"/>
                 <Button x:Name="test"  
                         Content="Test"
                         Click="test_Click"/>
@@ -133,5 +134,60 @@
                         Click="testt_Click"/>
             </StackPanel>
         </Popup>
+
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Content="Trang chủ"
+               FontWeight="Bold"
+               Grid.Row="0" Grid.Column="0"
+               FontSize="30"/>
+
+            <Label Content="Số lượng người dùng: "
+                   Grid.Row="1" Grid.Column="0"/>
+            <Label x:Name="numberOfUser"
+                   Grid.Row="1" Grid.Column="1"/>
+
+            <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+                <TextBox x:Name="searchTextBox" 
+                         Width="200" 
+                         Margin="132,7,0,0" 
+                         VerticalAlignment="Top" 
+                         HorizontalAlignment="Left"/>
+                <Button x:Name="searchButton" 
+                        Content="Tìm kiếm" 
+                        Width="100" 
+                        Margin="5" 
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Left" 
+                        Click="searchButton_Click"/>
+            </Grid>
+        </Grid>
+
+        <DataGrid x:Name="userDataGrid" Grid.Row="2" Grid.Column="1" IsReadOnly="true">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="ShowPassword">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox Checked="CheckBox_Checked"
+                                      Unchecked="CheckBox_Unchecked"
+                                      ClickMode="Release"
+                                      Tag="{Binding Username}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>
