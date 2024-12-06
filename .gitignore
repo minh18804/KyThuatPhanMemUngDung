@@ -5,5 +5,9 @@
 /Test/.vs/Test/v17/.suo
 /Test/.vs/Test/v17/DocumentLayout.backup.json
 /Test/.vs/Test/v17/DocumentLayout.json
-/Test/.vs/Test/FileContentIndex/513d2e3a-4e90-46e0-b5b3-942e5d662682.vsidx
 /.gitignore
+/Test/Test/Test.csproj
+*vsidx
+/Test/Test/obj/Debug/Test_MarkupCompile.i.lref
+*.wsuo
+*.json
