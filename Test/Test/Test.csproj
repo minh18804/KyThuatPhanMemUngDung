@@ -155,11 +155,8 @@
   <ItemGroup>
     <Resource Include="Images\background.jpg" />
   </ItemGroup>
-<<<<<<< HEAD
-=======
   <ItemGroup>
     <Resource Include="Images\background-changepass.jpg" />
   </ItemGroup>
->>>>>>> f829770e0c96db9d413f90a8184baa5f5ece008a
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

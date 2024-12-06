@@ -182,6 +182,7 @@
                         <DataTemplate>
                             <CheckBox Checked="CheckBox_Checked"
                                       Unchecked="CheckBox_Unchecked"
+                                      ClickMode="Release"
                                       Tag="{Binding Username}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

@@ -68,12 +68,11 @@
                              GroupName="Roles" 
                              IsChecked="True"
                              Margin="0,10,0,10"/>
-            <RadioButton x:Name="nhanVien" 
+            <RadioButton x:Name="capXa" 
                              Content="Cấp xã" 
                              GroupName="Roles" 
-                             Checked="nhanVien_Checked" 
                              Margin="0,10,0,10"/>
-            <RadioButton x:Name="khach" 
+            <RadioButton x:Name="capHuyen" 
                              Content="Cấp huyện" 
                              GroupName="Roles" 
                              Margin="0,10,0,10"/>

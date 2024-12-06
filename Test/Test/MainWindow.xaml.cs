@@ -42,8 +42,8 @@ namespace Test
             user.Username = Username.Text;
             user.Password = Password.Password;
             bool? isAdmin = admin.IsChecked;
-            bool? isCapXa = nhanVien.IsChecked;
-            bool? isCapHuyen = khach.IsChecked;
+            bool? isCapXa = capXa.IsChecked;
+            bool? isCapHuyen = capHuyen.IsChecked;
             int roles;
             if (isAdmin == true) roles = 0;
             else if (isCapXa == true) roles = 1;
@@ -151,11 +151,6 @@ namespace Test
             ChangePasswordWindow ChangePasswordWindow = new ChangePasswordWindow(this);
             ChangePasswordWindow.Show();
             Hide();
-        }
-
-        private void nhanVien_Checked(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

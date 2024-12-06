@@ -67,6 +67,7 @@ namespace Test
 
             userDataGrid.ItemsSource = users;
         }
+        private void 
 
         private List<User> SearchUsers(string searchText)
         {
