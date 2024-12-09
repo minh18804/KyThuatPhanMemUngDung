@@ -171,14 +171,15 @@ namespace Test
             }
         }
         /// <summary>
-        /// Hàm xử lý sự kiện changePassword: chuyển sang màn hình thay đổi mật khẩu
+        /// Hàm xử lý sự kiện forgotPassword: chuyển sang màn hình quên mật khẩu
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void passwordChange_Click(object sender, RoutedEventArgs e)
+
+        private void forgotPassword_Click(object sender, RoutedEventArgs e)
         {
-            ChangePasswordWindow ChangePasswordWindow = new ChangePasswordWindow(this);
-            ChangePasswordWindow.Show();
+            ForgotPasswordWindow ForgotPasswordWindow = new ForgotPasswordWindow(this);
+            ForgotPasswordWindow.Show();
             Hide();
         }
     }

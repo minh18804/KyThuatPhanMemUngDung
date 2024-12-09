@@ -181,13 +181,27 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <CheckBox Checked="CheckBox_Checked"
-                                      Unchecked="CheckBox_Unchecked"
+                                      ClickMode="Press"
+                                      IsEnabled="True"
+                                      Tag="{Binding Username}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Chỉnh sửa">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox x:Name="configData"
+                                      Checked="configData_Checked"
+                                      Unchecked="configData_Unchecked"
                                       ClickMode="Release"
                                       Tag="{Binding Username}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
+
+
         </DataGrid>
     </Grid>
 </Window>
