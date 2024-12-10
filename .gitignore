@@ -8,3 +8,4 @@
 /Test/.vs/Test/v17/DocumentLayout.json
 *.htm
 *.cache
+/Test/Test/obj/Debug/Test_MarkupCompile.i.lref
