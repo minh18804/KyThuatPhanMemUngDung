@@ -2,3 +2,5 @@
 /Test/UpgradeLog.htm
 /Test/UpgradeLog2.htm
 /Test/.vs/Test/FileContentIndex/551ad132-a313-415b-adb8-558e93902681.vsidx
+*.suo
+*.json
