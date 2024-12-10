@@ -17,9 +17,9 @@ namespace Test
     /// <summary>
     /// Interaction logic for NhanVienWindow.xaml
     /// </summary>
-    public partial class NhanVienWindow : Window
+    public partial class CapHuyenWindow : Window
     {
-        public NhanVienWindow(string username, string password, string lastname)
+        public CapHuyenWindow(User _user)
         {
             InitializeComponent();
         }

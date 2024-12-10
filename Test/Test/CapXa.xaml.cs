@@ -17,17 +17,14 @@ namespace Test
     /// <summary>
     /// Interaction logic for KhachWindow.xaml
     /// </summary>
-    public partial class KhachWindow : Window
+    public partial class CapXaWindow : Window
     {
         public string username;
         public string password;
 
-        public KhachWindow(string _username, string _password, string _lastname)
+        public CapXaWindow(User _user)
         {
             InitializeComponent();
-            username = _username;
-            InfoButton.Content = _lastname[0].ToString();
-            Greeting.Content = "Xin chào, khách";
         }
         /// <summary>
         /// Đăng xuất
