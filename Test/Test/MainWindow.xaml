@@ -7,9 +7,8 @@
         mc:Ignorable="d"
         Title="Đăng nhập" Height="450" Width="800" Background="White">
     <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="images/background.jpg"/>
-        </Grid.Background>
+        <StackPanel         HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
