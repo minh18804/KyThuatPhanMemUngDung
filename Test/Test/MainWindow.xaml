@@ -67,12 +67,12 @@
                              GroupName="Roles" 
                              IsChecked="True"
                              Margin="0,10,0,10"/>
-            <RadioButton x:Name="capXa" 
-                             Content="Cấp xã" 
-                             GroupName="Roles" 
-                             Margin="0,10,0,10"/>
             <RadioButton x:Name="capHuyen" 
                              Content="Cấp huyện" 
+                             GroupName="Roles" 
+                             Margin="0,10,0,10"/>
+            <RadioButton x:Name="capXa" 
+                             Content="Cấp xã" 
                              GroupName="Roles" 
                              Margin="0,10,0,10"/>
         </StackPanel>
@@ -142,9 +142,9 @@
                         MaxHeight="150"
                         MaxWidth="150" 
                         MinWidth="80"/>
-            <Button x:Name="passwordChange" 
-                        Content="Đổi mật khẩu?" 
-                        Click="passwordChange_Click" 
+            <Button x:Name="forgotPassword" 
+                        Content="Quên mật khẩu?" 
+                        Click="forgotPassword_Click" 
                         FontSize="10" 
                         Foreground="Blue" 
                         Background="White" 

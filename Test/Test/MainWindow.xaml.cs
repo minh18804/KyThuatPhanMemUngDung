@@ -44,11 +44,9 @@ namespace Test
             bool? isAdmin = admin.IsChecked;
             bool? isCapXa = capXa.IsChecked;
             bool? isCapHuyen = capHuyen.IsChecked;
-            int roles;
-            if (isAdmin == true) roles = 0;
-            else if (isCapXa == true) roles = 1;
-            else if (isCapHuyen == true) roles = 2;
-            else roles = 3;
+            if (isAdmin == true) user.isAdmin = true;
+            else if (isCapXa == true) user.AdministratorLevel = "Xa";
+            else if (isCapHuyen == true) user.AdministratorLevel = "Huyen";
 
             if (String.IsNullOrEmpty(user.Username) || String.IsNullOrEmpty(user.Password))
             {
@@ -57,47 +55,78 @@ namespace Test
             }
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                conn.Open();
-                string query = "SELECT COUNT(1) FROM Users WHERE Username=@username AND Password=@password AND Roles = @roles";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@username", user.Username);
-                cmd.Parameters.AddWithValue("@password", user.Password);
-                cmd.Parameters.AddWithValue("@roles", roles);
-                int count = Convert.ToInt32(cmd.ExecuteScalar());
-
-                if (count == 1)
+                if (isAdmin == false)
                 {
-                    query = "SELECT Roles, FirstName, LastName FROM Users WHERE Username=@username AND Password=@password";
-                    cmd = new SqlCommand(query, conn);
+                    conn.Open();
+                    string query = "SELECT COUNT(1) FROM Company c JOIN AdministratorLevel a ON c.AdministratorLevel = a.LevelID WHERE c.Username=@username AND c.Password=@password AND a.LevelName=@levelname";
+                    SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@username", user.Username);
                     cmd.Parameters.AddWithValue("@password", user.Password);
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    reader.Read();
-                    user.Roles = (int)reader["Roles"];
-                    user.Firstname = (string)reader["FirstName"];
-                    user.Lastname = (string)reader["LastName"];
-                    switch (user.Roles)
+                    cmd.Parameters.AddWithValue("@levelname", user.AdministratorLevel);
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    if (count == 1)
                     {
-                        case 0:
-                            AdminWindow adminWindow = new AdminWindow(user);
-                            adminWindow.Show();
-                            Close();
-                            break;
-                        case 1:
-                            NhanVienWindow nhanVienWindow = new NhanVienWindow(user.Username, user.Password, (string)reader["LastName"]);
-                            nhanVienWindow.Show();
-                            Close();
-                            break;
-                        case 2:
-                            KhachWindow khachWindow = new KhachWindow(user.Username, user.Password, (string)reader["LastName"]);
-                            khachWindow.Show();
-                            Close();
-                            break;
+                        query = "UPDATE Company SET LoginTime = @logintime WHERE Username = @username";
+                        cmd = new SqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@logintime", DateTime.Now);
+                        cmd.Parameters.AddWithValue("@username", user.Username);
+                        cmd.ExecuteNonQuery();
+
+                        query = "SELECT c.CompanyName, x.TenXa, h.TenHuyen, c.CompanyID FROM Company c JOIN Xa x ON c.IDXa = x.IDXa JOIN Huyen h ON c.IDHuyen = h.IDHuyen WHERE Username=@username AND Password=@password";
+                        cmd = new SqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@username", user.Username);
+                        cmd.Parameters.AddWithValue("@password", user.Password);
+                        cmd.ExecuteNonQuery();
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        reader.Read();
+                        user.CompanyID = (int)reader["CompanyID"];
+                        user.CompanyName = (string)reader["CompanyName"];
+                        user.TenXa = (string)reader["TenXa"];
+                        user.TenHuyen = (string)reader["TenHuyen"];
+                        switch (user.AdministratorLevel)
+                        {
+                            case "Xa":
+                                CapXaWindow capXaWindow = new CapXaWindow(user);
+                                capXaWindow.Show();
+                                Close();
+                                break;
+                            case "Huyen":
+                                CapHuyenWindow capHuyenWindow = new CapHuyenWindow(user);
+                                capHuyenWindow.Show();
+                                Close();
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Username hoặc password không đúng", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Question);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Username hoặc password không đúng", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Question);
+                    conn.Open();
+                    string query = "SELECT COUNT(1) FROM Company WHERE Username=@username AND Password=@password AND isAdmin=@isadmin";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@username", user.Username);
+                    cmd.Parameters.AddWithValue("@password", user.Password);
+                    cmd.Parameters.AddWithValue("@isadmin", user.isAdmin);
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    if (count == 1)
+                    {
+                        query = "UPDATE Company SET LoginTime = @logintime WHERE Username = @username";
+                        cmd = new SqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@logintime", DateTime.Now);
+                        cmd.Parameters.AddWithValue("@username", user.Username);
+                        cmd.ExecuteNonQuery();
+
+                        AdminWindow adminWindow = new AdminWindow(user);
+                        adminWindow.Show();
+                        Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Username hoặc password không đúng", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Question);
+                    }
                 }
             }
         }
@@ -142,14 +171,15 @@ namespace Test
             }
         }
         /// <summary>
-        /// Hàm xử lý sự kiện changePassword: chuyển sang màn hình thay đổi mật khẩu
+        /// Hàm xử lý sự kiện forgotPassword: chuyển sang màn hình quên mật khẩu
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void passwordChange_Click(object sender, RoutedEventArgs e)
+
+        private void forgotPassword_Click(object sender, RoutedEventArgs e)
         {
-            ChangePasswordWindow ChangePasswordWindow = new ChangePasswordWindow(this);
-            ChangePasswordWindow.Show();
+            ForgotPasswordWindow ForgotPasswordWindow = new ForgotPasswordWindow(this);
+            ForgotPasswordWindow.Show();
             Hide();
         }
     }
