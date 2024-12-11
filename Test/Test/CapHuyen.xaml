@@ -7,6 +7,160 @@
         mc:Ignorable="d"
         Title="Trang chủ" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto" MinWidth="40"/>
+            <ColumnDefinition Width="Auto" MinWidth="40"/>
+        </Grid.ColumnDefinitions>
+
+        <Button x:Name="LogoutButton" 
+    Width="30" 
+    Height="30" 
+    Grid.Column="2"
+    Grid.Row="0"
+    Background="LightBlue" 
+    Foreground="White" 
+    FontSize="18" 
+    FontWeight="Bold" 
+    HorizontalAlignment="Center" 
+    VerticalAlignment="Center" 
+    BorderBrush="Black" 
+    Click="LogoutButton_Click"
+    BorderThickness="1">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Ellipse Fill="{TemplateBinding Background}" 
+                         Stroke="{TemplateBinding BorderBrush}" 
+                         StrokeThickness="{TemplateBinding BorderThickness}"/>
+                        <ContentPresenter HorizontalAlignment="Center" 
+                                  VerticalAlignment="Center"/>
+                        <Image Source="pack://application:,,,/imageicon/logout.png" 
+                       Width="16" 
+                       Height="16" 
+                       Margin="0,0,5,0"/>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <Button x:Name="InfoButton" 
+        Width="30" 
+        Height="30" 
+        Grid.Column="3"
+        Grid.Row="0"
+        Background="LightBlue" 
+        Foreground="White" 
+        FontSize="18" 
+        FontWeight="Bold" 
+        HorizontalAlignment="Center" 
+        VerticalAlignment="Center" 
+        BorderBrush="Black" 
+        Click="InfoButton_Click"
+        BorderThickness="1">
+            <Popup  x:Name="popupInfoMenu" 
+            PlacementTarget="{Binding ElementName=InfoButton}" 
+            StaysOpen="False" 
+            Placement="Bottom" 
+            HorizontalOffset="10" 
+            VerticalOffset="10">
+                <StackPanel Background="LightGray" 
+                    Width="200" 
+                    HorizontalAlignment="Right">
+                    <Button x:Name="changePassword"
+                    Content="Đổi mật khẩu" 
+                    Click="changePassword_Click"
+                    FontWeight="Normal"/>
+
+                    <Button x:Name="personInfo"
+                    Content="Thông tin người dùng" 
+                    Click="personInfo_Click"
+                    FontWeight="Normal"/>
+                </StackPanel>
+            </Popup>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Ellipse Fill="{TemplateBinding Background}" 
+                         Stroke="{TemplateBinding BorderBrush}" 
+                         StrokeThickness="{TemplateBinding BorderThickness}"/>
+                        <ContentPresenter HorizontalAlignment="Center" 
+                                  VerticalAlignment="Center"/>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <Button x:Name="hamburgerButton"
+        Width="30" 
+        Height="30" 
+        Content="☰"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Background="White"
+        BorderThickness="0"
+        FontSize="18"
+        Click="hamburgerButton_Click"/>
+
+        <Popup x:Name="popupMenu" 
+       PlacementTarget="{Binding ElementName=hamburgerButton}" 
+       StaysOpen="False" 
+       Placement="Bottom">
+            <StackPanel Background="LightGray"
+                Width="200" 
+                HorizontalAlignment="Left">
+                <Button x:Name="QLNS"  
+                Content="Quản lý nhân sự" 
+                Click="QLNS_Click"/>
+                <Button x:Name="test1"  
+                Content="Test1" 
+                Click="test1_Click"/>
+                <Button x:Name="test2"  
+                Content="Test2" 
+                Click="test2_Click"/>
+            </StackPanel>
+        </Popup>
+
+        <Grid Grid.Row="1" 
+      Grid.Column="1" 
+      Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Trang chủ" 
+               FontSize="28" 
+               FontWeight="Bold" 
+               Margin="0,0,0,20" 
+               Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+
+
+            <StackPanel Grid.Row="11" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right"/>
+        </Grid>
+        <Label Grid.Column="1" 
+               x:Name="Greeting"
+               HorizontalAlignment="Left" 
+               VerticalAlignment="Center"/>
+        <TextBox/>
     </Grid>
 </Window>

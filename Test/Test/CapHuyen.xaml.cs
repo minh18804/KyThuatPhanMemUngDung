@@ -19,9 +19,12 @@ namespace Test
     /// </summary>
     public partial class CapHuyenWindow : Window
     {
-        public CapHuyenWindow(User _user)
+        User user;
+        public CapHuyenWindow(User user)
         {
+            this.user = user;
             InitializeComponent();
+            Greeting.Content = $"Xin chào, {user.CompanyName}";
         }
     }
 }
