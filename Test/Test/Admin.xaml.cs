@@ -27,7 +27,6 @@ namespace Test
         {
             InitializeComponent();
             InitializeClock();
-
             Greeting.Content            = $"Xin chào, Admin";
             InfoButton.Content          = " ";
             AdminUser = adminUser;
@@ -144,12 +143,12 @@ namespace Test
 
         private void personInfo_Click(object sender, RoutedEventArgs e)
         {
-            //popupInfoMenu.IsOpen = false;
-            //UserInfoWindow userInfoWindow = new UserInfoWindow(username, this);
-            //userInfoWindow.Show();
-            //Hide();
+            popupInfoMenu.IsOpen = false;
+            UserInfoWindow userInfoWindow = new UserInfoWindow(AdminUser.Username, this);
+            userInfoWindow.Show();
+            Hide();
         }
-        private void InitializeClock() { 
+        public void InitializeClock() { 
             timer = new DispatcherTimer(); 
             timer.Interval = TimeSpan.FromSeconds(1); 
             timer.Start(); 
@@ -262,7 +261,7 @@ namespace Test
                     user.CompanyID          = (int)reader["CompanyID"];
                     user.CompanyName        = reader["CompanyName"].ToString();
                     user.Username           = username;
-                    user.Password           = reader["Password"].ToString();
+                    user.Password           = "***";
                     user.AdministratorLevel = reader["LevelName"].ToString();
                     user.TenXa              = reader["TenXa"].ToString();
                     user.TenHuyen           = reader["TenHuyen"].ToString();
@@ -270,6 +269,26 @@ namespace Test
             }
             userDataGrid.ItemsSource        = null;
             userDataGrid.ItemsSource        = users;
+        }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RadioButton_Checked_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CongTy_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Company_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
     public class User

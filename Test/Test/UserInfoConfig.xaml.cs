@@ -31,15 +31,15 @@ namespace Test
             this.previousWindow = previousWindow;
             InitializeComponent();
             CompanyNameTextBox.Text = user.CompanyName;
-            
-            
+
+
             UsernameTextBox.Text = user.Username;
         }
 
         private void changePasswordBtn_Click(object sender, RoutedEventArgs e)
-        { 
-                bool isCollapsed = NewPasswordPanel.Visibility == Visibility.Collapsed;
-                NewPasswordPanel.Visibility = isCollapsed ? Visibility.Visible : Visibility.Collapsed;
+        {
+            bool isCollapsed = NewPasswordPanel.Visibility == Visibility.Collapsed;
+            NewPasswordPanel.Visibility = isCollapsed ? Visibility.Visible : Visibility.Collapsed;
         }
         private void showHide_Click(object sender, RoutedEventArgs e)
         {
@@ -65,11 +65,11 @@ namespace Test
 
         private void saveChanges_Click(object sender, RoutedEventArgs e)
         {
-            string _username        = UsernameTextBox.Text;
-            string _companyName     = CompanyNameTextBox.Text;
-            string _adminLevel      = adminLevel.SelectedItem.ToString();
-            string _tenXaHuyen      = tenXaHuyen.SelectedItem.ToString();
-            string _newpassword        = NewPasswordTextBox.Text;
+            string _username = UsernameTextBox.Text;
+            string _companyName = CompanyNameTextBox.Text;
+            string _adminLevel = adminLevel.SelectedItem.ToString();
+            string _tenXaHuyen = tenXaHuyen.SelectedItem.ToString();
+            string _newpassword = NewPasswordTextBox.Text;
             int minimumLength = 8;
 
             if ((NewPasswordTextBox.Text.Length < minimumLength) && (NewPasswordPanel.Visibility == Visibility.Visible))
@@ -87,65 +87,52 @@ namespace Test
                         MessageBox.Show("Mật khẩu xác nhận không trùng nhau", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
+
+                    string hasPasswordQuery = "UPDATE Company SET CompanyName = @companyname, AdministratorLevel = (SELECT LevelID FROM AdministratorLevel WHERE LevelName = @levelname), Password = @newpassword, IDHuyen = (SELECT IDHuyen FROM Huyen WHERE TenHuyen = @tenhuyen), IDXa = 0 WHERE Username = @username";
+                    SqlCommand hasPasswordCommand = new SqlCommand(hasPasswordQuery, conn);
+                    hasPasswordCommand.Parameters.AddWithValue("@username", _username);
+                    hasPasswordCommand.Parameters.AddWithValue("@newpassword", _newpassword);
+                    hasPasswordCommand.Parameters.AddWithValue("@companyname", _companyName);
                     if (_adminLevel == "Huyện")
                     {
-                        string hasPasswordQuery = "UPDATE Company SET CompanyName = @companyname, AdministratorLevel = (SELECT LevelID FROM AdministratorLevel WHERE LevelName = @levelname), Password = @newpassword, IDHuyen = (SELECT IDHuyen FROM Huyen WHERE TenHuyen = @tenhuyen), IDXa = 0 WHERE Username = @username";
-                        SqlCommand hasPasswordCommand = new SqlCommand(hasPasswordQuery, conn);
-                        hasPasswordCommand.Parameters.AddWithValue("@username", _username);
-                        hasPasswordCommand.Parameters.AddWithValue("@password", _newpassword);
-                        hasPasswordCommand.Parameters.AddWithValue("@companyname", _companyName);
                         hasPasswordCommand.Parameters.AddWithValue("@levelname", "Huyen");
                         hasPasswordCommand.Parameters.AddWithValue("@tenhuyen", _tenXaHuyen);
                         hasPasswordCommand.ExecuteNonQuery();
-
-                        MessageBox.Show("Thay đổi thông tin thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                     else
                     {
-                        string hasPasswordQuery = "UPDATE Company SET CompanyName = @companyname, AdministratorLevel = (SELECT LevelID FROM AdministratorLevel WHERE LevelName = @levelname), Password = @newpassword, IDHuyen = 0, IDXa = (SELECT IDXa FROM Xa WHERE TenXa = @tenxa) WHERE Username = @username";
-                        SqlCommand hasPasswordCommand = new SqlCommand(hasPasswordQuery, conn);
-                        hasPasswordCommand.Parameters.AddWithValue("@username", _username);
-                        hasPasswordCommand.Parameters.AddWithValue("@password", _newpassword);
-                        hasPasswordCommand.Parameters.AddWithValue("@companyname", _companyName);
                         hasPasswordCommand.Parameters.AddWithValue("@levelname", "Xa");
-                        hasPasswordCommand.Parameters.AddWithValue("@tenhuyen", _tenXaHuyen);
+                        hasPasswordCommand.Parameters.AddWithValue("@tenxa", _tenXaHuyen);
                         hasPasswordCommand.ExecuteNonQuery();
-
-                        MessageBox.Show("Thay đổi thông tin thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
+
+                    MessageBox.Show("Thay đổi thông tin thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
 
                 else if (NewPasswordPanel.Visibility == Visibility.Collapsed)
                 {
+                    string hasPasswordQuery = "UPDATE Company SET CompanyName = @companyname, AdministratorLevel = (SELECT LevelID FROM AdministratorLevel WHERE LevelName = @levelname), IDHuyen = (SELECT IDHuyen FROM Huyen WHERE TenHuyen = @tenhuyen), IDXa = 0 WHERE Username = @username";
+                    SqlCommand hasPasswordCommand = new SqlCommand(hasPasswordQuery, conn);
+                    hasPasswordCommand.Parameters.AddWithValue("@username", _username);
+                    hasPasswordCommand.Parameters.AddWithValue("@companyname", _companyName);
                     if (_adminLevel == "Huyện")
                     {
-                        string hasPasswordQuery = "UPDATE Company SET CompanyName = @companyname, AdministratorLevel = (SELECT LevelID FROM AdministratorLevel WHERE LevelName = @levelname), IDHuyen = (SELECT IDHuyen FROM Huyen WHERE TenHuyen = @tenhuyen), IDXa = 0 WHERE Username = @username";
-                        SqlCommand hasPasswordCommand = new SqlCommand(hasPasswordQuery, conn);
-                        hasPasswordCommand.Parameters.AddWithValue("@username", _username);
-                        hasPasswordCommand.Parameters.AddWithValue("@companyname", _companyName);
                         hasPasswordCommand.Parameters.AddWithValue("@levelname", "Huyen");
                         hasPasswordCommand.Parameters.AddWithValue("@tenhuyen", _tenXaHuyen);
                         hasPasswordCommand.ExecuteNonQuery();
-
-                        MessageBox.Show("Thay đổi thông tin thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                     else
                     {
-                        string hasPasswordQuery = "UPDATE Company SET CompanyName = @companyname, AdministratorLevel = (SELECT LevelID FROM AdministratorLevel WHERE LevelName = @levelname), IDHuyen = 0, IDXa = (SELECT IDXa FROM Xa WHERE TenXa = @tenxa) WHERE Username = @username";
-                        SqlCommand hasPasswordCommand = new SqlCommand(hasPasswordQuery, conn);
-                        hasPasswordCommand.Parameters.AddWithValue("@username", _username);
-
-                        hasPasswordCommand.Parameters.AddWithValue("@companyname", _companyName);
                         hasPasswordCommand.Parameters.AddWithValue("@levelname", "Xa");
-                        hasPasswordCommand.Parameters.AddWithValue("@tenhuyen", _tenXaHuyen);
+                        hasPasswordCommand.Parameters.AddWithValue("@tenxa", _tenXaHuyen);
                         hasPasswordCommand.ExecuteNonQuery();
-
-                        MessageBox.Show("Thay đổi thông tin thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
+
+                    MessageBox.Show("Thay đổi thông tin thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
         }
-
+        // sai chỉnh sửa tên xã huyện
         private void hamburgerButton_Click(object sender, RoutedEventArgs e)
         {
             popupInfoMenu.IsOpen = !popupInfoMenu.IsOpen;
@@ -195,13 +182,15 @@ namespace Test
             else adminLevel.SelectedIndex = 0;
         }
 
-        private void tenXaHuyen_Loaded(object sender, RoutedEventArgs e)
+        private void adminLevel_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            string selectedAdminLevel = adminLevel.SelectedItem as string;
+            tenXaHuyen.Items.Clear();
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
                 string query = "";
-                if (user.AdministratorLevel == "Xa")
+                if (selectedAdminLevel == "Xã")
                 {
                     query = "SELECT TenXa FROM Xa WHERE IDXa != 0";
                 }
@@ -211,21 +200,27 @@ namespace Test
                 }
                 SqlCommand cmd = new SqlCommand(query, conn);
                 SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
+                if (selectedAdminLevel == "Xã")
                 {
-                    if (user.AdministratorLevel == "Xa")
+                    while (reader.Read())
                     {
                         tenXaHuyen.Items.Add(reader["TenXa"].ToString());
                     }
-                    else
+                }
+                else
+                {
+                    while (reader.Read())
                     {
                         tenXaHuyen.Items.Add(reader["TenHuyen"].ToString());
                     }
                 }
             }
+        }
+        private void tenXaHuyen_Loaded(object sender, RoutedEventArgs e)
+        {
             if (user.AdministratorLevel == "Xa")
                 tenXaHuyen.SelectedItem = user.TenXa;
-            else 
+            else
                 tenXaHuyen.SelectedItem = user.TenHuyen;
         }
     }

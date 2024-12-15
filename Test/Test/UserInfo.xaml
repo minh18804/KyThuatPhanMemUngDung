@@ -6,17 +6,17 @@
         xmlns:local="clr-namespace:Test"
         mc:Ignorable="d"
         Title="Thông tin người dùng" Height="450" Width="800">
-<Grid>
-    <Grid.RowDefinitions>
-        <RowDefinition Height="Auto"/>
-        <RowDefinition Height="*"/>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-    <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="Auto"/>
-        <ColumnDefinition Width="*"/>
-        <ColumnDefinition Width="Auto" MinWidth="40"/>
-        <ColumnDefinition Width="Auto" MinWidth="40"/>
-    </Grid.ColumnDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto" MinWidth="40"/>
+            <ColumnDefinition Width="Auto" MinWidth="40"/>
+        </Grid.ColumnDefinitions>
 
         <Button x:Name="LogoutButton" 
             Width="30" 
@@ -32,17 +32,17 @@
             BorderBrush="Black" 
             Click="LogoutButton_Click"
             BorderThickness="1">
-            
+
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Grid>
                         <Ellipse Fill="{TemplateBinding Background}" 
                                  Stroke="{TemplateBinding BorderBrush}" 
                                  StrokeThickness="{TemplateBinding BorderThickness}"/>
-                        
+
                         <ContentPresenter HorizontalAlignment="Center" 
                                           VerticalAlignment="Center"/>
-                         
+
                         <Image Source="pack://application:,,,/imageicon/logout.png" 
                                Width="16" Height="16" 
                                Margin="0,0,5,0"/>
@@ -65,45 +65,45 @@
                 BorderBrush="Black" 
                 Click="InfoButton_Click"
                 BorderThickness="1">
-            
+
             <Popup  x:Name="popupInfoMenu" 
                     PlacementTarget="{Binding ElementName=InfoButton}" 
                     StaysOpen="False" 
                     Placement="Bottom" 
                     HorizontalOffset="10" 
                     VerticalOffset="10">
-                
+
                 <StackPanel Background="LightGray" 
                             Width="200" 
                             HorizontalAlignment="Right">
-                    
+
                     <Button x:Name="changePassword"
                             Content="Đổi mật khẩu" 
                             Click="changePassword_Click"
                             FontWeight="Normal"/>
-                    
+
                     <Button x:Name="personInfo"
                             Content="Thông tin người dùng" 
                             Click="personInfo_Click"
                             FontWeight="Normal"/>
                 </StackPanel>
             </Popup>
-            
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Grid>
-                            <Ellipse Fill="{TemplateBinding Background}" 
+
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Ellipse Fill="{TemplateBinding Background}" 
                                      Stroke="{TemplateBinding BorderBrush}" 
                                      StrokeThickness="{TemplateBinding BorderThickness}"/>
-                            
-                            <ContentPresenter HorizontalAlignment="Center" 
+
+                        <ContentPresenter HorizontalAlignment="Center" 
                                               VerticalAlignment="Center"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Button.Template>
-            
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+
         </Button>
-    
+
         <Button x:Name="hamburgerButton"
                 Width="30" 
                 Height="30" 
@@ -119,112 +119,120 @@
                 PlacementTarget="{Binding ElementName=hamburgerButton}" 
                 StaysOpen="False" 
                 Placement="Bottom">
-            
-        <StackPanel Background="LightGray" Width="200" HorizontalAlignment="Left">
-            <Button x:Name="QLNS" 
+
+            <StackPanel Background="LightGray" Width="200" HorizontalAlignment="Left">
+                <Button x:Name="QLNS" 
                     Content="Quản lý nhân sự" 
                     Click="QLNS_Click"/>
-            
-            <Button x:Name="test1" 
+
+                <Button x:Name="test1" 
                     Content="Test1" 
                     Click="test1_Click"/>
-            
-            <Button x:Name="test2" 
+
+                <Button x:Name="test2" 
                     Content="Test2" 
                     Click="test2_Click"/>
-        </StackPanel>
-            
+            </StackPanel>
+
         </Popup>
-    
-    <Grid Grid.Row="1" 
+
+        <Grid Grid.Row="1" 
           Grid.Column="1">
-        
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-            
-        <TextBlock Text="Thông tin người dùng" 
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Thông tin người dùng" 
                     FontSize="28" 
                     FontWeight="Bold" 
                     Margin="0,0,0,10"
                     Grid.Row="0" Grid.Column="0"/>
-            
-        <TextBlock Text="Họ: " 
+            <TextBlock Text="ID người dùng"
+                       FontWeight="Bold" 
+                       Grid.Row="1" Grid.Column="0"/>
+
+            <TextBlock x:Name="companyID"
+                       Grid.Row="1" Grid.Column="1"/>
+
+            <TextBlock Text="Tên người dùng: " 
                     FontWeight="Bold"
-                    Grid.Row="1"/>
-        
-        <TextBlock x:Name="FirstNameText" 
-                    Margin="0,0,0,10"
-                    Grid.Row="1" Grid.Column="1"/>
-        
-        <TextBlock Text="Tên: " 
-                    FontWeight="Bold"
-                    Grid.Row="2" Grid.Column="0"/>
-        
-        <TextBlock x:Name="LastNameText" 
+                    Grid.Row="2"/>
+
+            <TextBlock x:Name="companyName" 
                     Margin="0,0,0,10"
                     Grid.Row="2" Grid.Column="1"/>
-        
-        <TextBlock Text="Vai trò: " 
+
+            <TextBlock Text="Cấp trực thuộc: " 
                     FontWeight="Bold"
                     Grid.Row="3" Grid.Column="0"/>
-        
-        <TextBlock x:Name="RolesText" 
+
+            <TextBlock x:Name="adminLevel" 
                     Margin="0,0,0,10"
                     Grid.Row="3" Grid.Column="1"/>
-        
-        <TextBlock Text="Tên đăng nhập: " 
+
+            <TextBlock Text="Tên xã/huyện: " 
                     FontWeight="Bold"
                     Grid.Row="4" Grid.Column="0"/>
-        
-        <TextBlock x:Name="UsernameText" 
+
+            <TextBlock x:Name="tenXaHuyen" 
                     Margin="0,0,0,10"
                     Grid.Row="4" Grid.Column="1"/>
-        
-        <TextBlock Text="Mật khẩu: " 
+
+            <TextBlock Text="Tên đăng nhập: " 
                     FontWeight="Bold"
                     Grid.Row="5" Grid.Column="0"/>
 
-        <StackPanel Orientation="Horizontal" 
-                    Grid.Row="5" 
+            <TextBlock x:Name="UsernameText" 
+                    Margin="0,0,0,10"
+                    Grid.Row="5" Grid.Column="1"/>
+
+            <TextBlock Text="Mật khẩu: " 
+                    FontWeight="Bold"
+                    Grid.Row="6" Grid.Column="0"/>
+
+            <StackPanel Orientation="Horizontal" 
+                    Grid.Row="6" 
                     Grid.Column="1">
-            <TextBlock x:Name="PasswordText" 
+                <TextBlock x:Name="PasswordText" 
                     Text="***" 
                     Margin="0,0,10,0"/>
-            <Button x:Name="showHide"  
+                <Button x:Name="showHide"  
                     Content="Hiện" 
                     Click="showHide_Click"/>
-        </StackPanel>
-        
-        <Button x:Name="return" 
+            </StackPanel>
+
+            <Button x:Name="return" 
                 Content="Quay lại"
-                Grid.Row="6" Grid.Column="0"
+                Grid.Row="7" Grid.Column="0"
                 Width="130"
                 HorizontalAlignment="Left"
                 Background="White"
                 BorderThickness="0"
                 Padding="7"
                 Click="return_Click"/>
-        
-        <Button x:Name="changeInfo"
+
+            <Button x:Name="changeInfo"
                 Content="Thay đổi thông tin"
-                Grid.Row="6" Grid.Column="1"
+                Grid.Row="7" Grid.Column="1"
                 Width="130"
                 Padding="7"
                 Background="White"
                 BorderThickness="0"
                 Foreground="Blue"
                 Click="changeInfo_Click"/>
+        </Grid>
     </Grid>
-</Grid>
 </Window>

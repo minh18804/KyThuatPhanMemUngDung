@@ -103,5 +103,20 @@ namespace Test
         {
 
         }
+
+        private void Quanlygiongvatnuoi_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Quanlynguongen_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Quanlythucanchannuoi_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
