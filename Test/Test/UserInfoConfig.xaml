@@ -148,13 +148,13 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Chỉnh sửa thông tin công ty" 
+            <TextBlock Text="Chỉnh sửa thông tin người dùng" 
                        FontSize="28" 
                        FontWeight="Bold" 
                        Margin="0,0,0,20" 
                        Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
 
-            <TextBlock Text="Tên công ty" 
+            <TextBlock Text="Tên cán bộ nghiệp vụ: " 
                        FontWeight="Bold" 
                        VerticalAlignment="Center"
                        Grid.Row="1" Grid.Column="0"/>
@@ -167,11 +167,10 @@
                        VerticalAlignment="Center"
                        Grid.Row="2" Grid.Column="0"/>
             <ComboBox x:Name="adminLevel" 
-                      Margin="90,36,450,2" 
+                      Margin="0,1,413,1" 
                       Loaded="adminLevel_Loaded"
-                      Grid.Row="1" 
-                      Grid.ColumnSpan="2" 
-                      Grid.RowSpan="2"/>
+                      SelectionChanged="adminLevel_SelectionChanged"
+                      Grid.Row="2" Grid.Column="1"/>
 
             <TextBlock Text="Tên xã/huyện: " 
                        FontWeight="Bold" 
@@ -179,20 +178,20 @@
                        Grid.Row="3" Grid.Column="0"/>
 
             <ComboBox x:Name="tenXaHuyen" 
-                     Margin="90,5,0,5" 
+                     Margin="0,5,0,5" 
                      Width="130"
-                     Loaded="tenXaHuyen_Loaded"
                      HorizontalAlignment="Left"
-                     Grid.Row="3" Grid.ColumnSpan="2"/>
+                     Loaded="tenXaHuyen_Loaded"
+                     Grid.Row="3" Grid.Column="1"/>
 
             <TextBlock Text="Tên đăng nhập: " 
                        FontWeight="Bold" 
                        VerticalAlignment="Center"
                        Grid.Row="4" Grid.Column="0"/>
             <TextBox x:Name="UsernameTextBox" 
-                     Margin="90,5,0,5" 
+                     Margin="0,6,0,4" 
                      IsEnabled="False"
-                     Grid.Row="4" Grid.ColumnSpan="2"/>
+                     Grid.Row="4" Grid.Column="1"/>
 
             <TextBlock Text="Mật khẩu: " 
                        FontWeight="Bold" 
@@ -200,9 +199,9 @@
                        Grid.Row="5" Grid.Column="0"/>
             <TextBox x:Name="PasswordTextBox" 
                      Text="***" 
-                     Margin="90,5,436,5" 
+                     Margin="0,5,399,5" 
                      IsReadOnly="True"
-                     Grid.Row="5" Grid.ColumnSpan="2"/>
+                     Grid.Row="5" Grid.Column="1"/>
 
             <Button x:Name="showHide" 
                     Content="Hiện" 

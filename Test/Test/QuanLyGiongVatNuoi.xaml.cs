@@ -16,18 +16,22 @@ using System.Windows.Shapes;
 namespace Test
 {
     /// <summary>
-    /// Interaction logic for NhanVienWindow.xaml
+    /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class CapHuyenWindow : Window
+    public partial class QuanLyGiongVatNuoiWindow : Window
     {
         User user;
+        Window previousWindow;
         string connectionString = "Data Source=localhost;Initial Catalog=contact;Integrated Security=true";
-        public CapHuyenWindow(User user)
+        List<User> users;
+        public QuanLyGiongVatNuoiWindow(User user, Window previousWindow)
         {
             this.user = user;
+            this.previousWindow = previousWindow;
             InitializeComponent();
             Greeting.Content = $"Xin chào, {user.CompanyName}";
         }
+
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Bạn có muốn đăng xuất không?", "Xác nhận đăng xuất", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -55,6 +59,14 @@ namespace Test
             popupInfoMenu.IsOpen = !popupInfoMenu.IsOpen;
         }
 
+        private void personInfo_Click(object sender, RoutedEventArgs e)
+        {
+            UserInfoWindow userInfoWindow = new UserInfoWindow(user.Username, this);
+            userInfoWindow.Show();
+            popupInfoMenu.IsOpen = false;
+            Hide();
+        }
+
         private void hamburgerButton_Click(object sender, RoutedEventArgs e)
         {
             popupMenu.IsOpen = !popupMenu.IsOpen;
@@ -67,34 +79,39 @@ namespace Test
             Hide();
         }
 
-        private void personInfo_Click(object sender, RoutedEventArgs e)
+        private void LoadUserData()
         {
-            UserInfoWindow userInfoWindow = new UserInfoWindow(user.Username, this);
-            userInfoWindow.Show();
-            popupInfoMenu.IsOpen = false;
-            Hide();
-        }
+            userDataGrid.ItemsSource = null;
 
-        private void QLNS_Click(object sender, RoutedEventArgs e)
-        {
-            //Chưa phát triển
-        }
+            users = new List<User>();
 
-        private void quanLyGiongVatNuoi_Click(object sender, RoutedEventArgs e)
-        {
-            QuanLyGiongVatNuoiWindow quanLyGiongVatNuoiWindow = new QuanLyGiongVatNuoiWindow(user, this);
-            quanLyGiongVatNuoiWindow.Show();
-            Hide();
-        }
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = "SELECT ";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                SqlDataReader reader = cmd.ExecuteReader();
 
-        private void quanLyNguonGen_Click(object sender, RoutedEventArgs e)
-        {
+                while (reader.Read())
+                {
+                    users.Add(new User
+                    {
+                        CompanyID = (int)reader["CompanyID"],
+                        CompanyName = reader["CompanyName"]?.ToString(),
+                        Username = reader["Username"]?.ToString(),
+                        AdministratorLevel = reader["LevelName"].ToString(),
+                        TenXa = reader["TenXa"] != DBNull.Value ? reader["TenXa"].ToString() : null,
+                        TenHuyen = reader["TenHuyen"] != DBNull.Value ? reader["TenHuyen"].ToString() : null,
+                        Password = "***",
+                        LoginTime = reader["LoginTime"] != DBNull.Value ? (DateTime?)reader["LoginTime"] : null,
+                        LogoutTime = reader["LogoutTime"] != DBNull.Value ? (DateTime?)reader["LogoutTime"] : null,
+                        isAdmin = false
+                    });
 
-        }
+                }
+            }
 
-        private void quanLyThucAnChanNuoi_Click(object sender, RoutedEventArgs e)
-        {
-
+            userDataGrid.ItemsSource = users;
         }
     }
 }
