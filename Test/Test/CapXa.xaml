@@ -132,7 +132,14 @@
                     Click="testt_Click"/>
             </StackPanel>
         </Popup>
+        <Button  x:Name="Quanlygiongvatnuoi"
+                 Content="Quản lý giống vật nuôi"
+                 Click="Quanlygiongvatnuoi_Click" Margin="274,143,274,231" Grid.Row="1" Grid.Column="1"/>
+        <Button  x:Name="Quanlynguongen"
+                 Content="Quản lý nguồn gen giống"
+                 Click="Quanlynguongen_Click" Margin="274,218,274,156" Grid.Row="1" Grid.Column="1"/>
+        <Button  x:Name="Quanlythucanchannuoi"
+                 Content="Quản lý thức ăn chăn nuôi"
+                 Click="Quanlythucanchannuoi_Click" Margin="274,288,274,86" Grid.Row="1" Grid.Column="1"/>
     </Grid>
 </Window>
-
-

@@ -169,6 +169,7 @@
             <ComboBox x:Name="adminLevel" 
                       Margin="0,1,413,1" 
                       Loaded="adminLevel_Loaded"
+                      SelectionChanged="adminLevel_SelectionChanged"
                       Grid.Row="2" Grid.Column="1"/>
 
             <TextBlock Text="Tên xã/huyện: " 
@@ -179,8 +180,8 @@
             <ComboBox x:Name="tenXaHuyen" 
                      Margin="0,5,0,5" 
                      Width="130"
-                     Loaded="tenXaHuyen_Loaded"
                      HorizontalAlignment="Left"
+                     Loaded="tenXaHuyen_Loaded"
                      Grid.Row="3" Grid.Column="1"/>
 
             <TextBlock Text="Tên đăng nhập: " 

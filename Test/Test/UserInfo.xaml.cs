@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Test
 {
@@ -26,10 +27,14 @@ namespace Test
         private string username;
         private string password;
         private Window previousWindow;
+        private DispatcherTimer timer;
         private bool _isPasswordVisible;
+        string connectionString = "Data Source=localhost;Initial Catalog=contact;Integrated Security=True";
+
         public UserInfoWindow(string _username, Window _previousWindow)
         {
             InitializeComponent();
+            InitializeClock();
             username = _username;
             previousWindow = _previousWindow;
             LoadUserInfo();
@@ -40,29 +45,33 @@ namespace Test
         /// </summary>
         private void LoadUserInfo()
         {
-            string connectionString = "Data Source=localhost;Initial Catalog=contact;Integrated Security=True";
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn   = new SqlConnection(connectionString))
             {
                 conn.Open();
-                string query = "SELECT FirstName, LastName, Roles, Username, Password FROM Users WHERE Username=@username";
-                SqlCommand cmd = new SqlCommand(query, conn);
+                string query            = "SELECT c.CompanyID, c.CompanyName, c.Username, a.LevelName, c.Password, c.LoginTime, c.LogoutTime, x.TenXa, h.TenHuyen, CASE WHEN c.AdministratorLevel = 2 THEN x.TenXa WHEN c.AdministratorLevel = 1 THEN h.TenHuyen END AS AdministrativeName FROM Company c LEFT JOIN Xa x ON c.IDXa = x.IDXa LEFT JOIN Huyen h ON c.IDHuyen = h.IDHuyen LEFT JOIN AdministratorLevel a on c.AdministratorLevel = a.LevelID WHERE Username = @username";
+                SqlCommand cmd          = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@username", username);
                 
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 if (reader.Read())
                 {
-                    FirstNameText.Text = reader["FirstName"].ToString();
-                    LastNameText.Text = reader["LastName"].ToString();
-
-                    if ((int)reader["Roles"] == 0) RolesText.Text = "Admin";
-                    else if ((int)reader["Roles"] == 1) RolesText.Text = "Nhân viên";
-                    else RolesText.Text = "Khách";
-
-                    UsernameText.Text = reader["Username"].ToString();
-                    password = reader["Password"].ToString();
+                    companyID.Text      = reader["CompanyID"].ToString();
+                    companyName.Text    = reader["CompanyName"].ToString() ;
+                    adminLevel.Text     = reader["LevelName"].ToString();
+                    if (adminLevel.Text == "Xa")    tenXaHuyen.Text = reader["TenXa"].ToString();
+                    else                            tenXaHuyen.Text = reader["TenHuyen"].ToString();
+                    UsernameText.Text   = reader["Username"].ToString();
+                    password            = reader["Password"].ToString();
+                    PasswordText.Text = "***";
                 }
             }
+        }
+        public void InitializeClock()
+        {
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Start();
         }
 
         /// <summary>
@@ -76,6 +85,16 @@ namespace Test
 
             if (result == MessageBoxResult.No)
                 return;
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = "UPDATE Company SET LogoutTime = @logouttime WHERE Username = @username";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@logouttime", DateTime.Now);
+                cmd.Parameters.AddWithValue("@username", username);
+                cmd.ExecuteNonQuery();
+            }
 
             LoginWindow loginWindow = new LoginWindow();
             loginWindow.Show();

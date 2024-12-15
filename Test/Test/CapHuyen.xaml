@@ -114,15 +114,6 @@
             <StackPanel Background="LightGray"
                 Width="200" 
                 HorizontalAlignment="Left">
-                <Button x:Name="QLNS"  
-                Content="Quản lý nhân sự" 
-                Click="QLNS_Click"/>
-                <Button x:Name="test1"  
-                Content="Test1" 
-                Click="test1_Click"/>
-                <Button x:Name="test2"  
-                Content="Test2" 
-                Click="test2_Click"/>
             </StackPanel>
         </Popup>
 
@@ -154,13 +145,23 @@
                Margin="0,0,0,20" 
                Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
 
+            <StackPanel Grid.Row="1">
+                <Button x:Name="quanLyGiongVatNuoi"
+                    Content="Quản lý giống vật nuôi"
+                    Click="quanLyGiongVatNuoi_Click"/>
+                <Button x:Name="quanLyNguonGen"
+                    Content="Quản lý nguồn gen giống"
+                    Click="quanLyNguonGen_Click"/>
+                <Button x:Name="quanLyThucAnChanNuoi"
+                    Content="Quản lý thức ăn chăn nuôi"
+                    Click="quanLyThucAnChanNuoi_Click"/>
+            </StackPanel>
 
-            <StackPanel Grid.Row="11" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right"/>
         </Grid>
         <Label Grid.Column="1" 
                x:Name="Greeting"
                HorizontalAlignment="Left" 
                VerticalAlignment="Center"/>
-        <TextBox/>
+
     </Grid>
 </Window>
