@@ -290,6 +290,11 @@ namespace Test
         {
 
         }
+
+        private void userDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
     public class User
     {
