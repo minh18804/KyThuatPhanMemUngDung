@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
+using System.Data;
+using System.Security.Cryptography;
 
 namespace Test
 {
@@ -20,15 +22,6 @@ namespace Test
     /// </summary>
     public partial class RegisterWindow : Window
     {
-        /// <summary>
-        /// Tạo cấp độ chức vụ từ 0->2 tương ứng từ Admin->Khach
-        /// </summary>
-        public enum EnumRoles
-        {
-            Admin,
-            NhanVien,
-            Khach
-        }
         public RegisterWindow()
         {
             InitializeComponent();
@@ -45,36 +38,8 @@ namespace Test
         /// <param name="e"></param>
         private void Roles_Loaded(object sender, RoutedEventArgs e)
         {
-            Roles.Items.Add("Admin");
-            Roles.Items.Add("NhanVien");
-            Roles.Items.Add("Khach");
-        }
-        /// <summary>
-        /// Hàm tạo mã số nhân viên
-        /// </summary>
-        /// <param name="role"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
-        private int GenerateID(EnumRoles role)
-        {
-            Random random = new Random();
-            string prefix;
-            switch (role)
-            {
-                case EnumRoles.Admin:
-                    prefix = "0";
-                    break;
-                case EnumRoles.NhanVien:
-                    prefix = "1";
-                    break;
-                case EnumRoles.Khach:
-                    prefix = "2";
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-            string randomNumber = random.Next(100000, 999999).ToString();
-            return int.Parse(prefix + randomNumber);
+            AdministratorLevel.Items.Add("Cấp huyện");
+            AdministratorLevel.Items.Add("Cấp xã");
         }
 
         /// <summary>
@@ -89,51 +54,105 @@ namespace Test
                 MessageBox.Show("Không được để trống username hoặc password", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            if (string.IsNullOrWhiteSpace(FirstName.Text) || string.IsNullOrWhiteSpace(LastName.Text))
+            if (string.IsNullOrWhiteSpace(CompanyName.Text))
             {
-                MessageBox.Show("Không được để trống họ và tên", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Không được để trống tên công ty", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            if (Roles.SelectedItem == null)
+            if (AdministratorLevel.SelectedItem == null || AdministratorName.SelectedItem == null)
             {
-                MessageBox.Show("Vui lòng chọn chức vụ", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Vui lòng chọn đơn vị hành chính", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            if(Username.Text.Length < 8 || Password.Password.Length < 8)
+            if (Username.Text.Length < 8 || Password.Password.Length < 8)
             {
                 MessageBox.Show("Username hoặc password quá ngắn", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             string username = Username.Text;
             string password = Password.Password;
-            string firstname = FirstName.Text;
-            string lastname = LastName.Text;
-            string _roles = Roles.SelectedItem.ToString();
-            EnumRoles temproles = (EnumRoles)Enum.Parse(typeof(EnumRoles), _roles); 
-            int roles = (int)temproles;
+            string companyName = CompanyName.Text;
+            string string_administratorLevel = AdministratorLevel.SelectedItem.ToString();
+            string companyIDString;
+            string recoveryCode1;
+            string recoveryCode2;
+            string recoveryCode3;
+            string recoveryCode;
+            int administratorLevel;
+            int idXa = 0;
+            int idHuyen = 0;
+            int companyID = 0;
+            int soThuTu = 0;
+
+            if (string_administratorLevel == "Cấp huyện")
+            {
+                administratorLevel = 1;
+            }
+            else
+            {
+                administratorLevel = 2;
+            }
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                string checkQuery = "SELECT COUNT(*) FROM Users WHERE Username = @username"; 
-                SqlCommand checkCmd = new SqlCommand(checkQuery, conn); 
-                checkCmd.Parameters.AddWithValue("@username", username); 
-                int userCount = (int)checkCmd.ExecuteScalar(); 
-                if (userCount > 0) { 
-                    MessageBox.Show("Username đã tồn tại. Vui lòng chọn username khác.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error); 
-                    return; 
+                string checkQuery = "SELECT COUNT(*) FROM Company WHERE Username = @username";
+                SqlCommand checkCmd = new SqlCommand(checkQuery, conn);
+                checkCmd.Parameters.AddWithValue("@username", username);
+                int userCount = (int)checkCmd.ExecuteScalar();
+                if (userCount > 0)
+                {
+                    MessageBox.Show("Username đã tồn tại. Vui lòng chọn username khác.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 }
 
-                string query = "INSERT INTO Users (Username, Password, FirstName, Lastname, Roles) VALUES (@username, @password, @firstname, @lastname, @roles)";
-                SqlCommand cmd = new SqlCommand(query, conn);
+
+                if (administratorLevel == 2)
+                {
+                    checkQuery          = "SELECT IDXa FROM Xa WHERE TenXa = @tenxa";
+                    checkCmd            = new SqlCommand(checkQuery, conn);
+                    checkCmd.Parameters.AddWithValue("@tenxa", AdministratorName.SelectedItem.ToString());
+                    idXa                = Convert.ToInt32(checkCmd.ExecuteScalar());
+                }
+                else
+                {
+                    checkQuery          = "SELECT IDHuyen FROM Huyen WHERE TenHuyen = @tenhuyen";
+                    checkCmd            = new SqlCommand(checkQuery, conn);
+                    checkCmd.Parameters.AddWithValue("@tenhuyen", AdministratorName.SelectedItem.ToString());
+                    idHuyen             = Convert.ToInt32(checkCmd.ExecuteScalar());
+                }
+
+                checkQuery              = "SELECT COUNT(*) FROM Company WHERE isAdmin = 0";
+                checkCmd                = new SqlCommand(checkQuery, conn);
+                soThuTu                 = Convert.ToInt32(checkCmd.ExecuteScalar());
+                string formattedSoThuTu = soThuTu.ToString("D4");
+                string formattedIDHuyen = idHuyen.ToString("D2");
+                string formattedIDXa    = idXa.ToString("D2");
+
+                companyIDString         = $"{administratorLevel}{formattedIDHuyen}{formattedIDXa}{formattedSoThuTu}";
+                companyID               = int.Parse(companyIDString);
+
+                recoveryCode1           = GenerateRecoveryCode(9);
+                recoveryCode2           = GenerateRecoveryCode(9);
+                recoveryCode3           = GenerateRecoveryCode(9);
+                recoveryCode            = $"{recoveryCode1} {recoveryCode2} {recoveryCode3}";
+                Clipboard.SetText(recoveryCode);
+
+                string query            = "INSERT INTO Company (Username, Password, CompanyName, AdministratorLevel, IDXa, IDHuyen, CompanyID, RecoveryCode1, RecoveryCode2, RecoveryCode3, isAdmin) VALUES (@username, @password, @companyname, @administratorlevel, @idxa, @idhuyen, @companyid, @recoverycode1, @recoverycode2, @recoverycode3, 0)";
+                SqlCommand cmd          = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@username", username);
                 cmd.Parameters.AddWithValue("@password", password);
-                cmd.Parameters.AddWithValue("@firstname", firstname);
-                cmd.Parameters.AddWithValue("@lastname", lastname);
-                cmd.Parameters.AddWithValue("@roles", roles);
+                cmd.Parameters.AddWithValue("@companyname", companyName);
+                cmd.Parameters.AddWithValue("@administratorlevel", administratorLevel);
+                cmd.Parameters.AddWithValue("@idxa", idXa);
+                cmd.Parameters.AddWithValue("@idhuyen", idHuyen);
+                cmd.Parameters.AddWithValue("@companyid", companyID);
+                cmd.Parameters.AddWithValue("@recoverycode1", recoveryCode1);
+                cmd.Parameters.AddWithValue("@recoverycode2", recoveryCode2);
+                cmd.Parameters.AddWithValue("@recoverycode3", recoveryCode3);
                 cmd.ExecuteNonQuery();
 
-                MessageBox.Show("Đăng ký thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.None);
+                MessageBox.Show($"Đăng ký thành công, mã khôi phục tài khoản khi quên mật khẩu của bạn là: \n{recoveryCode1} \n{recoveryCode2} \n{recoveryCode3} \nĐã được copy", "Thông báo", MessageBoxButton.OK, MessageBoxImage.None);
 
                 LoginWindow loginWindow = new LoginWindow();
                 loginWindow.Show();
@@ -148,14 +167,58 @@ namespace Test
         /// <param name="e"></param>
         private void Return_Click(object sender, RoutedEventArgs e)
         {
-            LoginWindow loginWindow = new LoginWindow();
+            LoginWindow loginWindow     = new LoginWindow();
             loginWindow.Show();
             Close();
         }
-
-        private void Username_TextChanged(object sender, TextChangedEventArgs e)
+        private void Roles_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            if (AdministratorLevel.SelectedItem != null)
+            {
+                string selectedRole = AdministratorLevel.SelectedItem.ToString();
+                AdministratorName.Items.Clear();
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    string query = "";
+                    if (selectedRole == "Cấp xã")
+                    {
+                        query = "SELECT TenXa FROM Xa WHERE IDXa != 0";
+                    }
+                    else
+                    {
+                        query = "SELECT TenHuyen FROM Huyen WHERE IDHuyen != 0";
+                    }
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        if (selectedRole == "Cấp xã")
+                        {
+                            AdministratorName.Items.Add(reader["TenXa"].ToString());
+                        }
+                        else
+                        {
+                            AdministratorName.Items.Add(reader["TenHuyen"].ToString());
+                        }
+                    }
+                }
+            }
+        }
+        private string GenerateRecoveryCode(int length) 
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"; 
+            using (var crypto = new RNGCryptoServiceProvider()) 
+            { 
+                var data = new byte[length]; 
+                crypto.GetBytes(data); 
+                var result = new StringBuilder(length); 
+                foreach (var byteValue in data) 
+                { 
+                    result.Append(chars[byteValue % chars.Length]); 
+                } 
+                return result.ToString(); 
+            }
         }
     }
 }

@@ -48,6 +48,11 @@ C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyT
 C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\obj\Debug\MainWindow.baml
 C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\obj\Debug\Khach.g.cs
 C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\obj\Debug\Khach.baml
+<<<<<<< HEAD
+C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\obj\Debug\UserInfoConfig.g.cs
+C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\obj\Debug\UserInfoConfig.baml
+=======
+>>>>>>> f829770e0c96db9d413f90a8184baa5f5ece008a
 C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\bin\Debug\Test.exe.config
 C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\bin\Debug\Test.exe
 C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\obj\Debug\Test.csproj.AssemblyReference.cache
@@ -75,3 +80,22 @@ C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\obj\Debug\T
 C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\obj\Debug\Test.exe
 C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\obj\Debug\Test.pdb
 C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\bin\Debug\Test.pdb
+>>>>>>> 9339a75075a6a634b8c97157cd592a1b8d43d2ca
+C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\obj\Debug\CapHuyen.g.cs
+C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\obj\Debug\CapXa.g.cs
+C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\obj\Debug\CapHuyen.baml
+C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\obj\Debug\CapXa.baml
+C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\obj\Debug\ForgotPassword.g.cs
+C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\obj\Debug\ForgotPassword.baml
+C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\obj\Debug\QuanLyGiongVatNuoi.g.cs
+C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\obj\Debug\QuanLyGiongVatNuoi.baml
+C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\obj\Debug\CapHuyen.g.cs
+C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\obj\Debug\CapXa.g.cs
+C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\obj\Debug\UserInfoConfig.g.cs
+C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\obj\Debug\ForgotPassword.g.cs
+C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\obj\Debug\QuanLyGiongVatNuoi.g.cs
+C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\obj\Debug\CapHuyen.baml
+C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\obj\Debug\CapXa.baml
+C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\obj\Debug\UserInfoConfig.baml
+C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\obj\Debug\ForgotPassword.baml
+C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\obj\Debug\QuanLyGiongVatNuoi.baml

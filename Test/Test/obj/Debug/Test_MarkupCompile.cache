@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\App.xaml
-72132211871
+10-665352216
 
-111212181075
+14-1359556854
 13-1310406943
-MainWindow.xaml;Register.xaml;Admin.xaml;NhanVien.xaml;Khach.xaml;ChangePassword.xaml;UserInfo.xaml;
+MainWindow.xaml;Register.xaml;Admin.xaml;CapHuyen.xaml;CapXa.xaml;ChangePassword.xaml;UserInfo.xaml;UserInfoConfig.xaml;ForgotPassword.xaml;QuanLyGiongVatNuoi.xaml;
 
 False
 
