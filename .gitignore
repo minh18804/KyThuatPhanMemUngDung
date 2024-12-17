@@ -13,3 +13,5 @@
 /Test/.vs/Test/FileContentIndex/8128439c-bb98-4bef-ae8f-5f0e0c2844ca.vsidx
 /Test/.vs/Test/FileContentIndex/cad0a4e5-408e-4ea7-9d02-7174f8b0cb4f.vsidx
 /Test/.vs/Test/FileContentIndex/a09e7373-6b32-45b9-863e-9d72fb9091b9.vsidx
+*.cs
+*.lref
