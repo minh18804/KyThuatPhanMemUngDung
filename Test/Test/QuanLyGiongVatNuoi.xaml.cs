@@ -22,14 +22,15 @@ namespace Test
     {
         User user;
         Window previousWindow;
+        List<Company> companies;
         string connectionString = "Data Source=localhost;Initial Catalog=contact;Integrated Security=true";
-        List<User> users;
         public QuanLyGiongVatNuoiWindow(User user, Window previousWindow)
         {
             this.user = user;
             this.previousWindow = previousWindow;
             InitializeComponent();
             Greeting.Content = $"Xin chào, {user.CompanyName}";
+            LoadUserData();
         }
 
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
@@ -83,35 +84,36 @@ namespace Test
         {
             userDataGrid.ItemsSource = null;
 
-            users = new List<User>();
+            companies = new List<Company>();
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                string query = "SELECT ";
+                string query = "SELECT congty.IDCongTy, congty.Ten, huyen.TenHuyen, congty.SDT, loaikinhdoanh.TenGiongVatNuoi FROM CongTy congty JOIN AdministratorLevel admin ON congty.CapTrucThuoc = admin.LevelID JOIN Huyen huyen ON congty.IDHuyen = huyen.IDHuyen JOIN GiongVatNuoi loaikinhdoanh ON congty.IDGiongVatNuoi = loaikinhdoanh.IDGiongVatNuoi WHERE congty.IDLinhVuc = 1 AND congty.CapTrucThuoc = 1";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    users.Add(new User
+                    companies.Add(new Company
                     {
-                        CompanyID = (int)reader["CompanyID"],
-                        CompanyName = reader["CompanyName"]?.ToString(),
-                        Username = reader["Username"]?.ToString(),
-                        AdministratorLevel = reader["LevelName"].ToString(),
-                        TenXa = reader["TenXa"] != DBNull.Value ? reader["TenXa"].ToString() : null,
-                        TenHuyen = reader["TenHuyen"] != DBNull.Value ? reader["TenHuyen"].ToString() : null,
-                        Password = "***",
-                        LoginTime = reader["LoginTime"] != DBNull.Value ? (DateTime?)reader["LoginTime"] : null,
-                        LogoutTime = reader["LogoutTime"] != DBNull.Value ? (DateTime?)reader["LogoutTime"] : null,
-                        isAdmin = false
+                        IDCongTy = (int)reader["IDCongTy"],
+                        Name = reader["Ten"].ToString(),
+                        TenHuyen = reader["TenHuyen"].ToString(),
+                        SDT = reader["SDT"].ToString(),
+                        TenGiongVatNuoi = reader["TenGiongVatNuoi"].ToString()
                     });
-
+                    userDataGrid.ItemsSource = companies;
                 }
             }
-
-            userDataGrid.ItemsSource = users;
+        }
+        public class Company
+        {
+            public int IDCongTy { get; set; }
+            public string Name { get; set; }
+            public string TenHuyen { get; set; }
+            public string SDT { get; set; }
+            public string TenGiongVatNuoi { get; set; }
         }
     }
 }

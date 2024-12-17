@@ -61,7 +61,7 @@
                MaxHeight="50"/>
 
             <StackPanel Grid.Row="3" Grid.ColumnSpan="3" Grid.RowSpan="11" Grid.Column="0"  VerticalAlignment="Top" >
-                <Label Content="Tên công ty:" 
+                <Label Content="Tên cán bộ nghiệp vụ:" 
                        FontSize="16" 
                        Margin="0,0,0,10" 
                        Padding="5"
