@@ -13,134 +13,209 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
 using System.Windows.Threading;
+using static System.Net.Mime.MediaTypeNames;
+using System.Windows.Controls.Primitives;
+using System.Collections;
 
 namespace Test
 {
     public partial class AdminWindow : Window
     {
-        private List<User> users        = new List<User>();
-        public User AdminUser;
-        private DispatcherTimer timer;
-        string connectionString         = "Data Source=localhost;Initial Catalog=contact;Integrated Security=true";
-
-        public AdminWindow(User adminUser)
+        private List<CanBoNghiepVu> users;   
+        private List<CongTy> companies;
+        public CanBoNghiepVu AdminUser;
+        private DispatcherTimer timer = new DispatcherTimer();
+        bool isPasswordVisible = false;
+        public AdminWindow(CanBoNghiepVu adminUser)
         {
             InitializeComponent();
-            InitializeClock();
+            ClockProvider.InitializeClock(ref timer);
             Greeting.Content            = $"Xin chào, Admin";
             InfoButton.Content          = " ";
             AdminUser = adminUser;
-
-            LoadUserData();
-
-            
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                conn.Open();
-                string numberOfUserQuery    = "SELECT COUNT(*) FROM Company";
-                SqlCommand command          = new SqlCommand(numberOfUserQuery, conn);
-                numberOfUser.Content        = command.ExecuteScalar();
-            }
+            DataGridConfig(false);
+            userDataGrid.ItemsSource    = Provider.LoadUsersData();
+            numberOfUser.Content        = Provider.NumberOfUsersOrCompany("CanBoNghiepVu");
+            users                       = Provider.LoadUsersData();
+            companies                   = Provider.LoadCompaniesData();
         }
-        private void LoadUserData()
+        private void DataGridConfig(bool isCongTy)
         {
-            userDataGrid.ItemsSource = null;
-
-            users = new List<User>();
-
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            if (userDataGrid != null)
             {
-                conn.Open();
-                string query            = "SELECT c.CompanyID, c.CompanyName, c.Username, a.LevelName, c.Password, c.LoginTime, c.LogoutTime, x.TenXa, h.TenHuyen, CASE WHEN c.AdministratorLevel = 2 THEN x.TenXa WHEN c.AdministratorLevel = 1 THEN h.TenHuyen END AS AdministrativeName FROM Company c LEFT JOIN Xa x ON c.IDXa = x.IDXa LEFT JOIN Huyen h ON c.IDHuyen = h.IDHuyen LEFT JOIN AdministratorLevel a on c.AdministratorLevel = a.LevelID WHERE isAdmin = 0";
-                SqlCommand cmd          = new SqlCommand(query, conn);
-                SqlDataReader reader    = cmd.ExecuteReader();
+                var keepColumns = userDataGrid.Columns[0];
+                userDataGrid.Columns.Clear();
+                userDataGrid.Columns.Add(keepColumns);
+                userDataGrid.ItemsSource = null;
 
-                while (reader.Read())
+                if (isCongTy)
                 {
-                    users.Add(new User
+                    userDataGrid.Columns.Add(new DataGridTextColumn
                     {
-                        CompanyID               = (int)reader["CompanyID"],
-                        CompanyName             = reader["CompanyName"]?.ToString(),
-                        Username                = reader["Username"]?.ToString(),
-                        AdministratorLevel      = reader["LevelName"].ToString(),
-                        TenXa                   = reader["TenXa"] != DBNull.Value ? reader["TenXa"].ToString() : null,
-                        TenHuyen                = reader["TenHuyen"] != DBNull.Value ? reader["TenHuyen"].ToString() : null,
-                        Password                = "***",
-                        LoginTime               = reader["LoginTime"] != DBNull.Value ? (DateTime?)reader["LoginTime"] : null,
-                        LogoutTime              = reader["LogoutTime"] != DBNull.Value ? (DateTime?)reader["LogoutTime"] : null,
-                        isAdmin                 = false
+                        Header = "ID Công Ty",
+                        Binding = new Binding("ID")
                     });
-
+                    userDataGrid.Columns.Add(new DataGridTextColumn
+                    {
+                        Header = "Tên công ty",
+                        Binding = new Binding("Name")
+                    });
+                    userDataGrid.Columns.Add(new DataGridTextColumn
+                    {
+                        Header = "Tên đăng nhập",
+                        Binding = new Binding("Username")
+                    });
+                    userDataGrid.Columns.Add(new DataGridTextColumn
+                    {
+                        Header = "Mật khẩu",
+                        Binding = new Binding("Password")
+                    });
+                    userDataGrid.Columns.Add(new DataGridTextColumn
+                    {
+                        Header = "SDT công ty",
+                        Binding = new Binding("SDT")
+                    });
+                    userDataGrid.Columns.Add(new DataGridTextColumn
+                    {
+                        Header = "Cấp trực thuộc",
+                        Binding = new Binding("CapTrucThuoc")
+                    });
+                    userDataGrid.Columns.Add(new DataGridTextColumn
+                    {
+                        Header = "Tên xã",
+                        Binding = new Binding("TenXa")
+                    });
+                    userDataGrid.Columns.Add(new DataGridTextColumn
+                    {
+                        Header = "Tên huyện",
+                        Binding = new Binding("TenHuyen")
+                    });
+                    userDataGrid.Columns.Add(new DataGridTextColumn
+                    {
+                        Header = "Nhiệm vụ",
+                        Binding = Giong_Vat_Nuoi_RadioButton.IsChecked == true ? new Binding("GiongVatNuoi") : Nguon_Gen_Giong_RadioButton.IsChecked == true ? new Binding("NguonGenGiong") : new Binding("ThucAnChanNuoi")
+                    });
+                    userDataGrid.Columns.Add(new DataGridTextColumn
+                    {
+                        Header = "Loại con vật",
+                        Binding = new Binding("TenLoaiConVat")
+                    });
+                    userDataGrid.Columns.Add(new DataGridTextColumn
+                    {
+                        Header = "Số lượng",
+                        Binding = new Binding("SoLuong")
+                    });
+                    userDataGrid.Columns.Add(new DataGridTextColumn
+                    {
+                        Header = "Đã bị dừng hoạt động",
+                        Binding = new Binding("Banned")
+                    });
+                }
+                else
+                {
+                    userDataGrid.Columns.Add(new DataGridTextColumn
+                    {
+                        Header = "ID Cán bộ nghiệp vụ",
+                        Binding = new Binding("ID")
+                    });
+                    userDataGrid.Columns.Add(new DataGridTextColumn
+                    {
+                        Header = "Tên cán bộ nghiệp vụ",
+                        Binding = new Binding("Name")
+                    });
+                    userDataGrid.Columns.Add(new DataGridTextColumn
+                    {
+                        Header = "Tên đăng nhập",
+                        Binding = new Binding("Username")
+                    });
+                    userDataGrid.Columns.Add(new DataGridTextColumn
+                    {
+                        Header = "Mật khẩu",
+                        Binding = new Binding("Password")
+                    });
+                    userDataGrid.Columns.Add(new DataGridTextColumn
+                    {
+                        Header = "SDT cán bộ nghiệp vụ",
+                        Binding = new Binding("SDT")
+                    });
+                    userDataGrid.Columns.Add(new DataGridTextColumn
+                    {
+                        Header = "Cấp trực thuộc",
+                        Binding = new Binding("CapTrucThuoc")
+                    });
+                    userDataGrid.Columns.Add(new DataGridTextColumn
+                    {
+                        Header = "Tên xã",
+                        Binding = new Binding("TenXa")
+                    });
+                    userDataGrid.Columns.Add(new DataGridTextColumn
+                    {
+                        Header = "Tên huyện",
+                        Binding = new Binding("TenHuyen")
+                    });
+                    //ID = (int)reader["CanBoNghiepVuID"],
+                    //        Name = reader["CanBoNghiepVuName"]?.ToString(),
+                    //        Username = reader["Username"]?.ToString(),
+                    //        Password = "***",
+                    //        CapTrucThuoc = reader["LevelName"].ToString(),
+                    //        SDT = reader["SDT"].ToString(),
+                    //        TenXa = reader["TenXa"] != DBNull.Value ? reader["TenXa"].ToString() : null,
+                    //        TenHuyen = reader["TenHuyen"] != DBNull.Value ? reader["TenHuyen"].ToString() : null,
+                    //        LoginTime = reader["LoginTime"] != DBNull.Value ? (DateTime?)reader["LoginTime"] : null,
+                    //        LogoutTime = reader["LogoutTime"] != DBNull.Value ? (DateTime?)reader["LogoutTime"] : null,
+                    //        IsAdmin = false
                 }
             }
-
-            userDataGrid.ItemsSource = users;
         }
-
-        private List<User> SearchUsers(string searchText)
-        {
-            return users.Where(user => (user.Username?.ToLower().Contains(searchText)       ?? false) ||
-                                       (user.CompanyName?.ToLower().Contains(searchText)    ?? false) ||
-                                       (user.TenHuyen?.ToLower().Contains(searchText)       ?? false) ||
-                                       (user.TenXa?.ToLower().Contains(searchText)          ?? false)).ToList();
-        }
-
         private void searchButton_Click(object sender, RoutedEventArgs e)
         {
             string searchText = searchTextBox.Text.ToLower();
-            if (string.IsNullOrEmpty(searchText))
+            if(userDataGrid.ItemsSource != null)
             {
-                userDataGrid.ItemsSource    = users;
+                userDataGrid.ItemsSource = null;
+                userDataGrid.Items.Clear();
+                if (CanBoNghiepVu.IsChecked == true)
+                {
+                    userDataGrid.ItemsSource = Provider.SearchUsers(searchText, Provider.LoadUsersData());
+                }
+                else
+                {
+                    userDataGrid.ItemsSource = Provider.SearchCompany(searchText, Provider.LoadCompaniesData());
+                }
             }
-            else
-            {
-                var filteredUsers           = SearchUsers(searchText);
-                userDataGrid.ItemsSource    = filteredUsers;
-            }
+                if (CanBoNghiepVu.IsChecked == true)
+                {
+                    userDataGrid.ItemsSource = Provider.SearchUsers(searchText, Provider.LoadUsersData());
+                }
+                else
+                {
+                    userDataGrid.ItemsSource = Provider.SearchCompany(searchText, Provider.LoadCompaniesData());
+                }
         }
-
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Bạn có muốn đăng xuất không?", "Xác nhận đăng xuất", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
             if (result == MessageBoxResult.No)
                 return;
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                conn.Open();
-                string query        = "UPDATE Company SET LogoutTime = @logouttime WHERE Username = @username";
-                SqlCommand cmd      = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@logouttime", DateTime.Now);
-                cmd.Parameters.AddWithValue("@username", AdminUser.Username);
-                cmd.ExecuteNonQuery();
-            }
+            Provider.SetLogoutTime(AdminUser);
 
             LoginWindow loginWindow = new LoginWindow();
             loginWindow.Show();
             Close();
         }
-
         private void hamburgerButton_Click(object sender, RoutedEventArgs e)
         {
             popupMenu.IsOpen = !popupMenu.IsOpen;
         }
-
-        private void test_Click(object sender, RoutedEventArgs e)
-        {
-            //Chưa phát triển
-        }
-
         private void testt_Click(object sender, RoutedEventArgs e)
         {
             //Chưa phát triển
         }
-
         private void InfoButton_Click(object sender, RoutedEventArgs e)
         {
             popupInfoMenu.IsOpen = !popupInfoMenu.IsOpen;
         }
-
         private void personInfo_Click(object sender, RoutedEventArgs e)
         {
             popupInfoMenu.IsOpen = false;
@@ -148,12 +223,6 @@ namespace Test
             userInfoWindow.Show();
             Hide();
         }
-        public void InitializeClock() { 
-            timer = new DispatcherTimer(); 
-            timer.Interval = TimeSpan.FromSeconds(1); 
-            timer.Start(); 
-        }
-
         private void changePassword_Click(object sender, RoutedEventArgs e)
         {
             ChangePasswordWindow changePasswordWindow = new ChangePasswordWindow(this);
@@ -161,153 +230,427 @@ namespace Test
             Hide();
         }
 
-        private void userInfoConfig_Click(object sender, RoutedEventArgs e)
+        private void ShowPassword_Checked(object sender, RoutedEventArgs e)
         {
-            popupInfoMenu.IsOpen = false;
-            UserInfoConfigWindow userInfoConfigWindow = new UserInfoConfigWindow(AdminUser, this);
-            userInfoConfigWindow.Show();
-            Hide();
-        }
-        private string GetPasswordFromDatabase(string username) { 
-            string password             = ""; 
-            string connectionString     = "Data Source=localhost;Initial Catalog=contact;Integrated Security=True"; 
-            using (SqlConnection conn   = new SqlConnection(connectionString)) 
-            { 
-                conn.Open(); 
-                string query            = "SELECT Password FROM Company WHERE Username = @Username"; 
-                SqlCommand cmd          = new SqlCommand(query, conn); 
-                cmd.Parameters.AddWithValue("@Username", username); 
-                SqlDataReader reader    = cmd.ExecuteReader();
-
-                if (reader.Read()) 
-                { 
-                    password = reader["Password"].ToString(); 
-                } 
-
-            } 
-            return password; 
-        }
-
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            CheckBox checkBox       = sender as CheckBox;
-            string username         = checkBox?.Tag?.ToString();
-            User user               = users.FirstOrDefault(u => u.Username == username);
-
-            if (user != null)
+            if (CanBoNghiepVu.IsChecked == false)
             {
-                if (user.Password == "***")
+                CheckBox checkBox = sender as CheckBox;
+                string username = checkBox?.Tag?.ToString();
+                CongTy company = companies.FirstOrDefault(c => c.Username == username);
+
+                if (company != null)
                 {
-                    user.Password               = GetPasswordFromDatabase(user.Username);
-                    userDataGrid.ItemsSource    = null;
-                    userDataGrid.ItemsSource    = users;
+                    if (company.Password == "***")
+                    {
+                        company.Password = Provider.GetPasswordFromDatabase(username, "CongTy");
+                        userDataGrid.ItemsSource = null;
+                        userDataGrid.ItemsSource = companies;
+                    }
+                    else
+                    {
+                        company.Password = "***";
+                        userDataGrid.ItemsSource = null;
+                        userDataGrid.ItemsSource = companies;
+                    }
+                }
+            }
+            else
+            {
+                CheckBox checkBox = sender as CheckBox;
+                string username = checkBox?.Tag?.ToString();
+                CanBoNghiepVu user = users.FirstOrDefault(u => u.Username == username);
+
+                if (user != null)
+                {
+                    if (user.Password == "***")
+                    {
+                        user.Password = Provider.GetPasswordFromDatabase(username, "CanBoNghiepVu");
+                        userDataGrid.ItemsSource = null;
+                        userDataGrid.ItemsSource = users;
+                    }
+                    else
+                    {
+                        user.Password = "***";
+                        userDataGrid.ItemsSource = null;
+                        userDataGrid.ItemsSource = users;
+                    }
+                }
+            }
+        }
+        private void CongTy_Checked(object sender, RoutedEventArgs e)
+        {
+            if (userDataGrid.ItemsSource != null)
+            {
+                DataGridConfig(true);
+                userDataGrid.ItemsSource = null;
+
+                companies = new List<CongTy>();
+                companies = Provider.LoadCompaniesData();
+                if (Giong_Vat_Nuoi_RadioButton.IsChecked == true)
+                    companies = companies.Where(c => c.GiongVatNuoi != "KhongThuocLinhVuc").ToList();
+                else if (Nguon_Gen_Giong_RadioButton.IsChecked == true)
+                    companies = companies.Where(c => c.NguonGenGiong != "KhongThuocLinhVuc").ToList();
+                else
+                    companies = companies.Where(c => c.ThucAnChanNuoi != "KhongThuocLinhVuc").ToList();
+                userDataGrid.ItemsSource = companies;
+                numberOfUser.Content = companies.Count;
+                LinhVucHoatDongStackPanel.Visibility = Visibility.Visible;
+            }
+        }
+        private void CanBoNghiepVu_Checked(object sender, RoutedEventArgs e)
+        {
+            DataGridConfig(false);
+            if (userDataGrid != null)
+            {
+                userDataGrid.ItemsSource = null;
+                userDataGrid.Items.Clear();
+
+                users = new List<CanBoNghiepVu>();
+                users = Provider.LoadUsersData();
+                userDataGrid.ItemsSource = users;
+                numberOfUser.Content = users.Count;
+                LinhVucHoatDongStackPanel.Visibility = Visibility.Collapsed;
+            }
+        }
+        private void Giong_Vat_Nuoi_RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            DataGridConfig(true);
+            if (userDataGrid != null)
+            {
+                userDataGrid.ItemsSource = null;
+                userDataGrid.Items.Clear();
+
+                companies = new List<CongTy>();
+                companies = Provider.LoadCompaniesData();
+                if (Giong_Vat_Nuoi_RadioButton.IsChecked == true)
+                    companies = companies.Where(c => c.GiongVatNuoi != "KhongThuocLinhVuc").ToList();
+                else if (Nguon_Gen_Giong_RadioButton.IsChecked == true)
+                    companies = companies.Where(c => c.NguonGenGiong != "KhongThuocLinhVuc").ToList();
+                else
+                    companies = companies.Where(c => c.ThucAnChanNuoi != "KhongThuocLinhVuc").ToList();
+                userDataGrid.ItemsSource = companies;
+                numberOfUser.Content = companies.Count;
+            }
+        }
+
+        private void Nguon_Gen_Giong_RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            DataGridConfig(true);
+            if (userDataGrid != null)
+            {
+                userDataGrid.ItemsSource = null;
+                userDataGrid.Items.Clear();
+
+                companies = new List<CongTy>();
+                companies = Provider.LoadCompaniesData();
+                if (Giong_Vat_Nuoi_RadioButton.IsChecked == true)
+                    companies = companies.Where(c => c.GiongVatNuoi != "KhongThuocLinhVuc").ToList();
+                else if (Nguon_Gen_Giong_RadioButton.IsChecked == true)
+                    companies = companies.Where(c => c.NguonGenGiong != "KhongThuocLinhVuc").ToList();
+                else
+                    companies = companies.Where(c => c.ThucAnChanNuoi != "KhongThuocLinhVuc").ToList();
+                userDataGrid.ItemsSource = companies;
+                numberOfUser.Content = companies.Count;
+            }
+        }
+
+        private void Thuc_An_Chan_Nuoi_RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            DataGridConfig(true);
+            if (userDataGrid != null)
+            {
+                userDataGrid.ItemsSource = null;
+                userDataGrid.Items.Clear();
+
+                companies = new List<CongTy>();
+                companies = Provider.LoadCompaniesData();
+                if (Giong_Vat_Nuoi_RadioButton.IsChecked == true)
+                    companies = companies.Where(c => c.GiongVatNuoi != "KhongThuocLinhVuc").ToList();
+                else if (Nguon_Gen_Giong_RadioButton.IsChecked == true)
+                    companies = companies.Where(c => c.NguonGenGiong != "KhongThuocLinhVuc").ToList();
+                else
+                    companies = companies.Where(c => c.ThucAnChanNuoi != "KhongThuocLinhVuc").ToList();
+                userDataGrid.ItemsSource = companies;
+                numberOfUser.Content = companies.Count;
+            }
+        }
+
+        private void userDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            // Kiểm tra xem sự kiện double-click có xảy ra trên CheckBox hay không
+            if (e.OriginalSource is FrameworkElement element && element.Parent is DataGridCell cell && cell.Content is CheckBox)
+            {
+                // Nếu sự kiện double-click xảy ra trên CheckBox, không làm gì cả
+                return;
+            }
+
+            if (CanBoNghiepVu.IsChecked == true)
+            {
+                var selectedUser = userDataGrid.SelectedItem as CanBoNghiepVu;
+                if (selectedUser != null)
+                {
+                    selectedUser.Password = Provider.GetPasswordFromDatabase(selectedUser.Username, "CanBoNghiepVu");
+
+                    Main.Visibility = Visibility.Collapsed;
+                    ConfigUserData.Visibility = Visibility.Visible;
+
+                    NameTextBox.Text = selectedUser.Name;
+                    SDTTextBox.Text = selectedUser.SDT;
+                    adminLevel.SelectedValue = selectedUser.CapTrucThuoc;
+                    UsernameTextBox.Text = selectedUser.Username;
+                    PasswordTextBox.Password = selectedUser.Password;
+                    if (selectedUser.CapTrucThuoc == "Xa")
+                        tenXaHuyen.SelectedValue = selectedUser.TenXa;
+                    else tenXaHuyen.SelectedValue = selectedUser.TenHuyen;
                 }
                 else
                 {
-                user.Password                   = "***";
-                userDataGrid.ItemsSource        = null;
-                userDataGrid.ItemsSource        = users;
+                    MessageBox.Show("Không thể lấy thông tin người dùng.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-        }
-        private void configData_Checked(object sender, RoutedEventArgs e)
-        {   
-            CheckBox checkbox                   = sender as CheckBox;
-            User tempUser                       = new User();
-            string username                     = checkbox?.Tag?.ToString();
-
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            else
             {
-                conn.Open();
-                string query                    = "SELECT c.CompanyID, c.CompanyName, c.Password, a.LevelName, x.TenXa, h.TenHuyen FROM Company c JOIN AdministratorLevel a ON c.AdministratorLevel = a.LevelID JOIN Xa x ON c.IDXa = x.IDXa JOIN Huyen h ON c.IDHuyen = h.IDHuyen WHERE Username = @username";
-                SqlCommand cmd                  = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@username", username);
-                cmd.ExecuteNonQuery();
-
-                SqlDataReader reader    = cmd.ExecuteReader();
-                while (reader.Read())
+                var selectedCompany = userDataGrid.SelectedItem as CongTy;
+                if (selectedCompany != null)
                 {
-                    tempUser.CompanyID              = (int)reader["CompanyID"];
-                    tempUser.CompanyName            = reader["CompanyName"].ToString();
-                    tempUser.Username               = username;
-                    tempUser.Password               = reader["Password"].ToString();
-                    tempUser.AdministratorLevel     = reader["LevelName"].ToString();
-                    tempUser.TenXa                  = reader["TenXa"].ToString();
-                    tempUser.TenHuyen               = reader["TenHuyen"].ToString();
+                    selectedCompany.Password = Provider.GetPasswordFromDatabase(selectedCompany.Username, "CongTy");
+
+                    Main.Visibility = Visibility.Collapsed;
+                    ConfigUserData.Visibility = Visibility.Visible;
+
+                    NameTextBox.Text = selectedCompany.Name;
+                    SDTTextBox.Text = selectedCompany.SDT;
+                    adminLevel.SelectedValue = selectedCompany.CapTrucThuoc;
+                    UsernameTextBox.Text = selectedCompany.Username;
+                    PasswordTextBox.Password = selectedCompany.Password;
+
+                    if (selectedCompany.CapTrucThuoc == "Xa")
+                        tenXaHuyen.SelectedValue = selectedCompany.TenXa;
+                    else tenXaHuyen.SelectedValue = selectedCompany.TenHuyen;
+                }
+                else
+                {
+                    MessageBox.Show("Không thể lấy thông tin công ty.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            popupInfoMenu.IsOpen                        = false;
-            UserInfoConfigWindow userInfoConfigWindow   = new UserInfoConfigWindow(tempUser, this);
-            userInfoConfigWindow.Show();
-            Hide();
         }
 
-        private void configData_Unchecked(object sender, RoutedEventArgs e)
+
+        private void AdministratorManageButton_Click(object sender, RoutedEventArgs e)
         {
-            CheckBox checkBox               = sender as CheckBox;
-            string username                 = checkBox?.Tag?.ToString();
-            User user                       = users.FirstOrDefault(u => u.Username == username);
-            using (SqlConnection conn       = new SqlConnection(connectionString))
+
+        }
+
+        private void adminLevel_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string query;
+            if (adminLevel.SelectedItem != null)
             {
-                conn.Open();
-                string query                = "SELECT c.CompanyID, c.CompanyName, c.Password, a.LevelName, x.TenXa, h.TenHuyen FROM Company c JOIN AdministratorLevel a ON c.AdministratorLevel = a.LevelID JOIN Xa x ON c.IDXa = x.IDXa JOIN Huyen h ON c.IDHuyen = h.IDHuyen WHERE Username = @username";
-                SqlCommand cmd              = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@username", username);
-                cmd.ExecuteNonQuery();
-
-                SqlDataReader reader        = cmd.ExecuteReader();
-                while (reader.Read())
+                string selectedRole = adminLevel.SelectedItem.ToString();
+                tenXaHuyen.Items.Clear();
+                if (selectedRole == "Xa")
                 {
-                    user.CompanyID          = (int)reader["CompanyID"];
-                    user.CompanyName        = reader["CompanyName"].ToString();
-                    user.Username           = username;
-                    user.Password           = "***";
-                    user.AdministratorLevel = reader["LevelName"].ToString();
-                    user.TenXa              = reader["TenXa"].ToString();
-                    user.TenHuyen           = reader["TenHuyen"].ToString();
+                    query = "SELECT TenXa, TrucThuocHuyen FROM Xa WHERE IDXa != 0";
+                }
+                else
+                {
+                    query = "SELECT TenHuyen FROM Huyen WHERE IDHuyen != 0";
+                }
+
+                SqlHelper.ExecuteReader(SqlHelper.connectionString, query, cmd => { },
+                    reader =>
+                    {
+                        while (reader.Read())
+                        {
+                            if (selectedRole == "Xa")
+                            {
+                                tenXaHuyen.Items.Add(reader["TenXa"].ToString());
+                            }
+                            else
+                            {
+                                tenXaHuyen.Items.Add(reader["TenHuyen"].ToString());
+                            }
+                        }
+                    });
+            }
+        }
+        private void adminLevel_Loaded(object sender, RoutedEventArgs e)
+        {
+            adminLevel.Items.Add("Huyen");
+            adminLevel.Items.Add("Xa");
+        }
+
+        private void saveChanges_Click(object sender, RoutedEventArgs e)
+        {
+            string query;
+            if (CanBoNghiepVu.IsChecked == true)
+            {
+                if (NewPasswordPanel.Visibility == Visibility.Visible)
+                {
+                    if (ConfirmNewPasswordTextBox.Text != NewPasswordTextBox.Text)
+                    {
+                        MessageBox.Show("Mật khẩu xác nhận không trùng nhau", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    else if (NewPasswordTextBox.Text.Length < 8)
+                    {
+                        MessageBox.Show("Mật khẩu thay đổi quá ngắn", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    if (adminLevel.SelectedItem.ToString() == "Huyen")
+                        query = "UPDATE CanBoNghiepVu SET CanBoNghiepVuName = @cbnvname, AdministratorLevel = (SELECT LevelID FROM AdministratorLevel WHERE LevelName = @levelname), Password = @newpassword, IDHuyen = (SELECT IDHuyen FROM Huyen WHERE TenHuyen = @tenhuyen), IDXa = (SELECT IDXa FROM Xa WHERE TenXa = @tenxa) WHERE Username = @username";
+                    else
+                        query = "UPDATE CanBoNghiepVu SET CanBoNghiepVuName = @cbnvname, AdministratorLevel = (SELECT LevelID FROM AdministratorLevel WHERE LevelName = @levelname), Password = @newpassword, IDHuyen = (SELECT TrucThuocHuyen FROM Xa WHERE TenXa = @tenxa), IDXa = (SELECT IDXa FROM Xa WHERE TenXa = @tenxa) WHERE Username = @username";
+
+                    SqlHelper.ExecuteNonQuery(SqlHelper.connectionString, query,
+                        cmd =>
+                        {
+                            cmd.Parameters.AddWithValue("@cbnvname", NameTextBox.Text);
+                            cmd.Parameters.AddWithValue("@newpassword", NewPasswordTextBox.Text);
+                            cmd.Parameters.AddWithValue("@username", UsernameTextBox.Text);
+                            if (adminLevel.SelectedItem.ToString() == "Huyen")
+                            {
+                                cmd.Parameters.AddWithValue("@tenhuyen", tenXaHuyen.SelectedItem.ToString());
+                                cmd.Parameters.AddWithValue("@tenxa", DBNull.Value);
+                                cmd.Parameters.AddWithValue("@levelname", "Huyen");
+                            }
+                            else
+                            {
+                                cmd.Parameters.AddWithValue("@tenxa", tenXaHuyen.SelectedItem.ToString());
+                                cmd.Parameters.AddWithValue("@levelname", "Xa");
+                            }
+                        });
+                    MessageBox.Show("Thay đổi thông tin thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+
+                    if (adminLevel.SelectedItem.ToString() == "Huyen")
+                        query = "UPDATE CanBoNghiepVu SET CanBoNghiepVuName = @cbnvname, AdministratorLevel = (SELECT LevelID FROM AdministratorLevel WHERE LevelName = @levelname), IDHuyen = (SELECT IDHuyen FROM Huyen WHERE TenHuyen = @tenhuyen), IDXa = (SELECT IDXa FROM Xa WHERE TenXa = @tenxa) WHERE Username = @username";
+                    else
+                        query = "UPDATE CanBoNghiepVu SET CanBoNghiepVuName = @cbnvname, AdministratorLevel = (SELECT LevelID FROM AdministratorLevel WHERE LevelName = @levelname), IDHuyen = (SELECT TrucThuocHuyen FROM Xa WHERE TenXa = @tenxa), IDXa = (SELECT IDXa FROM Xa WHERE TenXa = @tenxa) WHERE Username = @username";
+
+                    SqlHelper.ExecuteNonQuery(SqlHelper.connectionString, query,
+                        cmd =>
+                        {
+                            cmd.Parameters.AddWithValue("@cbnvname", NameTextBox.Text);
+                            cmd.Parameters.AddWithValue("@username", UsernameTextBox.Text);
+                            if (adminLevel.SelectedItem.ToString() == "Huyen")
+                            {
+                                cmd.Parameters.AddWithValue("@tenhuyen", tenXaHuyen.SelectedItem.ToString());
+                                cmd.Parameters.AddWithValue("@tenxa", DBNull.Value);
+                                cmd.Parameters.AddWithValue("@levelname", "Huyen");
+                            }
+                            else
+                            {
+                                cmd.Parameters.AddWithValue("@tenxa", tenXaHuyen.SelectedItem.ToString());
+                                cmd.Parameters.AddWithValue("@levelname", "Xa");
+                            }
+                        });
+                }
+                MessageBox.Show("Thay đổi thông tin thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                DataGridConfig(false);
+            }
+            else
+            {
+                if (NewPasswordPanel.Visibility == Visibility.Visible)
+                {
+                    if (ConfirmNewPasswordTextBox.Text != NewPasswordTextBox.Text)
+                    {
+                        MessageBox.Show("Mật khẩu xác nhận không trùng nhau", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    else if (NewPasswordTextBox.Text.Length < 8)
+                    {
+                        MessageBox.Show("Mật khẩu thay đổi quá ngắn", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    if (adminLevel.SelectedItem.ToString() == "Huyen")
+                        query = "UPDATE CongTy SET Ten = @companyname, CapTrucThuoc = (SELECT LevelID FROM AdministratorLevel WHERE LevelName = @levelname), Password = @newpassword, IDHuyen = (SELECT IDHuyen FROM Huyen WHERE TenHuyen = @tenhuyen), IDXa = (SELECT IDXa FROM Xa WHERE TenXa = @tenxa) WHERE Username = @username";
+                    else
+                        query = "UPDATE CongTy SET Ten = @companyname, CapTrucThuoc = (SELECT LevelID FROM AdministratorLevel WHERE LevelName = @levelname), Password = @newpassword, IDHuyen = (SELECT TrucThuocHuyen FROM Xa WHERE TenXa = @tenxa), IDXa = (SELECT IDXa FROM Xa WHERE TenXa = @tenxa) WHERE Username = @username";
+
+                    SqlHelper.ExecuteNonQuery(SqlHelper.connectionString, query,
+                        cmd =>
+                        {
+                            cmd.Parameters.AddWithValue("@companyname", NameTextBox.Text);
+                            cmd.Parameters.AddWithValue("@newpassword", NewPasswordTextBox.Text);
+                            cmd.Parameters.AddWithValue("@username", UsernameTextBox.Text);
+                            if (adminLevel.SelectedItem.ToString() == "Huyen")
+                            {
+                                cmd.Parameters.AddWithValue("@tenhuyen", tenXaHuyen.SelectedItem.ToString());
+                                cmd.Parameters.AddWithValue("@tenxa", DBNull.Value);
+                                cmd.Parameters.AddWithValue("@levelname", "Huyen");
+                            }
+                            else
+                            {
+                                cmd.Parameters.AddWithValue("@tenxa", tenXaHuyen.SelectedItem.ToString());
+                                cmd.Parameters.AddWithValue("@levelname", "Xa");
+                            }
+                        });
+                }
+                else
+                {
+
+                    if (adminLevel.SelectedItem.ToString() == "Huyen")
+                        query = "UPDATE CongTy SET Ten = @companyname, CapTrucThuoc = (SELECT LevelID FROM AdministratorLevel WHERE LevelName = @levelname), IDHuyen = (SELECT IDHuyen FROM Huyen WHERE TenHuyen = @tenhuyen), IDXa = (SELECT IDXa FROM Xa WHERE TenXa = @tenxa) WHERE Username = @username";
+                    else
+                        query = "UPDATE CongTy SET Ten = @companyname, CapTrucThuoc = (SELECT LevelID FROM AdministratorLevel WHERE LevelName = @levelname), IDHuyen = (SELECT TrucThuocHuyen FROM Xa WHERE TenXa = @tenxa), IDXa = (SELECT IDXa FROM Xa WHERE TenXa = @tenxa) WHERE Username = @username";
+
+                    SqlHelper.ExecuteNonQuery(SqlHelper.connectionString, query,
+                        cmd =>
+                        {
+                            cmd.Parameters.AddWithValue("@companyname", NameTextBox.Text);
+                            cmd.Parameters.AddWithValue("@username", UsernameTextBox.Text);
+                            if (adminLevel.SelectedItem.ToString() == "Huyen")
+                            {
+                                cmd.Parameters.AddWithValue("@tenhuyen", tenXaHuyen.SelectedItem.ToString());
+                                cmd.Parameters.AddWithValue("@tenxa", DBNull.Value);
+                                cmd.Parameters.AddWithValue("@levelname", "Huyen");
+                            }
+                            else
+                            {
+                                cmd.Parameters.AddWithValue("@tenxa", tenXaHuyen.SelectedItem.ToString());
+                                cmd.Parameters.AddWithValue("@levelname", "Xa");
+                            }
+                        });
+                    MessageBox.Show("Thay đổi thông tin thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    DataGridConfig(true);
                 }
             }
-            userDataGrid.ItemsSource        = null;
-            userDataGrid.ItemsSource        = users;
+        }
+            private void return_Click(object sender, RoutedEventArgs e)
+            {
+                Main.Visibility = Visibility.Visible;
+                ConfigUserData.Visibility = Visibility.Collapsed;
+            }
+            private void showHide_Click(object sender, RoutedEventArgs e)
+            {
+                if (isPasswordVisible)
+                {
+                    isPasswordVisible = false;
+                    showHide.Content = "Hiện";
+                    PasswordTextBox.Visibility = Visibility.Visible;
+                    showedPassword.Visibility = Visibility.Collapsed;
+                    PasswordTextBox.Password = showedPassword.Text;
+            }
+            else
+            {
+                isPasswordVisible = true;
+                showHide.Content = "Ẩn";
+                PasswordTextBox.Visibility = Visibility.Collapsed;
+                showedPassword.Visibility = Visibility.Visible;
+                showedPassword.Text = PasswordTextBox.Password;
+            }
         }
 
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        private void changePasswordBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            bool isCollapsed = NewPasswordPanel.Visibility == Visibility.Collapsed;
+            NewPasswordPanel.Visibility = isCollapsed ? Visibility.Visible : Visibility.Collapsed;
         }
-
-        private void RadioButton_Checked_1(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void CongTy_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Company_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void userDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-    }
-    public class User
-    {
-        public int CompanyID { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string CompanyName { get; set; }
-        public string AdministratorLevel { get; set; }
-        public string TenXa { get; set; }
-        public string TenHuyen { get; set; }
-        public DateTime? LoginTime { get; set; }
-        public DateTime? LogoutTime { get; set; }
-        public bool isAdmin { get; set; }
     }
 }
 

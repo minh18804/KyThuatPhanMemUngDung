@@ -22,17 +22,15 @@ namespace Test
     public partial class UserInfoConfigWindow : Window
     {
         string connectionString = "Data Source=localhost;Initial Catalog=contact;Integrated Security=True";
-        User user;
+        CanBoNghiepVu user;
         Window previousWindow;
         bool _isPasswordVisible = false;
-        public UserInfoConfigWindow(User user, Window previousWindow)
+        public UserInfoConfigWindow(CanBoNghiepVu user, Window previousWindow)
         {
             this.user = user;
             this.previousWindow = previousWindow;
             InitializeComponent();
-            CompanyNameTextBox.Text = user.CompanyName;
-
-
+            CompanyNameTextBox.Text = user.Name;
             UsernameTextBox.Text = user.Username;
         }
 
@@ -175,7 +173,7 @@ namespace Test
         {
             adminLevel.Items.Add("Xã");
             adminLevel.Items.Add("Huyện");
-            if (user.AdministratorLevel == "Huyen")
+            if (user.CapTrucThuoc == "Huyen")
             {
                 adminLevel.SelectedIndex = 1;
             }
@@ -218,7 +216,7 @@ namespace Test
         }
         private void tenXaHuyen_Loaded(object sender, RoutedEventArgs e)
         {
-            if (user.AdministratorLevel == "Xa")
+            if (user.CapTrucThuoc == "Xa")
                 tenXaHuyen.SelectedItem = user.TenXa;
             else
                 tenXaHuyen.SelectedItem = user.TenHuyen;
