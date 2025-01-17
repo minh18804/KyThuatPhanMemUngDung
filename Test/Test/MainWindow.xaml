@@ -44,9 +44,9 @@
 
             <Label Content="Hệ thống quản lý chăn nuôi"
                FontSize="28"
-               Foreground="BurlyWood"
+               Foreground="White"
                FontWeight="Bold"
-               Grid.Row="2"
+               Grid.Row="5"
                Grid.RowSpan="2"
                Grid.Column="0"
                Grid.ColumnSpan="8"
@@ -54,9 +54,9 @@
                Margin="10"/>
 
             <StackPanel Grid.Row="1"
-                    Grid.Column="8" 
+                    Grid.Column="7" 
                     Grid.RowSpan="7" 
-                    Grid.ColumnSpan="2" 
+                    Grid.ColumnSpan="3" 
                     VerticalAlignment="Top" 
                     HorizontalAlignment="Right" 
                     Margin="10">
@@ -87,30 +87,25 @@
                     MinWidth="30"
                     MaxWidth="300"
                     VerticalAlignment="Top" 
-                    HorizontalAlignment="Stretch" 
-                    Margin="10,0,0,0">
+                    HorizontalAlignment="Stretch">
             <Label Content="Tên đăng nhập:" 
-                        FontSize="14" 
-                        Margin="0,0,0,10"/>
+                        FontSize="14" />
             <TextBox x:Name="Username" 
                         Background="Beige" 
                         KeyDown="username_KeyDown" 
                         FontSize="16"
                         Height="24" 
-                        Margin="0,0,0,10" 
                         MaxWidth="300" 
                         MinHeight="30"
                         MaxHeight="150"
                         MinWidth="100"/>
             <Label Content="Mật khẩu:" 
-                        FontSize="14"
-                        Margin="0,10,0,10"/>
+                        FontSize="14"/>
             <PasswordBox x:Name="Password" 
                             Background="Beige" 
                             Height="24" 
                             FontSize="16"
                             KeyDown="password_KeyDown" 
-                            Margin="0,0,0,10" 
                             MaxWidth="300" 
                             MinWidth="100"
                             MinHeight="30"
@@ -120,37 +115,65 @@
                         Click="login_Click" 
                         FontSize="14" 
                         FontWeight="Bold" 
-                        Background="Green" 
                         Foreground="White" 
                         BorderThickness="0" 
                         Height="32" 
-                        Margin="10,10,0,0"
                         MinHeight="30"
                         MaxHeight="150"
+                        Margin="10"
                         MaxWidth="150" 
-                        MinWidth="80"/>
+                        MinWidth="80">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="15" >
+                            <Border.Background>
+                                <SolidColorBrush Color="Green" Opacity="0.7"/>
+                            </Border.Background>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
             <Button x:Name="register" 
                         Content="Đăng ký" 
                         Click="register_Click" 
                         FontSize="14" 
                         FontWeight="Bold" 
-                        Background="Orange" 
                         Foreground="White" 
                         BorderThickness="0" 
                         Height="32" 
-                        Margin="10,10,0,0"
+                        Opacity="1"
                         MinHeight="30"
                         MaxHeight="150"
                         MaxWidth="150" 
-                        MinWidth="80"/>
+                        MinWidth="80">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="15">
+                            <Border.Background>
+                            <SolidColorBrush Color="Orange" Opacity="0.7"/>
+                            </Border.Background>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
             <Button x:Name="forgotPassword" 
                         Content="Quên mật khẩu?" 
                         Click="forgotPassword_Click" 
-                        FontSize="10" 
+                        FontSize="12" 
                         Foreground="Blue" 
                         Background="White" 
                         BorderThickness="0" 
-                        Margin="0,10,0,0"/>
+                        Margin="0,10,0,0">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="15">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
         </StackPanel>
 
             <Label  Content="Trang đăng nhập" 

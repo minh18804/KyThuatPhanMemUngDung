@@ -167,10 +167,13 @@
     <Resource Include="Images\background-register.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\background.jpg" />
+    <Resource Include="Images\background-changepass.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\background-changepass.jpg" />
+    <Resource Include="Images\background-main.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\background.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
