@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\obj\Debug\
+D:\vscode\btl_ktpm\Test\Test\obj\Debug\
 Test
 none
 false
 DEBUG;TRACE
-C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\App.xaml
-10-665352216
+D:\vscode\btl_ktpm\Test\Test\App.xaml
+111515005144
 
-1743526728
+18-432245712
 13-1310406943
-MainWindow.xaml;Register.xaml;Admin.xaml;CapHuyen.xaml;CapXa.xaml;ChangePassword.xaml;UserInfo.xaml;UserInfoConfig.xaml;ForgotPassword.xaml;QuanLyGiongVatNuoi.xaml;
+MainWindow.xaml;Register.xaml;Admin.xaml;CapHuyen.xaml;CapXa.xaml;ChangePassword.xaml;UserInfo.xaml;UserInfoConfig.xaml;ForgotPassword.xaml;QuanLyGiongVatNuoi.xaml;CongTyWindow.xaml;
 
 False
 

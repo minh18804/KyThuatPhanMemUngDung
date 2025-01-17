@@ -76,6 +76,10 @@
                              Content="Cấp xã" 
                              GroupName="Roles" 
                              Margin="0,10,0,10"/>
+            <RadioButton x:Name="congTy" 
+                 Content="Công ty" 
+                 GroupName="Roles" 
+                 Margin="0,10,0,10"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" 
