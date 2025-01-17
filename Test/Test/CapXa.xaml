@@ -6,7 +6,15 @@
         xmlns:local="clr-namespace:Test"
         mc:Ignorable="d"
         Title="Trang chủ" Height="450" Width="800">
+    <Window.Resources>
+        <Storyboard x:Key="SlideUpAnimation">
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" From="50" To="0" Duration="0:0:0.5" />
+        </Storyboard>
+    </Window.Resources>
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="images/background-main.jpg"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -17,129 +25,293 @@
             <ColumnDefinition Width="Auto" MinWidth="40"/>
             <ColumnDefinition Width="Auto" MinWidth="40"/>
         </Grid.ColumnDefinitions>
-
-        <Label x:Name="Greeting" 
-           Grid.Column="1" 
-           HorizontalAlignment="Center" 
-           Width="572" 
-           Height="30" 
-           VerticalAlignment="Top" Margin="0,8,0,0"/>
-
         <Button x:Name="LogoutButton" 
-            Width="30" 
-            Height="30" 
-            Grid.Column="2"
-            Grid.Row="0"
-            Background="LightBlue" 
-            Foreground="White" 
-            FontSize="18" 
-            FontWeight="Bold" 
-            HorizontalAlignment="Center" 
-            VerticalAlignment="Center" 
-            BorderBrush="Black" 
-            Click="LogoutButton_Click"
-            BorderThickness="1">
+    Width="30" 
+    Height="30" 
+    Grid.Column="2"
+    Grid.Row="0"
+    Background="LightBlue" 
+    Foreground="White" 
+    FontSize="18" 
+    FontWeight="Bold" 
+    HorizontalAlignment="Center" 
+    VerticalAlignment="Center" 
+    BorderBrush="White" 
+    Click="LogoutButton_Click"
+    BorderThickness="1">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="LightBlue"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="Red" Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Grid>
                         <Ellipse Fill="{TemplateBinding Background}" 
-                             Stroke="{TemplateBinding BorderBrush}" 
-                             StrokeThickness="{TemplateBinding BorderThickness}"/>
+                         Stroke="{TemplateBinding BorderBrush}" 
+                         StrokeThickness="{TemplateBinding BorderThickness}"/>
                         <ContentPresenter HorizontalAlignment="Center" 
-                                      VerticalAlignment="Center"/>
+                                  VerticalAlignment="Center"/>
                         <Image Source="pack://application:,,,/imageicon/logout.png" 
-                           Width="16" 
-                           Height="16" 
-                           Margin="0,0,5,0"/>
+                       Width="16" 
+                       Height="16" 
+                       Margin="0,0,5,0"/>
                     </Grid>
                 </ControlTemplate>
             </Button.Template>
         </Button>
 
         <Button x:Name="InfoButton" 
-            Width="30" 
-            Height="30" 
-            Grid.Column="3"
-            Grid.Row="0"
-            Background="LightBlue" 
-            Foreground="White" 
-            FontSize="18" 
-            FontWeight="Bold" 
-            HorizontalAlignment="Center" 
-            VerticalAlignment="Center" 
-            BorderBrush="Black" 
-            Click="InfoButton_Click"
-            BorderThickness="1">
+        Width="30" 
+        Height="30" 
+        Grid.Column="3"
+        Grid.Row="0"
+        Background="LightBlue" 
+        Foreground="White" 
+        FontSize="18" 
+        FontWeight="Bold" 
+        HorizontalAlignment="Center" 
+        VerticalAlignment="Center" 
+        BorderBrush="White" 
+        Click="InfoButton_Click"
+        BorderThickness="1">
             <Popup  x:Name="popupInfoMenu" 
-                PlacementTarget="{Binding ElementName=InfoButton}" 
-                StaysOpen="False" 
-                Placement="Bottom" 
-                HorizontalOffset="10" 
-                VerticalOffset="10">
+            PlacementTarget="{Binding ElementName=InfoButton}" 
+            StaysOpen="False" 
+            Placement="Bottom" 
+            HorizontalOffset="10" 
+            VerticalOffset="10">
                 <StackPanel Background="LightGray" 
-                        Width="200"
-                        HorizontalAlignment="Right">
+                    Width="200" 
+                    HorizontalAlignment="Right">
                     <Button x:Name="changePassword"
-                        Content="Đổi mật khẩu" 
-                        Click="changePassword_Click"
-                        FontWeight="Normal"/>
+                    Content="Đổi mật khẩu" 
+                    Click="changePassword_Click"
+                    FontWeight="Normal"/>
 
                     <Button x:Name="personInfo"
-                        Content="Thông tin người dùng" 
-                        Click="personInfo_Click"
-                        FontWeight="Normal"/>
+                    Content="Thông tin người dùng" 
+                    Click="personInfo_Click"
+                    FontWeight="Normal"/>
                 </StackPanel>
             </Popup>
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Grid>
                         <Ellipse Fill="{TemplateBinding Background}" 
-                             Stroke="{TemplateBinding BorderBrush}" 
-                             StrokeThickness="{TemplateBinding BorderThickness}"/>
+                         Stroke="{TemplateBinding BorderBrush}" 
+                         StrokeThickness="{TemplateBinding BorderThickness}"/>
                         <ContentPresenter HorizontalAlignment="Center" 
-                                      VerticalAlignment="Center"/>
+                                  VerticalAlignment="Center"/>
                     </Grid>
                 </ControlTemplate>
             </Button.Template>
         </Button>
 
         <Button x:Name="hamburgerButton"
-            Width="30" 
-            Height="30" 
-            Content="☰"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Background="White"
-            BorderThickness="0"
-            FontSize="18"
-            Click="hamburgerButton_Click"/>
+        Width="30" 
+        Height="30" 
+        Content="☰"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Background="Ivory"
+        BorderThickness="0"
+        FontSize="18"
+        Click="hamburgerButton_Click"/>
 
         <Popup x:Name="popupMenu" 
-           PlacementTarget="{Binding ElementName=hamburgerButton}" 
-           StaysOpen="False" 
-           Placement="Bottom">
+       PlacementTarget="{Binding ElementName=hamburgerButton}" 
+       StaysOpen="False" 
+       Placement="Bottom">
             <StackPanel Background="LightGray"
-                    Width="200" 
-                    HorizontalAlignment="Left">
-                <Button x:Name="XXXXXX"  
-                    Content="XXXXXXXX" 
-                    Click="XXXXXX_Click"/>
-                <Button x:Name="test"  
-                    Content="Test"
-                    Click="test_Click"/>
-                <Button x:Name="testt" 
-                    Content="Test"
-                    Click="testt_Click"/>
+                Width="200" 
+                HorizontalAlignment="Left">
             </StackPanel>
         </Popup>
-        <Button  x:Name="Quanlygiongvatnuoi"
-                 Content="Quản lý giống vật nuôi"
-                 Click="Quanlygiongvatnuoi_Click" Margin="274,143,274,231" Grid.Row="1" Grid.Column="1"/>
-        <Button  x:Name="Quanlynguongen"
-                 Content="Quản lý nguồn gen giống"
-                 Click="Quanlynguongen_Click" Margin="274,218,274,156" Grid.Row="1" Grid.Column="1"/>
-        <Button  x:Name="Quanlythucanchannuoi"
-                 Content="Quản lý thức ăn chăn nuôi"
-                 Click="Quanlythucanchannuoi_Click" Margin="274,288,274,86" Grid.Row="1" Grid.Column="1"/>
+
+        <Grid Grid.Row="1" 
+      Grid.Column="1" 
+      Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Trang chủ" 
+               FontSize="40" 
+               FontWeight="Bold" 
+               Margin="0,0,0,20" 
+               Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+
+
+            <Button x:Name="quanLyGiongVatNuoi"
+                    Grid.Column="0"
+                    Grid.Row="2"
+                    FontSize="18"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    BorderBrush="White"
+                    BorderThickness="0"
+                    HorizontalAlignment="Left"
+                    Grid.ColumnSpan="3"
+                    Background="Transparent"
+                    Width="300"
+                    Content="Quản lý giống vật nuôi"
+                    Click="quanLyGiongVatNuoi_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="#B3B3B3B3" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="15">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.RenderTransform>
+                    <TranslateTransform Y="500" />
+                </Button.RenderTransform>
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Loaded">
+                        <BeginStoryboard Storyboard="{StaticResource SlideUpAnimation}" />
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
+            <Button x:Name="quanLyNguonGen"
+                    Grid.Column="0"
+                    Grid.Row="4"
+                    Grid.ColumnSpan="3"
+                    FontSize="18"
+                    Foreground="White"
+                    BorderBrush="White"
+                    BorderThickness="0"
+                    HorizontalAlignment="Left"
+                    Background="Transparent"
+                    FontWeight="Bold"
+                    Width="300"
+                    Content="Quản lý nguồn gen giống"
+                    Click="quanLyNguonGen_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="#B3B3B3B3" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="15">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.RenderTransform>
+                    <TranslateTransform Y="500" />
+                </Button.RenderTransform>
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Loaded">
+                        <BeginStoryboard Storyboard="{StaticResource SlideUpAnimation}" />
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
+            <Button x:Name="quanLyThucAnChanNuoi"
+                    Grid.Column="0"
+                    Grid.Row="6"
+                    Width="300"
+                    Foreground="White"
+                    FontSize="18"
+                    BorderBrush="White"
+                    BorderThickness="0"
+                    FontWeight="Bold"
+                    Grid.ColumnSpan="3"
+                    Background="Transparent"
+                    HorizontalAlignment="Left"
+                    Content="Quản lý thức ăn chăn nuôi"
+                    Click="quanLyThucAnChanNuoi_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="#B3B3B3B3" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="15">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.RenderTransform>
+                    <TranslateTransform Y="500" />
+                </Button.RenderTransform>
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Loaded">
+                        <BeginStoryboard Storyboard="{StaticResource SlideUpAnimation}" />
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
+            <TextBox Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="48" Grid.Row="2" TextWrapping="Wrap" Text="Quản lý số lượng vật nuôi, giống vật nuôi và nơi chăn nuôi." VerticalAlignment="Center" Width="258" TextChanged="TextBox_TextChanged"
+                     Background="Transparent"
+                     BorderBrush="Transparent"
+                     Foreground="White"
+                     FontWeight="Bold"
+                     FontSize="16"
+                     IsEnabled="False">
+                <TextBox.RenderTransform>
+                    <TranslateTransform Y="500" />
+                </TextBox.RenderTransform>
+                <TextBox.Triggers>
+                    <EventTrigger RoutedEvent="TextBox.Loaded">
+                        <BeginStoryboard Storyboard="{StaticResource SlideUpAnimation}" />
+                    </EventTrigger>
+                </TextBox.Triggers>
+            </TextBox>
+            <TextBox Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="48" Grid.Row="4" TextWrapping="Wrap" Text="Quản lý gen giống cho vật nuôi và lựa chọn, duy trì đặc tính gen." VerticalAlignment="Center" Width="258" TextChanged="TextBox_TextChanged_1"
+                     Background="Transparent"
+                     BorderBrush="Transparent"
+                     Foreground="White"
+                     FontWeight="Bold"
+                     FontSize="16"
+                     IsEnabled="False">
+                <TextBox.RenderTransform>
+                    <TranslateTransform Y="500" />
+                </TextBox.RenderTransform>
+                <TextBox.Triggers>
+                    <EventTrigger RoutedEvent="TextBox.Loaded">
+                        <BeginStoryboard Storyboard="{StaticResource SlideUpAnimation}" />
+                    </EventTrigger>
+                </TextBox.Triggers>
+            </TextBox>
+            <TextBox Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="48" Grid.Row="6" TextWrapping="Wrap" Text="Quản lý thức ăn chăn nuôi, phân phối thức ăn." VerticalAlignment="Center" Width="258" TextChanged="TextBox_TextChanged_2"
+                     Background="Transparent"
+                     BorderBrush="Transparent"
+                     FontWeight="Bold"
+                     Foreground="White"
+                     FontSize="16"
+                     IsEnabled="False">
+                <TextBox.RenderTransform>
+                    <TranslateTransform Y="500" />
+                </TextBox.RenderTransform>
+                <TextBox.Triggers>
+                    <EventTrigger RoutedEvent="TextBox.Loaded">
+                        <BeginStoryboard Storyboard="{StaticResource SlideUpAnimation}" />
+                    </EventTrigger>
+                </TextBox.Triggers>
+            </TextBox>
+
+        </Grid>
+        <Label Grid.Column="1" 
+               x:Name="Greeting"
+               HorizontalAlignment="Left" 
+               VerticalAlignment="Center"/>
+
     </Grid>
 </Window>

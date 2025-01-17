@@ -187,6 +187,9 @@
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
+                <Button x:Name="returnToHuyenPage"
+                        Grid.Column="1" 
+                        Content="Return" HorizontalAlignment="Left" Margin="513,37,0,0" VerticalAlignment="Top" Click="returnToHuyenPage_Click"/>
             </Grid>
             <Grid x:Name="Statistic" 
                   Grid.Row="1" 

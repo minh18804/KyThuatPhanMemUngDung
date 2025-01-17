@@ -19,12 +19,12 @@ namespace Test
     /// </summary>
     public partial class CapXaWindow : Window
     {
-        public string username;
-        public string password;
+        CanBoNghiepVu user;
 
-        public CapXaWindow(User _user)
+        public CapXaWindow(CanBoNghiepVu _user)
         {
             InitializeComponent();
+            user = _user;
         }
         /// <summary>
         /// Đăng xuất
@@ -38,6 +38,7 @@ namespace Test
             if (result == MessageBoxResult.No)
                 return;
 
+            Provider.SetLogoutTime(user);
             LoginWindow loginWindow = new LoginWindow();
             loginWindow.Show();
             Close();
@@ -82,7 +83,7 @@ namespace Test
         /// <param name="e"></param>
         private void personInfo_Click(object sender, RoutedEventArgs e)
         {
-            UserInfoWindow userInfoWindow = new UserInfoWindow(username, this);
+            UserInfoWindow userInfoWindow = new UserInfoWindow(user, this);
             userInfoWindow.Show();
             popupInfoMenu.IsOpen = false;
             Hide();
@@ -99,22 +100,32 @@ namespace Test
             Hide();
         }
 
-        private void XXXXXX_Click(object sender, RoutedEventArgs e)
+        private void quanLyGiongVatNuoi_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void Quanlygiongvatnuoi_Click(object sender, RoutedEventArgs e)
+        private void quanLyNguonGen_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void Quanlynguongen_Click(object sender, RoutedEventArgs e)
+        private void quanLyThucAnChanNuoi_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void Quanlythucanchannuoi_Click(object sender, RoutedEventArgs e)
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TextBox_TextChanged_2(object sender, TextChangedEventArgs e)
         {
 
         }
