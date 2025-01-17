@@ -19,3 +19,5 @@
 /Test/.vs/Test/copilot-chat/42c370bc/sessions
 /Test/Test/bin/Debug/Test.exe
 /Test/Test/bin/Debug/Test.pdb
+/Test/Test/obj/Debug/Admin.g.i.cs
+/Test/Test/obj/Debug/ChangePassword.g.i.cs
