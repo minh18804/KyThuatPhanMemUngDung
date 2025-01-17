@@ -20,13 +20,13 @@ namespace Test
     /// </summary>
     public partial class CapHuyenWindow : Window
     {
-        User user;
+        CanBoNghiepVu user;
         string connectionString = "Data Source=localhost;Initial Catalog=contact;Integrated Security=true";
-        public CapHuyenWindow(User user)
+        public CapHuyenWindow(CanBoNghiepVu user)
         {
             this.user = user;
             InitializeComponent();
-            Greeting.Content = $"Xin chào, {user.CompanyName}";
+            Greeting.Content = $"Xin chào, {user.Name}";
         }
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {

@@ -92,7 +92,7 @@
                         FontSize="14" />
             <TextBox x:Name="Username" 
                         Background="Beige" 
-                        KeyDown="username_KeyDown" 
+                        KeyDown="Input_KeyDown" 
                         FontSize="16"
                         Height="24" 
                         MaxWidth="300" 
@@ -105,7 +105,7 @@
                             Background="Beige" 
                             Height="24" 
                             FontSize="16"
-                            KeyDown="password_KeyDown" 
+                            KeyDown="Input_KeyDown" 
                             MaxWidth="300" 
                             MinWidth="100"
                             MinHeight="30"

@@ -263,7 +263,8 @@
                      BorderBrush="Transparent"
                      Foreground="White"
                      FontWeight="Bold"
-                     FontSize="16">
+                     FontSize="16"
+                     IsEnabled="False">
                 <TextBox.RenderTransform>
                     <TranslateTransform Y="500" />
                 </TextBox.RenderTransform>
@@ -278,7 +279,8 @@
                      BorderBrush="Transparent"
                      Foreground="White"
                      FontWeight="Bold"
-                     FontSize="16">
+                     FontSize="16"
+                     IsEnabled="False">
                 <TextBox.RenderTransform>
                     <TranslateTransform Y="500" />
                 </TextBox.RenderTransform>
@@ -293,7 +295,8 @@
                      BorderBrush="Transparent"
                      FontWeight="Bold"
                      Foreground="White"
-                     FontSize="16">
+                     FontSize="16"
+                     IsEnabled="False">
                 <TextBox.RenderTransform>
                     <TranslateTransform Y="500" />
                 </TextBox.RenderTransform>
