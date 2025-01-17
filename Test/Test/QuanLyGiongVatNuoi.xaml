@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="Quản lý giống vật nuôi" Height="450" Width="800">
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="images/background-main.jpg"/>
+        </Grid.Background>
         <Grid x:Name="Main"
               Visibility="Visible">
             <Grid.RowDefinitions>
@@ -49,6 +52,29 @@
                         </Grid>
                     </ControlTemplate>
                 </Button.Template>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="LightBlue"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="Red" Duration="0:0:0.3"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="LightBlue" Duration="0:0:0.3"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
             </Button>
 
             <Button x:Name="InfoButton" 
@@ -111,7 +137,9 @@
                 Background="Ivory"
                 BorderThickness="0"
                 FontSize="18"
-                Click="hamburgerButton_Click"/>
+                Click="hamburgerButton_Click">
+                
+            </Button>
 
             <Popup x:Name="popupMenu" 
                PlacementTarget="{Binding ElementName=hamburgerButton}" 
@@ -136,44 +164,63 @@
               Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
+                <Button x:Name="returnToHuyenPage"
+                        Grid.Column="6" 
+                        Grid.Row="3"
+                        Width="70"
+                        Content="Return" Click="returnToHuyenPage_Click"/>
+                
                 <TextBlock Text="Trang quản lý giống vật nuôi" 
                        FontSize="28" 
                        FontWeight="Bold" 
-                       Margin="0,0,0,20" 
-                       Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+                       Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="2"/>
                 <Label x:Name="NumberOfCongTyActive"
-                   Grid.Row="1"/>
+                        Grid.Row="2"
+                       Grid.Column="0"
+                       Grid.ColumnSpan="5"/>
                 <Label x:Name="numberOfCompany"
-                   Grid.Row="1"
-                   Grid.Column="1"
+                   Grid.Row="2"
+                   Grid.Column="5"
+                       Grid.ColumnSpan="1"
                    HorizontalAlignment="Left"/>
                 <Button Content="Tìm kiếm"
                     x:Name="search"
-                    Grid.Column="0" Grid.Row="2"
+                    Grid.Column="2" Grid.Row="3"
+                    Grid.ColumnSpan="2"
+                    Width="100"
                     Click="search_Click"/>
                 <TextBox x:Name="searchbox"
-                     Grid.Row="2" Grid.Column="1"/>
+                     Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"/>
                 <DataGrid x:Name="userDataGrid" 
                       IsReadOnly="true" 
-                      Margin="0,10,0,-59" Grid.Row="3"
-                      AutoGenerateColumns="False" Grid.ColumnSpan="2" Grid.RowSpan="9">
+                      Margin="5"
+                      Grid.Row="4"
+                      AutoGenerateColumns="False" Grid.ColumnSpan="9" Grid.RowSpan="9">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="Dừng hoạt động công ty">
                             <DataGridTemplateColumn.CellTemplate>
@@ -193,71 +240,143 @@
             </Grid>
             <Grid x:Name="Statistic" 
                   Grid.Row="1" 
-              Grid.Column="1" 
-              Margin="10,0,-49,0"
-                  Height="466" VerticalAlignment="Center" Grid.ColumnSpan="3"
-                  Visibility="Collapsed">
-                <Label Content="Thống kê" Grid.Column="0" Margin="24,28,513,333"
-           FontWeight="Bold"
-           FontSize="28"/>
-                <Label x:Name="numberOfCompanyInFieldLabel"
-           Content="loremipsum"
-           Grid.Column="0" Margin="10,81,561,352"/>
-                <Label x:Name="numberOfCompanyInField"
-           Content="loremipsum" Margin="261,80,484,352"/>
-
-                <Label Content="Loài vật muốn tra cứu: " Margin="3,126,663,276"/>
-
-                <ComboBox x:Name="GiongVatNuoiTraCuu" Margin="137,131,383,308"/>
-
-                <StackPanel Margin="434,23,110,295">
-                    <Label Content="Chọn nhiệm vụ của công ty"
-               FontWeight="Bold"/>
-                    <RadioButton x:Name="sanXuatConGiongRadioButton"
-                     Content="Sản xuất con giống"
-                     Checked="sanXuatConGiongRadioButton_Checked"
-                     IsChecked="True"/>
-                    <RadioButton x:Name="sanXuatTinhPhoiAuTrungRadioButton"
-                     Content="Sản xuất tinh phôi ấu trùng, cơ sở ấp trứng"
-                     Checked="sanXuatTinhPhoiAuTrungRadioButton_Checked"/>
-                    <RadioButton x:Name="muaBanRadioButton"
-                     Content="Mua bán tinh phôi ấu trùng"
-                     Checked="muaBanRadioButton_Checked"/>
-                    <RadioButton x:Name="soHuuTrauBoDucLonRadioButton"
-                     Content="Sở hữu trâu, bò đực, lợn"
-                     Checked="soHuuTrauBoDucLonRadioButton_Checked"/>
-                    <RadioButton x:Name="khaoNghiemRadioButton"
-                     Content="Khảo nghiệm"
-                     Checked="khaoNghiemRadioButton_Checked"/>
-                </StackPanel>
-                <Button x:Name="returnToMain"
-        Content="Quay lại" 
-            HorizontalAlignment="Center" 
-            Margin="0,175,0,0" VerticalAlignment="Top"
-            Click="returnToMain_Click"/>
-            </Grid>
-            <Grid x:Name="AdministratorManagement"
-                Grid.Row="1" 
-                Grid.Column="1" 
-                Margin="10"
+                  Grid.Column="1"
                   Visibility="Collapsed">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+
+                </Grid.RowDefinitions>
+                <Label Content="Thống kê"
+                       Grid.Column="0"
+                       FontWeight="Bold"
+                       FontSize="28"
+                       Grid.ColumnSpan="3"
+                       Grid.RowSpan="2"/>
+                <Label x:Name="numberOfCompanyInFieldLabel"
+                        Content="loremipsum"
+                        Grid.Column="0" 
+                        Grid.Row="2"
+                       Margin="10"
+                       FontSize="16"
+                       FontWeight="DemiBold"
+                        Grid.ColumnSpan="2"/>
+                <Label x:Name="numberOfCompanyInField"
+                    Content="loremipsum"
+                       Grid.Column="2"
+                       Grid.Row="2"
+                       Margin="10"
+                       FontWeight="DemiBold"
+                       FontSize="16"
+                       Grid.ColumnSpan="2"/>
+
+                <Label Content="Loài vật muốn tra cứu: " 
+                       Grid.Column="0"
+                       Grid.Row="3"
+                       Margin="10"
+                       FontWeight="Bold"
+                       FontSize="16"
+                       Grid.ColumnSpan="3"/>
+
+                <ComboBox x:Name="GiongVatNuoiTraCuu" 
+                          Grid.Column="2"
+                          Margin="10"
+                          Grid.ColumnSpan="4"
+                          Grid.Row="3"/>
+
+                <StackPanel Grid.Column="9"
+                            Grid.ColumnSpan="5"
+                            Grid.RowSpan="5"
+                            Margin="10">
+                    <Label Content="Chọn nhiệm vụ của công ty"
+               FontWeight="Bold" FontSize="18"/>
+                    <RadioButton x:Name="sanXuatConGiongRadioButton"
+                     Content="Sản xuất con giống"
+                     Checked="sanXuatConGiongRadioButton_Checked"
+                     IsChecked="True"
+                     Margin="5" FontSize="14"/>
+                    <RadioButton x:Name="sanXuatTinhPhoiAuTrungRadioButton"
+                     Content="Sản xuất tinh phôi ấu trùng, cơ sở ấp trứng"
+                     Checked="sanXuatTinhPhoiAuTrungRadioButton_Checked"
+                     Margin="5" FontSize="14"/>
+                    <RadioButton x:Name="muaBanRadioButton"
+                     Content="Mua bán tinh phôi ấu trùng"
+                     Checked="muaBanRadioButton_Checked"
+                     Margin="5" FontSize="14"/>
+                    <RadioButton x:Name="soHuuTrauBoDucLonRadioButton"
+                     Content="Sở hữu trâu, bò đực, lợn"
+                     Checked="soHuuTrauBoDucLonRadioButton_Checked"
+                     Margin="5" FontSize="14"/>
+                    <RadioButton x:Name="khaoNghiemRadioButton"
+                     Content="Khảo nghiệm"
+                     Checked="khaoNghiemRadioButton_Checked"
+                     Margin="5" FontSize="14"/>
+                </StackPanel>
+                <Button x:Name="returnToMain"
+        Content="Quay lại" 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Top"
+                        Click="returnToMain_Click"
+                        FontSize="18"
+                        Grid.Column="3"
+                        FontWeight="Bold"
+                        Grid.ColumnSpan="2"
+                        Grid.Row="5"
+                        BorderBrush="Transparent"
+                        Width="100"
+                        Height="30"
+                        Foreground="White">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="15" >
+                                <Border.Background>
+                                    <SolidColorBrush Color="Transparent" Opacity="0.8"/>
+                                </Border.Background>
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+            <Grid x:Name="AdministratorManagement"
+                Grid.Row="1" 
+                Grid.Column="1" 
+                Margin="10" Visibility="Collapsed" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+
+
                 </Grid.RowDefinitions>
 
                 <Button x:Name="return_1"
@@ -267,15 +386,14 @@
                 <TextBlock Text="Quản lý hành chính" 
                        FontSize="28" 
                        FontWeight="Bold" 
-                       Margin="0,0,0,20" 
-                       Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+                       Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4"/>
                 <DataGrid x:Name="BangHuyen" 
-                          Grid.Column="0" Grid.ColumnSpan="2" Margin="0,57,456,-327" Grid.RowSpan="12"
+                          Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="12"
                           MouseDoubleClick="BangHuyen_MouseDoubleClick"
                           AutoGenerateColumns="False">
                 </DataGrid>
                 <DataGrid x:Name="BangXa" 
-                          Grid.Column="1" Grid.ColumnSpan="2" Margin="290,57,0,-327" Grid.RowSpan="12"
+                          Grid.Column="4" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="12"
                           AutoGenerateColumns="False">
                 </DataGrid>
             </Grid>
