@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -24,54 +25,37 @@ namespace Test
         /// <summary>
         /// Khởi tạo các biến toàn cục và lưu các dữ liệu từ cửa sổ trước
         /// </summary>
-        private string username;
-        private string password;
+        CanBoNghiepVu user;
+        CongTy congty;
+        bool isCongTy = new bool();
         private Window previousWindow;
-        private DispatcherTimer timer;
         private bool _isPasswordVisible;
         string connectionString = "Data Source=localhost;Initial Catalog=contact;Integrated Security=True";
 
-        public UserInfoWindow(string _username, Window _previousWindow)
+        public UserInfoWindow(CongTy _congty, Window _previousWindow)
         {
             InitializeComponent();
-            InitializeClock();
-            username = _username;
+            _congty = congty;
             previousWindow = _previousWindow;
+            isCongTy = true;
             LoadUserInfo();
         }
-
+        public UserInfoWindow(CanBoNghiepVu _user, Window _previousWindow)
+        {
+            InitializeComponent();
+            user = _user;
+            previousWindow = _previousWindow;
+            isCongTy = false;
+            LoadUserInfo();
+        }
         /// <summary>
         /// Lấy dữ liệu người dùng từ SQL
         /// </summary>
         private void LoadUserInfo()
         {
-            using (SqlConnection conn   = new SqlConnection(connectionString))
-            {
-                conn.Open();
-                string query            = "SELECT c.CompanyID, c.CompanyName, c.Username, a.LevelName, c.Password, c.LoginTime, c.LogoutTime, x.TenXa, h.TenHuyen, CASE WHEN c.AdministratorLevel = 2 THEN x.TenXa WHEN c.AdministratorLevel = 1 THEN h.TenHuyen END AS AdministrativeName FROM Company c LEFT JOIN Xa x ON c.IDXa = x.IDXa LEFT JOIN Huyen h ON c.IDHuyen = h.IDHuyen LEFT JOIN AdministratorLevel a on c.AdministratorLevel = a.LevelID WHERE Username = @username";
-                SqlCommand cmd          = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@username", username);
-                
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                if (reader.Read())
-                {
-                    companyID.Text      = reader["CompanyID"].ToString();
-                    companyName.Text    = reader["CompanyName"].ToString() ;
-                    adminLevel.Text     = reader["LevelName"].ToString();
-                    if (adminLevel.Text == "Xa")    tenXaHuyen.Text = reader["TenXa"].ToString();
-                    else                            tenXaHuyen.Text = reader["TenHuyen"].ToString();
-                    UsernameText.Text   = reader["Username"].ToString();
-                    password            = reader["Password"].ToString();
-                    PasswordText.Text = "***";
-                }
-            }
-        }
-        public void InitializeClock()
-        {
-            timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(1);
-            timer.Start();
+            IDTextBox.Text = user.ID.ToString();
+            NameTextBox.Text = user.Name;
+            UsernameTextBox.Text = user.Username;
         }
 
         /// <summary>
@@ -86,41 +70,24 @@ namespace Test
             if (result == MessageBoxResult.No)
                 return;
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                conn.Open();
-                string query = "UPDATE Company SET LogoutTime = @logouttime WHERE Username = @username";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@logouttime", DateTime.Now);
-                cmd.Parameters.AddWithValue("@username", username);
-                cmd.ExecuteNonQuery();
-            }
+            if(!isCongTy)
+                Provider.SetLogoutTime(user);
 
             LoginWindow loginWindow = new LoginWindow();
             loginWindow.Show();
             Close();
         }
-
-        private void InfoButton_Click(object sender, RoutedEventArgs e)
-        {
-            popupInfoMenu.IsOpen = !popupInfoMenu.IsOpen;
-        }
-
-        private void hamburgerButton_Click(object sender, RoutedEventArgs e)
-        {
-            popupMenu.IsOpen = !popupMenu.IsOpen;
-        }
         private void showHide_Click(object sender, RoutedEventArgs e)
         {
             if (_isPasswordVisible)
             {
-                PasswordText.Text = "***";
+                PasswordTextBox.Text = "***";
                 showHide.Content = "Hiện";
                 _isPasswordVisible = false;
             }
             else
             {
-                PasswordText.Text = password;
+                PasswordTextBox.Text = Provider.GetPasswordFromDatabase(user.Username, user is CanBoNghiepVu ? "CanBoNghiepVu" : "CongTy");
                 showHide.Content = "Ẩn";
                 _isPasswordVisible = true;
             }
@@ -130,37 +97,229 @@ namespace Test
             previousWindow.Show();
             Close();
         }
-
-        private void changeInfo_Click(object sender, RoutedEventArgs e)
+        private void saveChangesOrMakeChange_Click(object sender, RoutedEventArgs e)
         {
+            if (saveChangesOrMakeChange.Content.ToString() == "Thay đổi thông tin")
+            {
+                NameTextBox.IsEnabled = true;
+                PhoneNumberTextBox.IsEnabled = true;    
+                adminLevel.IsEnabled = true;
+                tenXaHuyen.IsEnabled = true;
+                changePasswordBtn.Visibility = Visibility.Visible;
+                saveChangesOrMakeChange.Content = "Lưu thay đổi";
+            }
+            else
+            {
+                string _name = NameTextBox.Text;
+                string _phoneNumber = PhoneNumberTextBox.Text;
+                string _adminLevel = adminLevel.SelectedItem.ToString();
+                string _tenXaHuyen = tenXaHuyen.SelectedItem.ToString();
+                int minimumLength = 8;
+
+                if ((NewPasswordTextBox.Text.Length < minimumLength) && (NewPasswordPanel.Visibility == Visibility.Visible))
+                {
+                    MessageBox.Show("Mật khẩu thay đổi quá ngắn", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                if (NewPasswordPanel.Visibility == Visibility.Visible)
+                {
+                    if (ConfirmNewPasswordTextBox.Text != NewPasswordTextBox.Text)
+                    {
+                        MessageBox.Show("Mật khẩu xác nhận không trùng nhau", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    if (!isCongTy)
+                    {
+                        string query_1 = "UPDATE CanBoNghiepVu SET CanBoNghiepVuName = @ten, SDT = @phonenumber, AdministratorLevel = (SELECT LevelID FROM AdministratorLevel WHERE LevelName = @levelname), Password = @newpassword, isAdmin = 0";
+                        string query_2;
+                        if (adminLevel.SelectedItem.ToString() == "Xa")
+                        {
+                            query_2 = ", IDHuyen = (SELECT TrucThuocHuyen FROM Xa WHERE TenXa = @tenxa), IDXa = (SELECT IDXa FROM Xa WHERE TenXa = @tenxa) WHERE Username = @username";
+                            SqlHelper.ExecuteNonQuery(SqlHelper.connectionString, query_1 + query_2, cmd =>
+                            {
+                                cmd.Parameters.AddWithValue("@ten", _name);
+                                cmd.Parameters.AddWithValue("@newpassword", NewPasswordTextBox.Text);
+                                cmd.Parameters.AddWithValue("@phonenumber", _phoneNumber);
+                                cmd.Parameters.AddWithValue("@levelname", _adminLevel);
+                                cmd.Parameters.AddWithValue("@tenxa", _tenXaHuyen);
+                                cmd.Parameters.AddWithValue("@username", UsernameTextBox.Text);
+                                cmd.ExecuteNonQuery();
+                            });
+                        }
+                        else
+                        {
+                            query_2 = ", IDHuyen = (SELECT IDHuyen FROM Huyen WHERE TenHuyen = @tenhuyen), IDXa = 0 WHERE Username = @username";
+                            SqlHelper.ExecuteNonQuery(SqlHelper.connectionString, query_1 + query_2, cmd =>
+                            {
+                                cmd.Parameters.AddWithValue("@ten", _name);
+                                cmd.Parameters.AddWithValue("@newpassword", NewPasswordTextBox.Text);
+                                cmd.Parameters.AddWithValue("@phonenumber", _phoneNumber);
+                                cmd.Parameters.AddWithValue("@levelname", _adminLevel);
+                                cmd.Parameters.AddWithValue("@tenhuyen", _tenXaHuyen);
+                                cmd.Parameters.AddWithValue("@username", UsernameTextBox.Text);
+                                cmd.ExecuteNonQuery();
+                            });
+                        }
+                    }
+                    else
+                    {
+                        string query_1 = "UPDATE CongTy SET Ten = @ten, SDT = @phonenumber, CapTrucThuoc = (SELECT LevelID FROM AdministratorLevel WHERE LevelName = @levelname), isAdmin = 0";
+                        string query_2;
+                        if (adminLevel.SelectedItem.ToString() == "Xa")
+                        {
+                            query_2 = ", IDHuyen = (SELECT TrucThuocHuyen FROM Xa WHERE TenXa = @tenxa), IDXa = (SELECT IDXa FROM Xa WHERE TenXa = @tenxa) WHERE Username = @username";
+                            SqlHelper.ExecuteNonQuery(SqlHelper.connectionString, query_1 + query_2, cmd =>
+                            {
+                                cmd.Parameters.AddWithValue("@ten", _name);
+                                cmd.Parameters.AddWithValue("@newpassword", NewPasswordTextBox.Text);
+                                cmd.Parameters.AddWithValue("@phonenumber", _phoneNumber);
+                                cmd.Parameters.AddWithValue("@levelname", _adminLevel);
+                                cmd.Parameters.AddWithValue("@tenxa", _tenXaHuyen);
+                                cmd.Parameters.AddWithValue("@username", UsernameTextBox.Text);
+                                cmd.ExecuteNonQuery();
+                            });
+                        }
+                        else
+                        {
+                            query_2 = ", IDHuyen = (SELECT IDHuyen FROM Huyen WHERE TenHuyen = @tenhuyen), IDXa = 0 WHERE Username = @username";
+                            SqlHelper.ExecuteNonQuery(SqlHelper.connectionString, query_1 + query_2, cmd =>
+                            {
+                                cmd.Parameters.AddWithValue("@ten", _name);
+                                cmd.Parameters.AddWithValue("@newpassword", NewPasswordTextBox.Text);
+                                cmd.Parameters.AddWithValue("@phonenumber", _phoneNumber);
+                                cmd.Parameters.AddWithValue("@levelname", _adminLevel);
+                                cmd.Parameters.AddWithValue("@tenhuyen", _tenXaHuyen);
+                                cmd.Parameters.AddWithValue("@username", UsernameTextBox.Text);
+                                cmd.ExecuteNonQuery();
+                            });
+                        }
+                    }
+                }
+                else
+                {
+                    if (!isCongTy)
+                    {
+                        string query_1 = "UPDATE CanBoNghiepVu SET CanBoNghiepVuName = @ten, SDT = @phonenumber, AdministratorLevel = (SELECT LevelID FROM AdministratorLevel WHERE LevelName = @levelname), isAdmin = 0";
+                        string query_2;
+                        if (adminLevel.SelectedItem.ToString() == "Xa")
+                        {
+                            query_2 = ", IDHuyen = (SELECT TrucThuocHuyen FROM Xa WHERE TenXa = @tenxa), IDXa = (SELECT IDXa FROM Xa WHERE TenXa = @tenxa) WHERE Username = @username";
+                            SqlHelper.ExecuteNonQuery(SqlHelper.connectionString, query_1 + query_2, cmd =>
+                            {
+                                cmd.Parameters.AddWithValue("@ten", _name);
+                                cmd.Parameters.AddWithValue("@phonenumber", _phoneNumber);
+                                cmd.Parameters.AddWithValue("@levelname", _adminLevel);
+                                cmd.Parameters.AddWithValue("@tenxa", _tenXaHuyen);
+                                cmd.Parameters.AddWithValue("@username", UsernameTextBox.Text);
+                                cmd.ExecuteNonQuery();
+                            });
+                        }
+                        else
+                        {
+                            query_2 = ", IDHuyen = (SELECT IDHuyen FROM Huyen WHERE TenHuyen = @tenhuyen), IDXa = 0 WHERE Username = @username";
+                            SqlHelper.ExecuteNonQuery(SqlHelper.connectionString, query_1 + query_2, cmd =>
+                            {
+                                cmd.Parameters.AddWithValue("@ten", _name);
+                                cmd.Parameters.AddWithValue("@phonenumber", _phoneNumber);
+                                cmd.Parameters.AddWithValue("@levelname", _adminLevel);
+                                cmd.Parameters.AddWithValue("@tenhuyen", _tenXaHuyen);
+                                cmd.Parameters.AddWithValue("@username", UsernameTextBox.Text);
+                                cmd.ExecuteNonQuery();
+                            });
+                        }
+                    }
+                    else
+                    {
+                        string query_1 = "UPDATE CongTy SET Ten = @ten, SDT = @phonenumber, CapTrucThuoc = (SELECT LevelID FROM AdministratorLevel WHERE LevelName = @levelname), isAdmin = 0";
+                        string query_2;
+                        if (adminLevel.SelectedItem.ToString() == "Xa")
+                        {
+                            query_2 = ", IDHuyen = (SELECT TrucThuocHuyen FROM Xa WHERE TenXa = @tenxa), IDXa = (SELECT IDXa FROM Xa WHERE TenXa = @tenxa) WHERE Username = @username";
+                            SqlHelper.ExecuteNonQuery(SqlHelper.connectionString, query_1 + query_2, cmd =>
+                            {
+                                cmd.Parameters.AddWithValue("@ten", _name);
+                                cmd.Parameters.AddWithValue("@phonenumber", _phoneNumber);
+                                cmd.Parameters.AddWithValue("@levelname", _adminLevel);
+                                cmd.Parameters.AddWithValue("@tenxa", _tenXaHuyen);
+                                cmd.Parameters.AddWithValue("@username", UsernameTextBox.Text);
+                                cmd.ExecuteNonQuery();
+                            });
+                        }
+                        else
+                        {
+                            query_2 = ", IDHuyen = (SELECT IDHuyen FROM Huyen WHERE TenHuyen = @tenhuyen), IDXa = 0 WHERE Username = @username";
+                            SqlHelper.ExecuteNonQuery(SqlHelper.connectionString, query_1 + query_2, cmd =>
+                            {
+                                cmd.Parameters.AddWithValue("@ten", _name);
+                                cmd.Parameters.AddWithValue("@phonenumber", _phoneNumber);
+                                cmd.Parameters.AddWithValue("@levelname", _adminLevel);
+                                cmd.Parameters.AddWithValue("@tenhuyen", _tenXaHuyen);
+                                cmd.Parameters.AddWithValue("@username", UsernameTextBox.Text);
+                                cmd.ExecuteNonQuery();
+                            });
+                        }
+                    }
+                }
+                MessageBox.Show("Thay đổi thông tin thành công. Vui lòng đăng nhập lại", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
+                LoginWindow loginWindow = new LoginWindow();
+                loginWindow.Show();
+                Close();
+            }
 
         }
-
-        private void test1_Click(object sender, RoutedEventArgs e)
+        private void adminLevel_Loaded(object sender, RoutedEventArgs e)
         {
-            //Chưa phát triển
+            adminLevel.Items.Add("Xa");
+            adminLevel.Items.Add("Huyen");
+            if (user.CapTrucThuoc == "Huyen")
+            {
+                adminLevel.SelectedIndex = 1;
+            }
+            else adminLevel.SelectedIndex = 0;
         }
 
-        private void test2_Click(object sender, RoutedEventArgs e)
+        private void adminLevel_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //Chưa phát triển
+            string selectedAdminLevel = adminLevel.SelectedItem as string;
+            tenXaHuyen.Items.Clear();
+            string query = "";
+            if (selectedAdminLevel == "Xa")
+            {
+                query = "SELECT TenXa FROM Xa WHERE IDXa != 0";
+            }
+            else
+            {
+                query = "SELECT TenHuyen FROM Huyen WHERE IDHuyen != 0";
+            }
+            SqlHelper.ExecuteReader(SqlHelper.connectionString, query, cmd => { }, reader =>
+            {
+                if (selectedAdminLevel == "Xa")
+                {
+                    while (reader.Read())
+                    {
+                        tenXaHuyen.Items.Add(reader["TenXa"].ToString());
+                    }
+                }
+                else
+                {
+                    while (reader.Read())
+                    {
+                        tenXaHuyen.Items.Add(reader["TenHuyen"].ToString());
+                    }
+                }
+            });
         }
-        private void personInfo_Click(object sender, RoutedEventArgs e)
+        private void tenXaHuyen_Loaded(object sender, RoutedEventArgs e)
         {
-            popupInfoMenu.IsOpen = false;
+            if (user.CapTrucThuoc == "Xa")
+                tenXaHuyen.SelectedItem = user.TenXa;
+            else
+                tenXaHuyen.SelectedItem = user.TenHuyen;
         }
-
-        private void QLNS_Click(object sender, RoutedEventArgs e)
+        private void changePasswordBtn_Click(object sender, RoutedEventArgs e)
         {
-            //Chưa phát triển
-        }
-
-        private void changePassword_Click(object sender, RoutedEventArgs e)
-        {
-            ChangePasswordWindow changePasswordWindow = new ChangePasswordWindow(this);
-            popupInfoMenu.IsOpen = false;
-            changePasswordWindow.Show();
-            Hide();
+            bool isCollapsed = NewPasswordPanel.Visibility == Visibility.Collapsed;
+            NewPasswordPanel.Visibility = isCollapsed ? Visibility.Visible : Visibility.Collapsed;
         }
     }
 }
