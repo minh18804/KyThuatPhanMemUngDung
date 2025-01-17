@@ -99,3 +99,7 @@ C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\obj\Debug\C
 C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\obj\Debug\UserInfoConfig.baml
 C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\obj\Debug\ForgotPassword.baml
 C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\obj\Debug\QuanLyGiongVatNuoi.baml
+C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\obj\Debug\QuanLyNguonGenGiong.g.cs
+C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\obj\Debug\QuanLyNguonGenGiong.baml
+C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\obj\Debug\QuanLyThucAnChanNuoi.g.cs
+C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\obj\Debug\QuanLyThucAnChanNuoi.baml

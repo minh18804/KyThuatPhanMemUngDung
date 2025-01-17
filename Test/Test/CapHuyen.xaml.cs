@@ -21,7 +21,6 @@ namespace Test
     public partial class CapHuyenWindow : Window
     {
         CanBoNghiepVu user;
-        string connectionString = "Data Source=localhost;Initial Catalog=contact;Integrated Security=true";
         public CapHuyenWindow(CanBoNghiepVu user)
         {
             this.user = user;
@@ -35,12 +34,11 @@ namespace Test
             if (result == MessageBoxResult.No)
                 return;
 
-            SqlHelper.ExecuteNonQuery(SqlHelper.connectionString, "UPDATE Congty SET LogoutTime = @logouttime WHERE Username = @username", cmd =>
+            SqlHelper.ExecuteNonQuery(SqlHelper.connectionString, "UPDATE CongTy SET LogoutTime = @logouttime WHERE Username = @username", cmd =>
             {
                 cmd.Parameters.AddWithValue("@logouttime", DateTime.Now);
                 cmd.Parameters.AddWithValue("@username", user.Username);
             });
-
 
             LoginWindow loginWindow = new LoginWindow();
             loginWindow.Show();
@@ -66,7 +64,7 @@ namespace Test
 
         private void personInfo_Click(object sender, RoutedEventArgs e)
         {
-            UserInfoWindow userInfoWindow = new UserInfoWindow(user.Username, this);
+            UserInfoWindow userInfoWindow = new UserInfoWindow(user, this);
             userInfoWindow.Show();
             popupInfoMenu.IsOpen = false;
             Hide();
@@ -86,7 +84,9 @@ namespace Test
 
         private void quanLyNguonGen_Click(object sender, RoutedEventArgs e)
         {
-
+            QuanLyNguonGenGiongWindow quanLyNguonGenGiongWindow = new QuanLyNguonGenGiongWindow(user, this);
+            quanLyNguonGenGiongWindow.Show();
+            Hide();
         }
 
         private void quanLyThucAnChanNuoi_Click(object sender, RoutedEventArgs e)

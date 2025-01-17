@@ -100,12 +100,12 @@ namespace Test
 
             if (user.CapTrucThuoc == "Huyen")
             {
-                companies = companies.Where(c => c.TenHuyen == user.TenHuyen).ToList();
+                companies = companies.Where(c => (c.TenHuyen == user.TenHuyen) && (c.LinhVuc == "GiongVatNuoi")).ToList();
                 numberOfCompany.Content = companies.Count;
             }
             else
             {
-                companies = companies.Where(c => c.TenXa == user.TenXa).ToList();
+                companies = companies.Where(c => (c.TenXa == user.TenXa) && (c.LinhVuc == "GiongVatNuoi")).ToList();
                 numberOfCompany.Content = companies.Count;
             }
             userDataGrid.ItemsSource = companies;
@@ -126,54 +126,46 @@ namespace Test
             checkBoxColumn.CellTemplate.VisualTree = checkBoxFactory;
             userDataGrid.Columns.Add(checkBoxColumn);
 
-            if (previousWindow is CapHuyenWindow)
+            userDataGrid.Columns.Add(new DataGridTextColumn 
+            { 
+                Header = "ID Công Ty", 
+                Binding = new Binding("ID") 
+            });
+            userDataGrid.Columns.Add(new DataGridTextColumn
             {
-                userDataGrid.Columns.Add(new DataGridTextColumn 
-                { 
-                    Header = "ID Công Ty", 
-                    Binding = new Binding("ID") 
-                });
-
-                userDataGrid.Columns.Add(new DataGridTextColumn
+                Header = "Tên công ty",
+                Binding = new Binding("Name")
+            });
+            userDataGrid.Columns.Add(new DataGridTextColumn
                 {
-                    Header = "Tên công ty",
-                    Binding = new Binding("Name")
-                });
-                userDataGrid.Columns.Add(new DataGridTextColumn
-                {
-                    Header = "SDT công ty",
-                    Binding = new Binding("SDT")
-                });
-                userDataGrid.Columns.Add(new DataGridTextColumn
-                {
-                    Header = "Nhiệm vụ",
-                    Binding = new Binding("GiongVatNuoi")
-                });
-                userDataGrid.Columns.Add(new DataGridTextColumn
-                {
-                    Header = "Loại con vật",
-                    Binding = new Binding("TenLoaiConVat")
-                });
-                userDataGrid.Columns.Add(new DataGridTextColumn
-                {
-                    Header = "Số lượng",
-                    Binding = new Binding("SoLuong")
-                });
-                userDataGrid.Columns.Add(new DataGridTextColumn
-                {
-                    Header = "Trạng thái",
-                    Binding = new Binding("TrangThaiConVat")
-                });
-                userDataGrid.Columns.Add(new DataGridTextColumn
-                {
-                    Header = "Đã bị dừng hoạt động",
-                    Binding = new Binding("Banned")
-                });
-            }
-            //else if (previousWindow is CapXaWindow)
-            //{
-
-            //}
+                Header = "SDT công ty",
+                Binding = new Binding("SDT")
+            });
+            userDataGrid.Columns.Add(new DataGridTextColumn
+            {
+                Header = "Nhiệm vụ",
+                Binding = new Binding("GiongVatNuoi")
+            });
+            userDataGrid.Columns.Add(new DataGridTextColumn
+            {
+                Header = "Loại con vật",
+                Binding = new Binding("TenLoaiConVat")
+            });
+            userDataGrid.Columns.Add(new DataGridTextColumn
+            {
+                Header = "Số lượng",
+                Binding = new Binding("SoLuong")
+            });
+            userDataGrid.Columns.Add(new DataGridTextColumn
+            {
+                Header = "Trạng thái",
+                Binding = new Binding("TrangThaiConVat")
+            });
+            userDataGrid.Columns.Add(new DataGridTextColumn
+            {
+                Header = "Đã bị dừng hoạt động",
+                Binding = new Binding("Banned")
+            });
         }
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
@@ -196,7 +188,7 @@ namespace Test
 
         private void personInfo_Click(object sender, RoutedEventArgs e)
         {
-            UserInfoWindow userInfoWindow = new UserInfoWindow(user.Username, this);
+            UserInfoWindow userInfoWindow = new UserInfoWindow(user, this);
             userInfoWindow.Show();
             popupInfoMenu.IsOpen = false;
             Hide();
@@ -416,7 +408,5 @@ namespace Test
             capHuyenWindow.Show();
             Close();
         }
-        //CS
-
     }
 }

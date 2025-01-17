@@ -219,7 +219,7 @@ namespace Test
         private void personInfo_Click(object sender, RoutedEventArgs e)
         {
             popupInfoMenu.IsOpen = false;
-            UserInfoWindow userInfoWindow = new UserInfoWindow(AdminUser.Username, this);
+            UserInfoWindow userInfoWindow = new UserInfoWindow(AdminUser, this);
             userInfoWindow.Show();
             Hide();
         }
