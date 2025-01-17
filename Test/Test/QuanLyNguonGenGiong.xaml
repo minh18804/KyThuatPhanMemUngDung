@@ -1,11 +1,11 @@
-﻿<Window x:Class="Test.QuanLyGiongVatNuoiWindow"
+﻿<Window x:Class="Test.QuanLyNguonGenGiongWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Test"
         mc:Ignorable="d"
-        Title="Quản lý giống vật nuôi" Height="450" Width="800">
+        Title="Window1" Height="450" Width="800">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="images/background-main.jpg"/>
@@ -138,7 +138,7 @@
                 BorderThickness="0"
                 FontSize="18"
                 Click="hamburgerButton_Click">
-                
+
             </Button>
 
             <Popup x:Name="popupMenu" 
@@ -161,7 +161,8 @@
             <Grid x:Name="CompanyTable"
                 Grid.Row="1" 
               Grid.Column="1" 
-              Margin="10">
+              Margin="10"
+              Visibility="Collapsed">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
@@ -194,10 +195,10 @@
                         Grid.Row="3"
                         Width="70"
                         Content="Return" Click="returnToHuyenPage_Click"/>
-                
-                <TextBlock Text="Trang quản lý giống vật nuôi" 
+
+                <TextBlock Text="Trang quản lý nguồn gen giống" 
                        FontSize="28" 
-                       FontWeight="Bold" 
+                       FontWeight="Bold"
                        Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="2"/>
                 <Label x:Name="NumberOfCongTyActive"
                         Grid.Row="2"
@@ -238,7 +239,7 @@
             <Grid x:Name="Statistic" 
                   Grid.Row="1" 
                   Grid.Column="1"
-                  Visibility="Collapsed">
+                  Visibility="Visible">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="auto"/>
@@ -303,26 +304,18 @@
                             Margin="10">
                     <Label Content="Chọn nhiệm vụ của công ty"
                FontWeight="Bold" FontSize="18"/>
-                    <RadioButton x:Name="sanXuatConGiongRadioButton"
-                     Content="Sản xuất con giống"
-                     Checked="sanXuatConGiongRadioButton_Checked"
+                    <RadioButton x:Name="thuThapRadioButton"
+                     Content="Thu thập nguồn gen giống vật nuôi"
+                     Checked="thuThapRadioButton_Checked"
                      IsChecked="True"
                      Margin="5" FontSize="14"/>
-                    <RadioButton x:Name="sanXuatTinhPhoiAuTrungRadioButton"
-                     Content="Sản xuất tinh phôi ấu trùng, cơ sở ấp trứng"
-                     Checked="sanXuatTinhPhoiAuTrungRadioButton_Checked"
+                    <RadioButton x:Name="baoTonRadioButton"
+                     Content="Bảo tồn nguồn gen giống vật nuôi"
+                     Checked="baoTonRadioButton_Checked"
                      Margin="5" FontSize="14"/>
-                    <RadioButton x:Name="muaBanRadioButton"
-                     Content="Mua bán tinh phôi ấu trùng"
-                     Checked="muaBanRadioButton_Checked"
-                     Margin="5" FontSize="14"/>
-                    <RadioButton x:Name="soHuuTrauBoDucLonRadioButton"
-                     Content="Sở hữu trâu, bò đực, lợn"
-                     Checked="soHuuTrauBoDucLonRadioButton_Checked"
-                     Margin="5" FontSize="14"/>
-                    <RadioButton x:Name="khaoNghiemRadioButton"
-                     Content="Khảo nghiệm"
-                     Checked="khaoNghiemRadioButton_Checked"
+                    <RadioButton x:Name="khaiThacPhatTrienRadioButton"
+                     Content="Khai thác, phát triển nguồn gen giống"
+                     Checked="khaiThacPhatTrienRadioButton_Checked"
                      Margin="5" FontSize="14"/>
                 </StackPanel>
                 <Button x:Name="returnToMain"
