@@ -30,7 +30,6 @@ namespace Test
         bool isCongTy = new bool();
         private Window previousWindow;
         private bool _isPasswordVisible;
-        string connectionString = "Data Source=localhost;Initial Catalog=contact;Integrated Security=True";
 
         public UserInfoWindow(CongTy _congty, Window _previousWindow)
         {

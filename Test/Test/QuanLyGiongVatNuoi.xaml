@@ -138,7 +138,7 @@
                 BorderThickness="0"
                 FontSize="18"
                 Click="hamburgerButton_Click">
-                
+
             </Button>
 
             <Popup x:Name="popupMenu" 
@@ -161,7 +161,8 @@
             <Grid x:Name="CompanyTable"
                 Grid.Row="1" 
               Grid.Column="1" 
-              Margin="10">
+              Margin="10"
+                  Visibility="Collapsed">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
@@ -194,7 +195,7 @@
                         Grid.Row="3"
                         Width="70"
                         Content="Return" Click="returnToHuyenPage_Click"/>
-                
+
                 <TextBlock Text="Trang quản lý giống vật nuôi" 
                        FontSize="28" 
                        FontWeight="Bold" 
@@ -238,7 +239,7 @@
             <Grid x:Name="Statistic" 
                   Grid.Row="1" 
                   Grid.Column="1"
-                  Visibility="Collapsed">
+                  Visibility="Visible">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="auto"/>
@@ -270,18 +271,17 @@
                         Content="loremipsum"
                         Grid.Column="0" 
                         Grid.Row="2"
-                       Margin="10"
+                       Margin="10,10,62,10"
                        FontSize="16"
                        FontWeight="DemiBold"
-                        Grid.ColumnSpan="2"/>
+                        Grid.ColumnSpan="3"/>
                 <Label x:Name="numberOfCompanyInField"
                     Content="loremipsum"
                        Grid.Column="2"
                        Grid.Row="2"
-                       Margin="10"
+                       Margin="110,10,29,10"
                        FontWeight="DemiBold"
-                       FontSize="16"
-                       Grid.ColumnSpan="2"/>
+                       FontSize="16"/>
 
                 <Label Content="Loài vật muốn tra cứu: " 
                        Grid.Column="0"
@@ -295,12 +295,29 @@
                           Grid.Column="2"
                           Margin="10"
                           Grid.ColumnSpan="4"
-                          Grid.Row="3"/>
+                          Grid.Row="3"
+                          SelectionChanged="GiongVatNuoiTraCuu_Selected"/>
 
-                <StackPanel Grid.Column="9"
-                            Grid.ColumnSpan="5"
-                            Grid.RowSpan="5"
-                            Margin="10">
+                <Label x:Name="LabelSoLuongConGiong" 
+                       Grid.Column="0"
+                       Grid.Row="4"
+                       Margin="10"
+                       FontWeight="Bold"
+                       FontSize="16"
+                       Grid.ColumnSpan="3"/>
+
+                <Label x:Name="numberOfBreed" 
+                       Grid.Column="1"
+                       Grid.Row="4"
+                       Margin="10"
+                       FontWeight="Bold"
+                       FontSize="16"
+                       Grid.ColumnSpan="3"
+                       HorizontalAlignment="Left"/>
+
+                <StackPanel Grid.Column="8"
+                            Grid.RowSpan="4"
+                            Margin="10,10,10,29">
                     <Label Content="Chọn nhiệm vụ của công ty"
                FontWeight="Bold" FontSize="18"/>
                     <RadioButton x:Name="sanXuatConGiongRadioButton"
@@ -327,18 +344,17 @@
                 </StackPanel>
                 <Button x:Name="returnToMain"
         Content="Quay lại" 
-                        HorizontalAlignment="Center" 
+                        HorizontalAlignment="Left" 
                         VerticalAlignment="Top"
                         Click="returnToMain_Click"
                         FontSize="18"
-                        Grid.Column="3"
+                        Grid.Column="8"
                         FontWeight="Bold"
-                        Grid.ColumnSpan="2"
-                        Grid.Row="5"
+                        Grid.Row="6"
                         BorderBrush="Transparent"
                         Width="100"
                         Height="30"
-                        Foreground="White">
+                        Foreground="White" Margin="94,7,0,0">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="15" >

@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Test;
 
 namespace Test
 {
@@ -265,101 +266,76 @@ namespace Test
 
         private void sanXuatConGiongRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            //using (SqlConnection conn = new SqlConnection(connectionString))
-            //{
-            //    conn.Open();
-            //    string query = "SELECT TenConVat FROM LoaiConVat";
-            //    SqlCommand cmd = new SqlCommand(query, conn);
-            //    SqlDataReader reader = cmd.ExecuteReader();
-            //    while(reader.Read())
-            //        GiongVatNuoiTraCuu.Items.Add(reader["TenConVat"].ToString());
-            //    reader.Close();
-            //    cmd.ExecuteNonQuery();
-            //}
-            
-            //numberOfCompanyInFieldLabel.Content = "Số lượng công ty có nhiệm vụ Sản xuất con giống: ";
-            //var companies = userDataGrid.ItemsSource as List<CongTy>;
-            //if (companies != null)
-            //{
-            //    int companiesCount = companies.Count(c => c.GiongVatNuoi == "SanXuat");
-            //    numberOfCompanyInField.Content = companiesCount.ToString();
-            //}
-            //else
-            //{
-            //    numberOfCompanyInField.Content = "0";
-            //}
-        }
+            numberOfCompanyInFieldLabel.Content = "Số lượng công ty có nhiệm vụ Sản xuất con giống: ";
+            var companies = userDataGrid.ItemsSource as List<CongTy>;
+            if (companies != null)
+            {
+                int companiesCount = companies.Count(c => c.GiongVatNuoi == "SanXuat");
+                numberOfCompanyInField.Content = companiesCount.ToString();
+            }
+            else
+            {
+                numberOfCompanyInField.Content = "0";
+            }
 
+        }
         private void sanXuatTinhPhoiAuTrungRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            //using (SqlConnection conn = new SqlConnection(connectionString))
-            //{
-            //    conn.Open();
-            //    string query = "SELECT TenConVat FROM LoaiConVat";
-            //    SqlCommand cmd = new SqlCommand(query, conn);
-            //    SqlDataReader reader = cmd.ExecuteReader();
-            //    while (reader.Read())
-            //        GiongVatNuoiTraCuu.Items.Add(reader["TenConVat"].ToString());
-            //    reader.Close();
-            //    cmd.ExecuteNonQuery();
-            //}
-            //numberOfCompanyInFieldLabel.Content = "Số lượng công ty có nhiệm vụ Sản xuất tinh phôi ấu trùng: ";
-            //var companies = userDataGrid.ItemsSource as List<Company>;
-            //if (companies != null)
-            //{
-            //    int companiesCount = companies.Count(c => c.GiongVatNuoi == "SanXuatTinhPhoiAuTrung");
-            //    numberOfCompanyInField.Content = companiesCount.ToString();
-            //}
-            //else
-            //{
-            //    numberOfCompanyInField.Content = "0";
-            //}
+            numberOfCompanyInFieldLabel.Content = "Số lượng công ty có nhiệm vụ Sản xuất tinh phôi ấu trùng: ";
+            var companies = userDataGrid.ItemsSource as List<CongTy>;
+            if (companies != null)
+            {
+                int companiesCount = companies.Count(c => c.GiongVatNuoi == "SanXuatTinhPhoiAuTrung");
+                numberOfCompanyInField.Content = companiesCount.ToString();
+            }
+            else
+            {
+                numberOfCompanyInField.Content = "0";
+            }
         }
 
-        private void muaBanTinhPhoiAuTrungRadioButton_Checked(object sender, RoutedEventArgs e)
+        private void muaBanRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            //using (SqlConnection conn = new SqlConnection(connectionString))
-            //{
-            //    conn.Open();
-            //    string query = "SELECT TenConVat FROM LoaiConVat";
-            //    SqlCommand cmd = new SqlCommand(query, conn);
-            //    SqlDataReader reader = cmd.ExecuteReader();
-            //    while (reader.Read())
-            //        GiongVatNuoiTraCuu.Items.Add(reader["TenConVat"].ToString());
-            //    reader.Close();
-            //    cmd.ExecuteNonQuery();
-            //}
-            //numberOfCompanyInFieldLabel.Content = "Số lượng công ty có nhiệm vụ Mua bán Tinh phôi ấu trùng: ";
-            //var companies = userDataGrid.ItemsSource as List<Company>;
-            //if (companies != null)
-            //{
-            //    int companiesCount = companies.Count(c => c.GiongVatNuoi == "SanXuat");
-            //    numberOfCompanyInField.Content = companiesCount.ToString();
-            //}
-            //else
-            //{
-            //    numberOfCompanyInField.Content = "0";
-            //}
-        }
-
-        private void muaBanConGiongRadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-            numberOfCompanyInFieldLabel.Content = "Số lượng công ty có nhiệm vụ Mua bán con giống: ";
+            numberOfCompanyInFieldLabel.Content = "Số lượng công ty có nhiệm vụ Mua bán Tinh phôi ấu trùng: ";
+            var companies = userDataGrid.ItemsSource as List<CongTy>;
+            if (companies != null)
+            {
+                int companiesCount = companies.Count(c => c.GiongVatNuoi == "MuaBan");
+                numberOfCompanyInField.Content = companiesCount.ToString();
+            }
+            else
+            {
+                numberOfCompanyInField.Content = "0";
+            }
         }
 
         private void khaoNghiemRadioButton_Checked(object sender, RoutedEventArgs e)
         {
             numberOfCompanyInFieldLabel.Content = "Số lượng công ty có nhiệm vụ Khảo nghiệm: ";
+            var companies = userDataGrid.ItemsSource as List<CongTy>;
+            if (companies != null)
+            {
+                int companiesCount = companies.Count(c => c.GiongVatNuoi == "KhaoNghiem");
+                numberOfCompanyInField.Content = companiesCount.ToString();
+            }
+            else
+            {
+                numberOfCompanyInField.Content = "0";
+            }
         }
-
-        private void muaBanRadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void soHuuTrauBoDucLonRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-
+            numberOfCompanyInFieldLabel.Content = "Số lượng công ty có nhiệm vụ Sở hữu trâu, bò đực, lợn: ";
+            var companies = userDataGrid.ItemsSource as List<CongTy>;
+            if (companies != null)
+            {
+                int companiesCount = companies.Count(c => c.GiongVatNuoi == "SoHuuTrauBoDuc_Lon");
+                numberOfCompanyInField.Content = companiesCount.ToString();
+            }
+            else
+            {
+                numberOfCompanyInField.Content = "0";
+            }
         }
 
         private void statisticButton_Click(object sender, RoutedEventArgs e)
@@ -368,6 +344,24 @@ namespace Test
             AdministratorManagement.Visibility = Visibility.Collapsed;
             Statistic.Visibility = Visibility.Visible;
             popupInfoMenu.IsOpen = false;
+            SqlHelper.ExecuteReader(SqlHelper.connectionString, "SELECT TenConVat FROM LoaiConVat", cmd => { }, reader =>
+            {
+                while (reader.Read())
+                {
+                    GiongVatNuoiTraCuu.Items.Add(reader["TenConVat"].ToString());
+                }
+            });
+            numberOfCompanyInFieldLabel.Content = "Số lượng công ty có nhiệm vụ Sản xuất tinh phôi ấu trùng: ";
+            var companies = userDataGrid.ItemsSource as List<CongTy>;
+            if (companies != null)
+            {
+                int companiesCount = companies.Count(c => c.GiongVatNuoi == "SanXuatTinhPhoiAuTrung");
+                numberOfCompanyInField.Content = companiesCount.ToString();
+            }
+            else
+            {
+                numberOfCompanyInField.Content = "0";
+            }
         }
 
         private void returnToMain_Click(object sender, RoutedEventArgs e)
@@ -407,6 +401,15 @@ namespace Test
             CapHuyenWindow capHuyenWindow = new CapHuyenWindow(user);
             capHuyenWindow.Show();
             Close();
+        }
+
+        private void GiongVatNuoiTraCuu_Selected(object sender, RoutedEventArgs e)
+        {
+            if (sanXuatConGiongRadioButton.IsChecked == true)
+            {
+                LabelSoLuongConGiong.Content = $"Tổng số lượng con giống loại {GiongVatNuoiTraCuu.SelectedItem.ToString()} đã được sản xuất là: ";
+                numberOfBreed.Content = companies.Where(c => (c.TenLoaiConVat == GiongVatNuoiTraCuu.SelectedItem.ToString()) && (c.LinhVuc == "GiongVatNuoi") && (c.GiongVatNuoi == "SanXuat")).Sum(c => c.SoLuong);
+            }
         }
     }
 }

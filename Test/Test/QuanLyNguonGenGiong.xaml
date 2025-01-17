@@ -271,18 +271,18 @@
                         Content="loremipsum"
                         Grid.Column="0" 
                         Grid.Row="2"
-                       Margin="10"
+                       Margin="10,10,43,10"
                        FontSize="16"
                        FontWeight="DemiBold"
-                        Grid.ColumnSpan="2"/>
+                        Grid.ColumnSpan="3"/>
                 <Label x:Name="numberOfCompanyInField"
                     Content="loremipsum"
                        Grid.Column="2"
                        Grid.Row="2"
-                       Margin="10"
+                       Margin="170,10,10,10"
                        FontWeight="DemiBold"
                        FontSize="16"
-                       Grid.ColumnSpan="2"/>
+                       Grid.ColumnSpan="3"/>
 
                 <Label Content="Loài vật muốn tra cứu: " 
                        Grid.Column="0"
@@ -298,10 +298,9 @@
                           Grid.ColumnSpan="4"
                           Grid.Row="3"/>
 
-                <StackPanel Grid.Column="9"
-                            Grid.ColumnSpan="5"
-                            Grid.RowSpan="5"
-                            Margin="10">
+                <StackPanel Grid.Column="8"
+                            Grid.RowSpan="3"
+                            Margin="10,10,10,29">
                     <Label Content="Chọn nhiệm vụ của công ty"
                FontWeight="Bold" FontSize="18"/>
                     <RadioButton x:Name="thuThapRadioButton"
