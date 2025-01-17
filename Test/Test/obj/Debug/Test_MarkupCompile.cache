@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\obj\Debug\
+C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\obj\Debug\
 Test
 none
 false
 DEBUG;TRACE
-C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\App.xaml
-52035306024
+C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\App.xaml
+10-665352216
 
-9788862842
+1743526728
 13-1310406943
-MainWindow.xaml;Register.xaml;GiamDoc.xaml;NhanVien.xaml;Khach.xaml;
+MainWindow.xaml;Register.xaml;Admin.xaml;CapHuyen.xaml;CapXa.xaml;ChangePassword.xaml;UserInfo.xaml;UserInfoConfig.xaml;ForgotPassword.xaml;QuanLyGiongVatNuoi.xaml;
 
 False
 

@@ -12,102 +12,163 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
+using System.Data;
+using System.Security.Cryptography;
 
 namespace Test
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for RegisterWindow.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class RegisterWindow : Window
     {
-        public Window1()
+        public RegisterWindow()
         {
             InitializeComponent();
         }
-        private string connectionString = "Data Source=localhost;Initial Catalog=contact;Integrated Security=True";
-        public enum EnumRoles
+        /// <summary>
+        /// Thêm các lựa chọn cho ComboBox chức vụ
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Roles_Loaded(object sender, RoutedEventArgs e)
         {
-            GiamDoc,
-            NhanVien,
-            Khach
-        }
-        private int GenerateID(EnumRoles role)
-        {
-            Random random = new Random();
-            string prefix;
-            switch (role)
-            {
-                case EnumRoles.GiamDoc:
-                    prefix = "0";
-                    break;
-                case EnumRoles.NhanVien:
-                    prefix = "1";
-                    break;
-                case EnumRoles.Khach:
-                    prefix = "2";
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-            string randomNumber = random.Next(100000, 999999).ToString();
-            return int.Parse(prefix + randomNumber);
+            AdministratorLevel.Items.Add("Huyen");
+            AdministratorLevel.Items.Add("Xa");
         }
 
+        /// <summary>
+        /// Hàm xử lý sự kiện register
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Register_Click(object sender, RoutedEventArgs e)
         {
-            string username = Username.Text;
-            string password = Password.Password;
-            string firstname = FirstName.Text;
-            string lastname = LastName.Text;
-            string _roles = Roles.SelectedItem.ToString();
-            EnumRoles temproles = (EnumRoles)Enum.Parse(typeof(EnumRoles), _roles); 
-            int roles = (int)temproles;
-            if (String.IsNullOrWhiteSpace(username) || String.IsNullOrWhiteSpace(password))
+            if (String.IsNullOrWhiteSpace(Username.Text) || String.IsNullOrWhiteSpace(Password.Password))
             {
                 MessageBox.Show("Không được để trống username hoặc password", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
-            }  
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                conn.Open();
-                string checkQuery = "SELECT COUNT(*) FROM Users WHERE Username = @username"; 
-                SqlCommand checkCmd = new SqlCommand(checkQuery, conn); 
-                checkCmd.Parameters.AddWithValue("@username", username); 
-                int userCount = (int)checkCmd.ExecuteScalar(); 
-                if (userCount > 0) { 
-                    MessageBox.Show("Username đã tồn tại. Vui lòng chọn username khác.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error); 
-                    return; 
-                }
-
-                string query = "INSERT INTO Users (Username, Password, FirstName, Lastname, Roles) VALUES (@username, @password, @firstname, @lastname, @roles)";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@username", username);
-                cmd.Parameters.AddWithValue("@password", password);
-                cmd.Parameters.AddWithValue("@firstname", firstname);
-                cmd.Parameters.AddWithValue("@lastname", lastname);
-                cmd.Parameters.AddWithValue("@roles", roles);
-                cmd.ExecuteNonQuery();
-
-                MessageBox.Show("Đăng ký thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.None);
-
-                MainWindow login = new MainWindow();
-                login.Show();
-                this.Close();
             }
+            if (string.IsNullOrWhiteSpace(CanBoNghiepVuName.Text))
+            {
+                MessageBox.Show("Không được để trống tên công ty", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (AdministratorLevel.SelectedItem == null || AdministratorName.SelectedItem == null)
+            {
+                MessageBox.Show("Vui lòng chọn đơn vị hành chính", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (Username.Text.Length < 8 || Password.Password.Length < 8)
+            {
+                MessageBox.Show("Username hoặc password quá ngắn", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            CanBoNghiepVu tempCanBoNghiepVu = new CanBoNghiepVu();
+            tempCanBoNghiepVu.Username = Username.Text;
+            tempCanBoNghiepVu.Password = Password.Password;
+            tempCanBoNghiepVu.Name = CanBoNghiepVuName.Text;
+            tempCanBoNghiepVu.CapTrucThuoc = AdministratorLevel.SelectedItem.ToString();
+
+            if(tempCanBoNghiepVu.CapTrucThuoc == "Huyen")
+            {
+                tempCanBoNghiepVu.TenHuyen = AdministratorName.SelectedItem.ToString();
+                tempCanBoNghiepVu.TenXa = "Khong thuoc xa";
+            }
+            else
+            {
+                tempCanBoNghiepVu.TenXa = AdministratorName.SelectedItem.ToString();
+                tempCanBoNghiepVu.TenHuyen = "Khong thuoc huyen";
+            }
+
+            tempCanBoNghiepVu.SDT = SDT.Text;
+
+            string recoveryCode1 = Provider.GenerateRecoveryCode(9);
+            string recoveryCode2 = Provider.GenerateRecoveryCode(9);
+            string recoveryCode3 = Provider.GenerateRecoveryCode(9);
+            string recoveryCode  = $"{recoveryCode1} {recoveryCode2} {recoveryCode3}";
+
+            int idXa = 0;
+            int idHuyen = 0;
+
+
+            if (Provider.ValidateUser(tempCanBoNghiepVu))
+            {
+                MessageBox.Show("Username đã tồn tại. Vui lòng chọn username khác.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (tempCanBoNghiepVu.CapTrucThuoc == "Xa")
+            {
+                idXa = SqlHelper.ExecuteScalar<int>(SqlHelper.connectionString, "SELECT IDXa FROM Xa WHERE TenXa = @tenxa",
+                    cmd => cmd.Parameters.AddWithValue("@tenxa", AdministratorName.SelectedItem.ToString()));
+            }
+            else
+            {
+                idHuyen = SqlHelper.ExecuteScalar<int>(SqlHelper.connectionString, "SELECT IDHuyen FROM Huyen WHERE TenHuyen = @tenhuyen",
+                    cmd => cmd.Parameters.AddWithValue("@tenHuyen", AdministratorName.SelectedItem.ToString()));
+            }
+            tempCanBoNghiepVu.ID = Provider.GenerateID(tempCanBoNghiepVu, idHuyen, idXa);
+            Clipboard.SetText(recoveryCode);
+
+            if (Provider.SetUserData(tempCanBoNghiepVu, recoveryCode1, recoveryCode2, recoveryCode3))
+            {
+                MessageBox.Show("Đăng ký thành công, mã khôi phục tài khoản khi quên mật khẩu của bạn \n đã được copy", "Thông báo", MessageBoxButton.OK, MessageBoxImage.None);
+            }
+            else
+            {
+                MessageBox.Show("Lỗi", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+                LoginWindow loginWindow = new LoginWindow();
+                loginWindow.Show();
+                Close();
         }
 
+        /// <summary>
+        /// Hàm xử lý sự kiện back
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Return_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow login = new MainWindow();
-            login.Show();
+            LoginWindow loginWindow     = new LoginWindow();
+            loginWindow.Show();
             Close();
         }
-
-        private void Roles_Loaded(object sender, RoutedEventArgs e)
+        private void Roles_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Roles.Items.Add("GiamDoc");
-            Roles.Items.Add("NhanVien");
-            Roles.Items.Add("Khach");
+            if (AdministratorLevel.SelectedItem != null)
+            {
+                string selectedRole = AdministratorLevel.SelectedItem.ToString();
+                AdministratorName.Items.Clear();
+
+                string query;
+                if (selectedRole == "Xa")
+                {
+                    query = "SELECT TenXa, TrucThuocHuyen FROM Xa WHERE IDXa != 0";
+                }
+                else
+                {
+                    query = "SELECT TenHuyen FROM Huyen WHERE IDHuyen != 0";
+                }
+
+                SqlHelper.ExecuteReader(SqlHelper.connectionString, query, cmd => { },
+                    reader =>
+                    {
+                        while (reader.Read())
+                        {
+                            if (selectedRole == "Xa")
+                            {
+                                AdministratorName.Items.Add(reader["TenXa"].ToString());
+                            }
+                            else
+                            {
+                                AdministratorName.Items.Add(reader["TenHuyen"].ToString());
+                            }
+                        }
+                    });
+            }
         }
     }
 }

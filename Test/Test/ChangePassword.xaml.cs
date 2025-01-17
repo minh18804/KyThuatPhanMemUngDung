@@ -25,10 +25,10 @@ namespace Test
         /// Tạo các biến toàn cục lưu các biến từ cửa số trước
         /// </summary>
         private Window previousWindow;
-        public ChangePasswordWindow(Window _previousWindow)
+        public ChangePasswordWindow(Window previousWindow)
         {
             InitializeComponent();
-            previousWindow = _previousWindow;
+            this.previousWindow = previousWindow;
         }
         /// <summary>
         /// Hàm đổi mật khẩu:

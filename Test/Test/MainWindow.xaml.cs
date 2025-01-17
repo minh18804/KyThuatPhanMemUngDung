@@ -13,75 +13,100 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
-
 namespace Test
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for LoginWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LoginWindow : Window
     {
-        public MainWindow()
+        public LoginWindow()
         {
             InitializeComponent();
         }
-        private string connectionString = "Data Source=localhost;Initial Catalog=contact;Integrated Security=True";
-        private void Login_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Hàm xử lý sự kiện login
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void login_Click(object sender, RoutedEventArgs e)
         {
-            string username = Username.Text;
-            string password = Password.Password;
-            if(String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password))
+            CanBoNghiepVu user = new CanBoNghiepVu();
+            user.IsAdmin = false;
+            user.Username = Username.Text;
+            user.Password = Password.Password;
+            bool? isAdmin = admin.IsChecked;
+            bool? isCapXa = capXa.IsChecked;
+            bool? isCapHuyen = capHuyen.IsChecked;
+
+            if (isAdmin == true) user.IsAdmin = true;
+            else if (isCapXa == true) user.CapTrucThuoc = "Xa";
+            else if (isCapHuyen == true) user.CapTrucThuoc = "Huyen";
+
+            if (String.IsNullOrEmpty(user.Username) || String.IsNullOrEmpty(user.Password))
             {
-                MessageBox.Show("Không được để trống Username hoặc Password");
+                MessageBox.Show("Không được để trống Username hoặc Password", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            if (Provider.ValidateUser(user))
             {
-                conn.Open();
-                string query = "SELECT COUNT(1) FROM Users WHERE Username=@username AND Password=@password";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@username", username);
-                cmd.Parameters.AddWithValue("@password", password);
-                int count = Convert.ToInt32(cmd.ExecuteScalar());
-
-                if (count == 1)
+                Provider.SetLoginTime(user);
+                user = Provider.LoadUserData(user);
+                if (user.IsAdmin == true)
                 {
-                    query = "SELECT Roles, FirstName, LastName FROM Users WHERE Username=@username AND Password=@password";
-                    cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@username", username);
-                    cmd.Parameters.AddWithValue("@password", password);
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    reader.Read();
-                    switch ((int)reader["Roles"])
-                    {
-                        case 0:
-                            Window2 _GiamDoc = new Window2(username, password, (string)reader["LastName"]);
-                            _GiamDoc.Show();
-                            Close();
-                            break;
-                        case 1:
-                            Window3 _NhanVien = new Window3(username, password, (string)reader["LastName"]);
-                            _NhanVien.Show();
-                            Close();
-                            break;
-                        case 2:
-                            Window4 _Khach = new Window4(username, password, (string)reader["LastName"]);
-                            _Khach.Show();
-                            Close();
-                            break;
-                    }
+                    AdminWindow adminWindow = new AdminWindow(user);
+                    adminWindow.Show();
+                    Close();
                 }
+                else if (user.CapTrucThuoc == "Huyen")
+                {
+                    CapHuyenWindow capHuyenWindow = new CapHuyenWindow(user);
+                    capHuyenWindow.Show();
+                    Close();
+                }  
                 else
                 {
-                    MessageBox.Show("Username hoặc password không đúng");
+                    CapXaWindow capXaWindow = new CapXaWindow(user);
+                    capXaWindow.Show();
+                    Close();
                 }
             }
-        }
 
-        private void Register_Click(object sender, RoutedEventArgs e)
+            else MessageBox.Show("Username hoặc password không đúng", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Question);
+        }
+        /// <summary>
+        /// Hàm xử lý sự kiện register: chuyển sang màn hình register
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void register_Click(object sender, RoutedEventArgs e)
         {
-            Window1 register = new Window1();
+            RegisterWindow register = new RegisterWindow();
             register.Show();
+            Hide();
+        }
+        /// <summary>
+        /// Hàm xử lý sự kiện bấm Enter là tự động đăng nhập
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Input_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                login_Click(sender, e);
+            }
+        }
+        /// <summary>
+        /// Hàm xử lý sự kiện forgotPassword: chuyển sang màn hình quên mật khẩu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
+        private void forgotPassword_Click(object sender, RoutedEventArgs e)
+        {
+            ForgotPasswordWindow ForgotPasswordWindow = new ForgotPasswordWindow(this);
+            ForgotPasswordWindow.Show();
             Hide();
         }
     }

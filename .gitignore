@@ -2,17 +2,20 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
+*.vsidx
 /Test/.vs/Test/v17/.suo
 /Test/.vs/Test/v17/DocumentLayout.backup.json
 /Test/.vs/Test/v17/DocumentLayout.json
-/.gitignore
-/Test/Test/Test.csproj
-*vsidx
+*.htm
+*.cache
 /Test/Test/obj/Debug/Test_MarkupCompile.i.lref
-*.wsuo
-*.json
-/Test/.vs/Test/FileContentIndex/188ed5d5-d59d-4d0f-a15f-0d75eaf5605d.vsidx
-/Test/.vs/Test/FileContentIndex/20120181-3e79-4a0b-b1d1-f2656ff30341.vsidx
-/Test/.vs/Test/FileContentIndex/2ebd5bbe-95c8-4524-8e6c-3e6b2ea8ffeb.vsidx
-/Test/.vs/Test/FileContentIndex/b593c89b-db2e-4493-b957-ae1864c025ef.vsidx
-/Test/.vs/Test/FileContentIndex/e566a003-005a-4a0e-8c7d-d85dafb3cdbf.vsidx
+/Test/Test/obj/Debug/CapHuyen.g.i.cs
+/.gitignore
+/Test/Test/obj/Debug/CapHuyen.g.i.cs
+/Test/Test/obj/Debug/CapHuyen.g.i.cs
+/Test/Test/obj/Debug/CapHuyen.g.i.cs
+/Test/Test/obj/Debug/MainWindow.g.i.cs
+/Test/.vs/Test/CopilotIndices/0.2.1634.3922
+/Test/.vs/Test/copilot-chat/42c370bc/sessions
+/Test/Test/bin/Debug/Test.exe
+/Test/Test/bin/Debug/Test.pdb
