@@ -410,5 +410,13 @@ namespace Test
             AdministratorManagement.Visibility = Visibility.Collapsed;
             CompanyTable.Visibility = Visibility.Visible;
         }
+        private void returnToHuyenPage_Click(object sender, RoutedEventArgs e)
+        {
+            CapHuyenWindow capHuyenWindow = new CapHuyenWindow(user);
+            capHuyenWindow.Show();
+            Close();
+        }
+        //CS
+
     }
 }

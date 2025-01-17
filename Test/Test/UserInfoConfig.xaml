@@ -7,7 +7,10 @@
         mc:Ignorable="d"
         Title="Chỉnh sửa thông tin người dùng" Height="500" Width="800">
     <Grid>
-        <Grid.RowDefinitions>
+        <Grid.Background>
+        <ImageBrush ImageSource="images/background-main.jpg"/>
+      </Grid.Background>
+    <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -17,7 +20,14 @@
             <ColumnDefinition Width="Auto" MinWidth="40"/>
             <ColumnDefinition Width="Auto" MinWidth="40"/>
         </Grid.ColumnDefinitions>
-
+        <Rectangle>
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="images/background-main.jpg" />
+            </Rectangle.Fill>
+            <Rectangle.OpacityMask>
+                <ImageBrush ImageSource="images/backmo.jpg"/>
+            </Rectangle.OpacityMask>
+        </Rectangle>
         <Button x:Name="LogoutButton" 
             Width="30" 
             Height="30" 
@@ -32,6 +42,29 @@
             BorderBrush="Black" 
             Click="LogoutButton_Click"
             BorderThickness="1">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="LightBlue"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="Red" Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="LightBlue" Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Grid>
@@ -102,9 +135,9 @@
                 Content="☰"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Background="White"
                 BorderThickness="0"
-                FontSize="18"
+                Background="Wheat"
+                FontSize="20"
                 Click="hamburgerButton_Click"/>
 
         <Popup x:Name="popupMenu" 
@@ -131,91 +164,101 @@
               Margin="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-
             <TextBlock Text="Chỉnh sửa thông tin người dùng" 
                        FontSize="28" 
                        FontWeight="Bold" 
-                       Margin="0,0,0,20" 
-                       Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+                       Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="7"/>
 
             <TextBlock Text="Tên cán bộ nghiệp vụ: " 
                        FontWeight="Bold" 
                        VerticalAlignment="Center"
-                       Grid.Row="1" Grid.Column="0"/>
+                       FontSize="18"
+                       Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"/>
             <TextBox x:Name="CompanyNameTextBox" 
-                     Margin="0,0,0,10" 
-                     Grid.Row="1" Grid.Column="1"/>
+                     Margin="5"
+                     Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3"/>
 
             <TextBlock Text="Cấp trực thuộc: " 
                        FontWeight="Bold" 
+                       FontSize="18"
                        VerticalAlignment="Center"
-                       Grid.Row="2" Grid.Column="0"/>
-            <ComboBox x:Name="adminLevel" 
-                      Margin="0,1,413,1" 
+                       Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>
+            <ComboBox x:Name="adminLevel"
+                      Margin="5"
                       Loaded="adminLevel_Loaded"
                       SelectionChanged="adminLevel_SelectionChanged"
-                      Grid.Row="2" Grid.Column="1"/>
+                      Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2"/>
 
             <TextBlock Text="Tên xã/huyện: " 
                        FontWeight="Bold" 
                        VerticalAlignment="Center"
-                       Grid.Row="3" Grid.Column="0"/>
+                       FontSize="18"
+                       Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"/>
 
             <ComboBox x:Name="tenXaHuyen" 
-                     Margin="0,5,0,5" 
-                     Width="130"
+                     Margin="5" 
+                     Width="150"
                      HorizontalAlignment="Left"
                      Loaded="tenXaHuyen_Loaded"
-                     Grid.Row="3" Grid.Column="1"/>
+                     Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="5"/>
 
             <TextBlock Text="Tên đăng nhập: " 
                        FontWeight="Bold" 
+                       FontSize="18"
                        VerticalAlignment="Center"
-                       Grid.Row="4" Grid.Column="0"/>
+                       Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"/>
             <TextBox x:Name="UsernameTextBox" 
-                     Margin="0,6,0,4" 
+                     Margin="5"
+                     Width="300"
                      IsEnabled="False"
-                     Grid.Row="4" Grid.Column="1"/>
+                     Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="3"/>
 
             <TextBlock Text="Mật khẩu: " 
                        FontWeight="Bold" 
+                       FontSize="18"
                        VerticalAlignment="Center"
-                       Grid.Row="5" Grid.Column="0"/>
+                       Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"/>
             <TextBox x:Name="PasswordTextBox" 
-                     Text="***" 
-                     Margin="0,5,399,5" 
+                     Text="*******" 
+                     FontSize="25"
+                     Margin="5"
                      IsReadOnly="True"
-                     Grid.Row="5" Grid.Column="1"/>
+                     Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="2"/>
 
             <Button x:Name="showHide" 
                     Content="Hiện" 
-                    Grid.Row="5" Grid.Column="1"
-                    Margin="149,0,358,0"
+                    Grid.Row="5" Grid.Column="5"
+                    Background="Azure"
                     VerticalAlignment="Center"
                     Click="showHide_Click"/>
 
             <Button x:Name="changePasswordBtn" 
                     Content="Thay đổi mật khẩu"
-                    Grid.Row="5" Grid.Column="1"
+                    Grid.Row="5" Grid.Column="6"
+                    Grid.ColumnSpan="2"
+                    Margin="5"
+                    Background="Azure"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Right"
-                    Margin="0,0,0,10"
                     Click="changePasswordBtn_Click"/>
 
             <StackPanel x:Name="NewPasswordPanel" 
@@ -233,25 +276,47 @@
                          Margin="0,0,0,10"/>
             </StackPanel>
 
-            <StackPanel Grid.Row="11" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button x:Name="return" 
+            <Button  x:Name="return" 
                         Content="Quay lại"
-                        Width="130"
-                        HorizontalAlignment="Left"
-                        Background="White"
+                        Grid.Column="2"
+                        Grid.Row="6"
+                        Grid.ColumnSpan="2"
+                        Width="100"
+                        FontSize="18"
+                        HorizontalAlignment="Center"
                         BorderThickness="0"
-                        Margin="0,0,10,0"
                         Padding="7"
-                        Click="return_Click"/>
+                        Click="return_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="White" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="15">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
 
-                <Button x:Name="saveChanges"
+            <Button x:Name="saveChanges"
                         Content="Lưu thay đổi"
-                        Width="130"
                         Background="White"
+                        Grid.Column="5"
+                        Grid.Row="6"
+                        Width="120"
                         Padding="7"
+                        FontSize="18"
+                        Grid.ColumnSpan="2"
+                        HorizontalAlignment="Center"
                         Foreground="Green"
-                        Click="saveChanges_Click"/>
-            </StackPanel>
+                        Click="saveChanges_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="White" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="15">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
         </Grid>
     </Grid>
 </Window>

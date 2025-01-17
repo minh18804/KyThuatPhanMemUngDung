@@ -146,9 +146,9 @@
                 Content="☰"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Background="Ivory"
+                Background="Transparent"
                 BorderThickness="0"
-                FontSize="18"
+                FontSize="23"
                 Click="hamburgerButton_Click"/>
 
             <Popup x:Name="popupMenu" 
@@ -258,7 +258,7 @@
                   Grid.ColumnSpan="6"
                   IsReadOnly="true"
                   AutoGenerateColumns="False"
-                  Background="Beige"
+                  Background="White"
                   MouseDoubleClick="userDataGrid_MouseDoubleClick">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="Hiện mật khẩu">

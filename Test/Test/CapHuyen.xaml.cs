@@ -35,15 +35,12 @@ namespace Test
             if (result == MessageBoxResult.No)
                 return;
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            SqlHelper.ExecuteNonQuery(SqlHelper.connectionString, "UPDATE Congty SET LogoutTime = @logouttime WHERE Username = @username", cmd =>
             {
-                conn.Open();
-                string query = "UPDATE Company SET LogoutTime = @logouttime WHERE Username = @username";
-                SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@logouttime", DateTime.Now);
                 cmd.Parameters.AddWithValue("@username", user.Username);
-                cmd.ExecuteNonQuery();
-            }
+            });
+
 
             LoginWindow loginWindow = new LoginWindow();
             loginWindow.Show();
