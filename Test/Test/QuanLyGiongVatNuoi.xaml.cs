@@ -373,6 +373,7 @@ namespace Test
         private void statisticButton_Click(object sender, RoutedEventArgs e)
         {
             CompanyTable.Visibility = Visibility.Collapsed;
+            AdministratorManagement.Visibility = Visibility.Collapsed;
             Statistic.Visibility = Visibility.Visible;
             popupInfoMenu.IsOpen = false;
         }
@@ -385,7 +386,9 @@ namespace Test
 
         private void administratorManageButton_Click(object sender, RoutedEventArgs e)
         {
-
+            CompanyTable.Visibility = Visibility.Collapsed;
+            Statistic.Visibility = Visibility.Collapsed;
+            AdministratorManagement.Visibility = Visibility.Visible;
         }
 
         private void BangHuyen_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -400,6 +403,12 @@ namespace Test
                 var filteredXa = tenXa.Where(x => x.TenHuyenTrucThuoc == selectedHuyen).Select(x => new { x.TenXa }).ToList(); 
                 BangXa.ItemsSource = filteredXa;
             }
+        }
+
+        private void return_1_Click(object sender, RoutedEventArgs e)
+        {
+            AdministratorManagement.Visibility = Visibility.Collapsed;
+            CompanyTable.Visibility = Visibility.Visible;
         }
     }
 }

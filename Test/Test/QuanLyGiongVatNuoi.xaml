@@ -133,8 +133,7 @@
             <Grid x:Name="CompanyTable"
                 Grid.Row="1" 
               Grid.Column="1" 
-              Margin="10"
-                  Visibility="Collapsed">
+              Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
@@ -188,9 +187,6 @@
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button x:Name="return"
-                    Content="Quay lại" Margin="452,0,10,37"
-                    Click="return_Click" Grid.Column="1"/>
             </Grid>
             <Grid x:Name="Statistic" 
                   Grid.Row="1" 
@@ -240,7 +236,8 @@
             <Grid x:Name="AdministratorManagement"
                 Grid.Row="1" 
                 Grid.Column="1" 
-                Margin="10">
+                Margin="10"
+                  Visibility="Collapsed">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
@@ -260,6 +257,10 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
+                <Button x:Name="return_1"
+                        Content="Quay lại" 
+                    Click="return_1_Click" 
+                    Grid.Column="1" Margin="524,29,0,0"/>
                 <TextBlock Text="Quản lý hành chính" 
                        FontSize="28" 
                        FontWeight="Bold" 
@@ -281,7 +282,6 @@
                x:Name="Greeting"
                HorizontalAlignment="Left" 
                VerticalAlignment="Center"/>
-
         </Grid>
     </Grid>
 </Window>
