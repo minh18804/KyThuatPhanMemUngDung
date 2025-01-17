@@ -55,6 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Tools\Provider.cs" />
+    <Compile Include="Tools\SqlTools.cs" />
+    <Compile Include="Tools\User.cs" />
     <Compile Include="Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
     </Compile>
@@ -167,10 +170,13 @@
     <Resource Include="Images\background-register.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\background.jpg" />
+    <Resource Include="Images\background-changepass.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\background-changepass.jpg" />
+    <Resource Include="Images\background-main.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\background.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

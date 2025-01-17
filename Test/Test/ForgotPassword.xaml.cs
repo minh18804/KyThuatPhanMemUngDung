@@ -29,6 +29,7 @@ namespace Test
 
         private void confirm_Click(object sender, RoutedEventArgs e)
         {
+            bool hasError = false;
             if (_newPassword.Password != newPassword.Password)
             {
                 MessageBox.Show("Mật khẩu mới không trùng khớp với phần xác nhận mật khẩu", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -40,41 +41,38 @@ namespace Test
                 return;
             }
 
-            string connectionString         = "Data Source=localhost;Initial Catalog=contact;Integrated Security=True";
+            SqlHelper.ExecuteReader(SqlHelper.connectionString, "SELECT RecoveryCode1, RecoveryCode2, RecoveryCode3 FROM CanBoNghiepVu WHERE Username = @username",
+                cmd => cmd.Parameters.AddWithValue("@username", username.Text),
+                reader =>
+                {
+                    if (!reader.Read())
+                    {
+                        MessageBox.Show("Không tồn tại tài khoản", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                        hasError = true;
+                    }
+                    else if ((reader["RecoveryCode1"].ToString() != recoveryCode.Text) && 
+                            (reader["RecoveryCode2"].ToString() != recoveryCode.Text) && 
+                            (reader["RecoveryCode3"].ToString() != recoveryCode.Text))
+                    {
+                        MessageBox.Show("Mã khôi phục không đúng", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                        hasError = true;
+                    }
+                });
 
-            using (SqlConnection conn       = new SqlConnection(connectionString))
+            if (!hasError)
             {
-                conn.Open();
-                string checkQuery           = "SELECT RecoveryCode1, RecoveryCode2, RecoveryCode3 FROM Company WHERE Username = @username";
-                SqlCommand checkCmd         = new SqlCommand(checkQuery, conn);
-                checkCmd.Parameters.AddWithValue("@username", username.Text);
-
-                SqlDataReader reader        = checkCmd.ExecuteReader();
-                if (!reader.Read())
-                {
-                    MessageBox.Show("Không tồn tại tài khoản", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-                    reader.Close();
-                    return;
-                }
-                else if ((reader["RecoveryCode1"].ToString() != recoveryCode.Text) && (reader["RecoveryCode2"].ToString() != recoveryCode.Text) && (reader["RecoveryCode3"].ToString() != recoveryCode.Text))
-                {
-                    MessageBox.Show("Mã khôi phục không đúng", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-                    reader.Close();
-                    return;
-                }
-                reader.Close();
-
-                string changeQuery = "UPDATE Company SET Password = @password WHERE Username = @username";
-                SqlCommand changeCmd = new SqlCommand(changeQuery, conn);
-                changeCmd.Parameters.AddWithValue("@username", username.Text);
-                changeCmd.Parameters.AddWithValue("@password", newPassword.Password);
-                changeCmd.ExecuteNonQuery();
+                SqlHelper.ExecuteNonQuery(SqlHelper.connectionString, "UPDATE CanBoNghiepVu SET Password = @password WHERE Username = @username",
+                    cmd =>
+                    {
+                        cmd.Parameters.AddWithValue("@username", username.Text);
+                        cmd.Parameters.AddWithValue("@password", newPassword.Password);
+                    }
+                );
                 MessageBox.Show("Đổi mật khẩu thành công, vui lòng đăng nhập lại", "Thông báo", MessageBoxButton.OK, MessageBoxImage.None);
-
                 LoginWindow loginWindow = new LoginWindow();
                 loginWindow.Show();
                 Close();
-            }
+            }  
         }
         private void cancel_Click(object sender, RoutedEventArgs e)
         {

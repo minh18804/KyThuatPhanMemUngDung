@@ -8,10 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-<<<<<<< HEAD
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/background.jpg")]
-=======
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/background-changepass.jpg")]
->>>>>>> f829770e0c96db9d413f90a8184baa5f5ece008a
 
 

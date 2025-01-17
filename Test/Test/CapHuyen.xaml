@@ -6,7 +6,15 @@
         xmlns:local="clr-namespace:Test"
         mc:Ignorable="d"
         Title="Trang chủ" Height="450" Width="800">
+    <Window.Resources>
+        <Storyboard x:Key="SlideUpAnimation">
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" From="50" To="0" Duration="0:0:0.5" />
+        </Storyboard>
+    </Window.Resources>
     <Grid>
+        <Grid.Background>
+        <ImageBrush ImageSource="images/background-main.jpg"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -17,7 +25,6 @@
             <ColumnDefinition Width="Auto" MinWidth="40"/>
             <ColumnDefinition Width="Auto" MinWidth="40"/>
         </Grid.ColumnDefinitions>
-
         <Button x:Name="LogoutButton" 
     Width="30" 
     Height="30" 
@@ -29,9 +36,25 @@
     FontWeight="Bold" 
     HorizontalAlignment="Center" 
     VerticalAlignment="Center" 
-    BorderBrush="Black" 
+    BorderBrush="White" 
     Click="LogoutButton_Click"
     BorderThickness="1">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="LightBlue"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="Red" Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Grid>
@@ -60,7 +83,7 @@
         FontWeight="Bold" 
         HorizontalAlignment="Center" 
         VerticalAlignment="Center" 
-        BorderBrush="Black" 
+        BorderBrush="White" 
         Click="InfoButton_Click"
         BorderThickness="1">
             <Popup  x:Name="popupInfoMenu" 
@@ -102,7 +125,7 @@
         Content="☰"
         HorizontalAlignment="Center"
         VerticalAlignment="Center"
-        Background="White"
+        Background="Ivory"
         BorderThickness="0"
         FontSize="18"
         Click="hamburgerButton_Click"/>
@@ -121,41 +144,168 @@
       Grid.Column="1" 
       Margin="10">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
             <TextBlock Text="Trang chủ" 
-               FontSize="28" 
+               FontSize="40" 
                FontWeight="Bold" 
                Margin="0,0,0,20" 
-               Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+               Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
 
-            <StackPanel Grid.Row="1">
-                <Button x:Name="quanLyGiongVatNuoi"
+
+            <Button x:Name="quanLyGiongVatNuoi"
+                    Grid.Column="0"
+                    Grid.Row="2"
+                    FontSize="18"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    BorderBrush="White"
+                    BorderThickness="0"
+                    HorizontalAlignment="Left"
+                    Grid.ColumnSpan="3"
+                    Background="Transparent"
+                    Width="300"
                     Content="Quản lý giống vật nuôi"
-                    Click="quanLyGiongVatNuoi_Click"/>
-                <Button x:Name="quanLyNguonGen"
+                    Click="quanLyGiongVatNuoi_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="#B3B3B3B3" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="15">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.RenderTransform>
+                    <TranslateTransform Y="500" />
+                </Button.RenderTransform>
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Loaded">
+                        <BeginStoryboard Storyboard="{StaticResource SlideUpAnimation}" />
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
+            <Button x:Name="quanLyNguonGen"
+                    Grid.Column="0"
+                    Grid.Row="4"
+                    Grid.ColumnSpan="3"
+                    FontSize="18"
+                    Foreground="White"
+                    BorderBrush="White"
+                    BorderThickness="0"
+                    HorizontalAlignment="Left"
+                    Background="Transparent"
+                    FontWeight="Bold"
+                    Width="300"
                     Content="Quản lý nguồn gen giống"
-                    Click="quanLyNguonGen_Click"/>
-                <Button x:Name="quanLyThucAnChanNuoi"
+                    Click="quanLyNguonGen_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="#B3B3B3B3" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="15">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.RenderTransform>
+                    <TranslateTransform Y="500" />
+                </Button.RenderTransform>
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Loaded">
+                        <BeginStoryboard Storyboard="{StaticResource SlideUpAnimation}" />
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
+            <Button x:Name="quanLyThucAnChanNuoi"
+                    Grid.Column="0"
+                    Grid.Row="6"
+                    Width="300"
+                    Foreground="White"
+                    FontSize="18"
+                    BorderBrush="White"
+                    BorderThickness="0"
+                    FontWeight="Bold"
+                    Grid.ColumnSpan="3"
+                    Background="Transparent"
+                    HorizontalAlignment="Left"
                     Content="Quản lý thức ăn chăn nuôi"
-                    Click="quanLyThucAnChanNuoi_Click"/>
-            </StackPanel>
+                    Click="quanLyThucAnChanNuoi_Click">
+                <Button.Template>
+                <ControlTemplate TargetType="Button">
+                        <Border Background="#B3B3B3B3" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="15">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+                </Button.Template>
+                <Button.RenderTransform>
+                    <TranslateTransform Y="500" />
+                </Button.RenderTransform>
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Loaded">
+                        <BeginStoryboard Storyboard="{StaticResource SlideUpAnimation}" />
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
+            <TextBox Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="48" Grid.Row="2" TextWrapping="Wrap" Text="Quản lý số lượng vật nuôi, giống vật nuôi và nơi chăn nuôi." VerticalAlignment="Center" Width="258" TextChanged="TextBox_TextChanged"
+                     Background="Transparent"
+                     BorderBrush="Transparent"
+                     Foreground="White"
+                     FontWeight="Bold"
+                     FontSize="16"
+                     IsEnabled="False">
+                <TextBox.RenderTransform>
+                    <TranslateTransform Y="500" />
+                </TextBox.RenderTransform>
+                <TextBox.Triggers>
+                    <EventTrigger RoutedEvent="TextBox.Loaded">
+                        <BeginStoryboard Storyboard="{StaticResource SlideUpAnimation}" />
+                    </EventTrigger>
+                </TextBox.Triggers>
+            </TextBox>
+            <TextBox Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="48" Grid.Row="4" TextWrapping="Wrap" Text="Quản lý gen giống cho vật nuôi và lựa chọn, duy trì đặc tính gen." VerticalAlignment="Center" Width="258" TextChanged="TextBox_TextChanged"
+                     Background="Transparent"
+                     BorderBrush="Transparent"
+                     Foreground="White"
+                     FontWeight="Bold"
+                     FontSize="16"
+                     IsEnabled="False">
+                <TextBox.RenderTransform>
+                    <TranslateTransform Y="500" />
+                </TextBox.RenderTransform>
+                <TextBox.Triggers>
+                    <EventTrigger RoutedEvent="TextBox.Loaded">
+                        <BeginStoryboard Storyboard="{StaticResource SlideUpAnimation}" />
+                    </EventTrigger>
+                </TextBox.Triggers>
+            </TextBox>
+            <TextBox Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="48" Grid.Row="6" TextWrapping="Wrap" Text="Quản lý thức ăn chăn nuôi, phân phối thức ăn." VerticalAlignment="Center" Width="258" TextChanged="TextBox_TextChanged"
+                     Background="Transparent"
+                     BorderBrush="Transparent"
+                     FontWeight="Bold"
+                     Foreground="White"
+                     FontSize="16"
+                     IsEnabled="False">
+                <TextBox.RenderTransform>
+                    <TranslateTransform Y="500" />
+                </TextBox.RenderTransform>
+                <TextBox.Triggers>
+                    <EventTrigger RoutedEvent="TextBox.Loaded">
+                        <BeginStoryboard Storyboard="{StaticResource SlideUpAnimation}" />
+                    </EventTrigger>
+                </TextBox.Triggers>
+            </TextBox>
 
         </Grid>
         <Label Grid.Column="1" 
