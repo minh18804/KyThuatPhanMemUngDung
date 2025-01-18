@@ -1,5 +1,6 @@
 ﻿
 
+<<<<<<< HEAD
 FD:\vscode\btl_ktpm\Test\Test\MainWindow.xaml;;
 FD:\vscode\btl_ktpm\Test\Test\Register.xaml;;
 FD:\vscode\btl_ktpm\Test\Test\Admin.xaml;;
@@ -13,4 +14,16 @@ FD:\vscode\btl_ktpm\Test\Test\ForgotPassword.xaml;;
 FD:\vscode\btl_ktpm\Test\Test\QuanLyGiongVatNuoi.xaml;;
 =======
 >>>>>>> Stashed changes
+=======
+FC:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\MainWindow.xaml;;
+FC:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\Register.xaml;;
+FC:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\Admin.xaml;;
+FC:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\CapHuyen.xaml;;
+FC:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\CapXa.xaml;;
+FC:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\ChangePassword.xaml;;
+FC:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\UserInfo.xaml;;
+FC:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\ForgotPassword.xaml;;
+FC:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\QuanLyGiongVatNuoi.xaml;;
+FC:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\QuanLyNguonGenGiong.xaml;;
+>>>>>>> 65b0d682a0502960ee23a676e839714828bfaa4c
 

@@ -51,6 +51,13 @@
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="LightBlue" Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
                         </Trigger>
                     </Style.Triggers>
                 </Style>
@@ -261,8 +268,8 @@
             <TextBox Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="48" Grid.Row="2" TextWrapping="Wrap" Text="Quản lý số lượng vật nuôi, giống vật nuôi và nơi chăn nuôi." VerticalAlignment="Center" Width="258" TextChanged="TextBox_TextChanged"
                      Background="Transparent"
                      BorderBrush="Transparent"
-                     Foreground="White"
-                     FontWeight="Bold"
+                     Foreground="Black"
+                     FontWeight="ExtraBold"
                      FontSize="16"
                      IsEnabled="False">
                 <TextBox.RenderTransform>
@@ -277,8 +284,8 @@
             <TextBox Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="48" Grid.Row="4" TextWrapping="Wrap" Text="Quản lý gen giống cho vật nuôi và lựa chọn, duy trì đặc tính gen." VerticalAlignment="Center" Width="258" TextChanged="TextBox_TextChanged"
                      Background="Transparent"
                      BorderBrush="Transparent"
-                     Foreground="White"
-                     FontWeight="Bold"
+                     Foreground="Black"
+                     FontWeight="ExtraBold"
                      FontSize="16"
                      IsEnabled="False">
                 <TextBox.RenderTransform>
@@ -293,8 +300,8 @@
             <TextBox Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="48" Grid.Row="6" TextWrapping="Wrap" Text="Quản lý thức ăn chăn nuôi, phân phối thức ăn." VerticalAlignment="Center" Width="258" TextChanged="TextBox_TextChanged"
                      Background="Transparent"
                      BorderBrush="Transparent"
-                     FontWeight="Bold"
-                     Foreground="White"
+                     FontWeight="ExtraBold"
+                     Foreground="Black"
                      FontSize="16"
                      IsEnabled="False">
                 <TextBox.RenderTransform>

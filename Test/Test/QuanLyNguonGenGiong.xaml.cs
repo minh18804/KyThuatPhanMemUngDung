@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,13 +11,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Test
 {
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class QuanLyGiongVatNuoiWindow : Window
+    public partial class QuanLyNguonGenGiongWindow : Window
     {
         CanBoNghiepVu user;
         Window previousWindow;
@@ -31,14 +30,14 @@ namespace Test
             public string TenHuyenTrucThuoc { get; set; }
         }
         List<Xa> tenXa;
-        public QuanLyGiongVatNuoiWindow(CanBoNghiepVu user, Window previousWindow)
+        public QuanLyNguonGenGiongWindow(CanBoNghiepVu user, Window previousWindow)
         {
             this.user = user;
             this.previousWindow = previousWindow;
             InitializeComponent();
             DataGridConfig();
             Greeting.Content = $"Xin chào, {user.Name}";
-            if (user.CapTrucThuoc == "Xa") 
+            if (user.CapTrucThuoc == "Xa")
                 NumberOfCongTyActive.Content = $"Số công ty đang hoạt động trên xã {user.TenXa}: ";
             else
                 NumberOfCongTyActive.Content = $"Số công ty đang hoạt động trên {user.TenHuyen}: ";
@@ -48,24 +47,25 @@ namespace Test
             AddColumnsToBangHuyen();
             AddColumnsToBangXa();
         }
-        private void AddColumnsToBangHuyen() { 
-            DataGridTextColumn huyenColumn = new DataGridTextColumn 
-            { 
-                Header = "Các huyện thuộc tỉnh Ninh Bình", 
-                Binding = new Binding("."), 
-                Width = new DataGridLength(1, DataGridLengthUnitType.Star) 
-            }; 
-            BangHuyen.Columns.Add(huyenColumn); 
+        private void AddColumnsToBangHuyen()
+        {
+            DataGridTextColumn huyenColumn = new DataGridTextColumn
+            {
+                Header = "Các huyện thuộc tỉnh Ninh Bình",
+                Binding = new Binding("."),
+                Width = new DataGridLength(1, DataGridLengthUnitType.Star)
+            };
+            BangHuyen.Columns.Add(huyenColumn);
         }
-        private void AddColumnsToBangXa() 
-        { 
-            DataGridTextColumn xaColumn = new DataGridTextColumn 
-            { 
-                Header = "Các xã", 
-                Binding = new Binding("TenXa"), 
-                Width = new DataGridLength(1, DataGridLengthUnitType.Star) 
-            }; 
-            BangXa.Columns.Add(xaColumn); 
+        private void AddColumnsToBangXa()
+        {
+            DataGridTextColumn xaColumn = new DataGridTextColumn
+            {
+                Header = "Các xã",
+                Binding = new Binding("TenXa"),
+                Width = new DataGridLength(1, DataGridLengthUnitType.Star)
+            };
+            BangXa.Columns.Add(xaColumn);
         }
         private void LoadXa()
         {
@@ -74,7 +74,8 @@ namespace Test
                 tenXa = new List<Xa>();
                 while (reader.Read())
                 {
-                    tenXa.Add(new Xa{
+                    tenXa.Add(new Xa
+                    {
                         TenXa = reader["TenXa"].ToString(),
                         TenHuyenTrucThuoc = reader["TenHuyen"].ToString()
                     });
@@ -85,27 +86,27 @@ namespace Test
         private void LoadHuyen()
         {
             SqlHelper.ExecuteReader(SqlHelper.connectionString, "SELECT TenHuyen FROM Huyen", cmd => { }, reader =>
+            {
+                tenHuyen = new List<string>();
+                while (reader.Read())
                 {
-                    tenHuyen = new List<string>();
-                    while (reader.Read())
-                    {
-                        tenHuyen.Add(reader["TenHuyen"].ToString());
-                    }
-                });
+                    tenHuyen.Add(reader["TenHuyen"].ToString());
+                }
+            });
             BangHuyen.ItemsSource = tenHuyen;
         }
-            private void LoadCompanyData()
+        private void LoadCompanyData()
         {
             companies = Provider.LoadCompaniesData();
 
             if (user.CapTrucThuoc == "Huyen")
             {
-                companies = companies.Where(c => (c.TenHuyen == user.TenHuyen) && (c.LinhVuc == "GiongVatNuoi")).ToList();
+                companies = companies.Where(c => (c.TenHuyen == user.TenHuyen) && (c.LinhVuc == "NguonGenGiong")).ToList();
                 numberOfCompany.Content = companies.Count;
             }
             else
             {
-                companies = companies.Where(c => (c.TenXa == user.TenXa) && (c.LinhVuc == "GiongVatNuoi")).ToList();
+                companies = companies.Where(c => (c.TenXa == user.TenXa) && (c.LinhVuc == "NguonGenGiong")).ToList();
                 numberOfCompany.Content = companies.Count;
             }
             userDataGrid.ItemsSource = companies;
@@ -126,10 +127,10 @@ namespace Test
             checkBoxColumn.CellTemplate.VisualTree = checkBoxFactory;
             userDataGrid.Columns.Add(checkBoxColumn);
 
-            userDataGrid.Columns.Add(new DataGridTextColumn 
-            { 
-                Header = "ID Công Ty", 
-                Binding = new Binding("ID") 
+            userDataGrid.Columns.Add(new DataGridTextColumn
+            {
+                Header = "ID Công Ty",
+                Binding = new Binding("ID")
             });
             userDataGrid.Columns.Add(new DataGridTextColumn
             {
@@ -137,14 +138,14 @@ namespace Test
                 Binding = new Binding("Name")
             });
             userDataGrid.Columns.Add(new DataGridTextColumn
-                {
+            {
                 Header = "SDT công ty",
                 Binding = new Binding("SDT")
             });
             userDataGrid.Columns.Add(new DataGridTextColumn
             {
                 Header = "Nhiệm vụ",
-                Binding = new Binding("GiongVatNuoi")
+                Binding = new Binding("NguonGenGiong")
             });
             userDataGrid.Columns.Add(new DataGridTextColumn
             {
@@ -245,7 +246,7 @@ namespace Test
             CheckBox checkBox = sender as CheckBox;
             int idCongTy = new int();
             int.TryParse(checkBox?.Tag?.ToString(), out idCongTy);
-            
+
             int hasChanged = SqlHelper.ExecuteNonQuery(SqlHelper.connectionString, "UPDATE CongTy SET Banned = 1 WHERE IDCongTy = @idcongty", cmd => cmd.Parameters.AddWithValue("@idcongty", idCongTy));
             if (hasChanged == 0)
             {
@@ -276,7 +277,7 @@ namespace Test
             //    reader.Close();
             //    cmd.ExecuteNonQuery();
             //}
-            
+
             //numberOfCompanyInFieldLabel.Content = "Số lượng công ty có nhiệm vụ Sản xuất con giống: ";
             //var companies = userDataGrid.ItemsSource as List<CongTy>;
             //if (companies != null)
@@ -384,7 +385,7 @@ namespace Test
         }
 
         private void BangHuyen_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        { 
+        {
             if (BangHuyen.SelectedItem is string selectedHuyen)
             {
                 var column = BangXa.Columns[0] as DataGridTextColumn;
@@ -392,7 +393,7 @@ namespace Test
                 {
                     column.Header = $"Các xã thuộc {selectedHuyen}";
                 }
-                var filteredXa = tenXa.Where(x => x.TenHuyenTrucThuoc == selectedHuyen).Select(x => new { x.TenXa }).ToList(); 
+                var filteredXa = tenXa.Where(x => x.TenHuyenTrucThuoc == selectedHuyen).Select(x => new { x.TenXa }).ToList();
                 BangXa.ItemsSource = filteredXa;
             }
         }
@@ -407,6 +408,21 @@ namespace Test
             CapHuyenWindow capHuyenWindow = new CapHuyenWindow(user);
             capHuyenWindow.Show();
             Close();
+        }
+
+        private void thuThapRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void baoTonRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void khaiThacPhatTrienRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
