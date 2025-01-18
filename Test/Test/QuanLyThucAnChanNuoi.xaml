@@ -166,7 +166,7 @@
             <Grid x:Name="CompanyTable"
                 Grid.Row="1" 
                 Grid.Column="1" 
-                Margin="10">
+                Margin="10" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
@@ -243,16 +243,18 @@
             <Grid x:Name="Statistic" 
                   Grid.Row="1" 
                   Grid.Column="1"
-                  Visibility="Collapsed">
+                  Visibility="Collapsed"
+                  >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -308,10 +310,10 @@
                        Margin="10"
                        FontWeight="Bold"
                        FontSize="16"
-                       Grid.ColumnSpan="3"/>
+                       Grid.ColumnSpan="6"/>
 
                 <Label x:Name="numberOfFood" 
-                       Grid.Column="1"
+                       Grid.Column="4"
                        Grid.Row="4"
                        Margin="10"
                        FontWeight="Bold"
@@ -319,9 +321,11 @@
                        Grid.ColumnSpan="3"
                        HorizontalAlignment="Left"/>
 
-                <StackPanel Grid.Column="8"
+                <StackPanel Grid.Column="6"
+                            Grid.Row="0"    
+                            Grid.ColumnSpan="4"
                             Grid.RowSpan="4"
-                            Margin="10,10,-44,29">
+                            >
                     <Label Content="Chọn nhiệm vụ của công ty"
                FontWeight="Bold" FontSize="18"/>
                     <RadioButton x:Name="sanXuatThucAnChanNuoiRadioButton"
