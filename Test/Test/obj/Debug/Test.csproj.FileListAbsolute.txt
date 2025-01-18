@@ -87,6 +87,7 @@ C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyT
 C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\obj\Debug\CapXa.baml
 C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\obj\Debug\ForgotPassword.g.cs
 C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\obj\Debug\ForgotPassword.baml
+<<<<<<< Updated upstream
 C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\obj\Debug\QuanLyGiongVatNuoi.g.cs
 C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\obj\Debug\QuanLyGiongVatNuoi.baml
 C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\obj\Debug\CapHuyen.g.cs
@@ -99,6 +100,11 @@ C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\obj\Debug\C
 C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\obj\Debug\UserInfoConfig.baml
 C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\obj\Debug\ForgotPassword.baml
 C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\obj\Debug\QuanLyGiongVatNuoi.baml
+=======
+D:\vscode\btl_ktpm\Test\Test\bin\Debug\Test.exe.config
+D:\vscode\btl_ktpm\Test\Test\bin\Debug\Test.exe
+D:\vscode\btl_ktpm\Test\Test\bin\Debug\Test.pdb
+>>>>>>> Stashed changes
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\Test.csproj.AssemblyReference.cache
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\MainWindow.g.cs
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\Register.g.cs
@@ -109,6 +115,7 @@ D:\vscode\btl_ktpm\Test\Test\obj\Debug\ChangePassword.g.cs
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\UserInfo.g.cs
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\UserInfoConfig.g.cs
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\ForgotPassword.g.cs
+<<<<<<< Updated upstream
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\QuanLyGiongVatNuoi.g.cs
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\App.g.cs
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\Test_MarkupCompile.cache
@@ -118,6 +125,11 @@ D:\vscode\btl_ktpm\Test\Test\obj\Debug\Test.pdb
 D:\vscode\btl_ktpm\Test\Test\bin\Debug\Test.exe.config
 D:\vscode\btl_ktpm\Test\Test\bin\Debug\Test.exe
 D:\vscode\btl_ktpm\Test\Test\bin\Debug\Test.pdb
+=======
+D:\vscode\btl_ktpm\Test\Test\obj\Debug\App.g.cs
+D:\vscode\btl_ktpm\Test\Test\obj\Debug\Test_MarkupCompile.cache
+D:\vscode\btl_ktpm\Test\Test\obj\Debug\Test_MarkupCompile.lref
+>>>>>>> Stashed changes
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\MainWindow.baml
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\Register.baml
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\Admin.baml
@@ -127,12 +139,20 @@ D:\vscode\btl_ktpm\Test\Test\obj\Debug\ChangePassword.baml
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\UserInfo.baml
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\UserInfoConfig.baml
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\ForgotPassword.baml
+<<<<<<< Updated upstream
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\QuanLyGiongVatNuoi.baml
+=======
+>>>>>>> Stashed changes
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\Test.g.resources
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\Test.Properties.Resources.resources
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\Test.csproj.GenerateResource.cache
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\Test.csproj.CoreCompileInputs.cache
+<<<<<<< Updated upstream
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\Window1.g.cs
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\Window1.baml
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\CongTyWindow.baml
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\CongTyWindow.g.cs
+=======
+D:\vscode\btl_ktpm\Test\Test\obj\Debug\Test.exe
+D:\vscode\btl_ktpm\Test\Test\obj\Debug\Test.pdb
+>>>>>>> Stashed changes
