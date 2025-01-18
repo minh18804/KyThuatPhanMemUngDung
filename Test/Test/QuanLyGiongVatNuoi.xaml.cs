@@ -410,6 +410,26 @@ namespace Test
                 LabelSoLuongConGiong.Content = $"Tổng số lượng con giống loại {GiongVatNuoiTraCuu.SelectedItem.ToString()} đã được sản xuất là: ";
                 numberOfBreed.Content = companies.Where(c => (c.TenLoaiConVat == GiongVatNuoiTraCuu.SelectedItem.ToString()) && (c.LinhVuc == "GiongVatNuoi") && (c.GiongVatNuoi == "SanXuat")).Sum(c => c.SoLuong);
             }
+            else if (muaBanRadioButton.IsChecked == true)
+            {
+                LabelSoLuongConGiong.Content = $"Tổng số lượng con giống loại {GiongVatNuoiTraCuu.SelectedItem.ToString()} đã được mua bán là: ";
+                numberOfBreed.Content = companies.Where(c => (c.TenLoaiConVat == GiongVatNuoiTraCuu.SelectedItem.ToString()) && (c.LinhVuc == "GiongVatNuoi") && (c.GiongVatNuoi == "MuaBan")).Sum(c => c.SoLuong);
+            }
+            else if (khaoNghiemRadioButton.IsChecked == true)
+            {
+                LabelSoLuongConGiong.Content = $"Tổng số lượng con giống loại {GiongVatNuoiTraCuu.SelectedItem.ToString()} đã được khảo nghiệm là: ";
+                numberOfBreed.Content = companies.Where(c => (c.TenLoaiConVat == GiongVatNuoiTraCuu.SelectedItem.ToString()) && (c.LinhVuc == "GiongVatNuoi") && (c.GiongVatNuoi == "KhaoNghiem")).Sum(c => c.SoLuong);
+            }
+            else if (soHuuTrauBoDucLonRadioButton.IsChecked == true)
+            {
+                LabelSoLuongConGiong.Content = $"Tổng số lượng con giống loại {GiongVatNuoiTraCuu.SelectedItem.ToString()} đã được sở hữu là: ";
+                numberOfBreed.Content = companies.Where(c => (c.TenLoaiConVat == GiongVatNuoiTraCuu.SelectedItem.ToString()) && (c.LinhVuc == "GiongVatNuoi") && (c.GiongVatNuoi == "SoHuuTrauBoDuc_Lon")).Sum(c => c.SoLuong);
+            }
+            else
+            {
+                LabelSoLuongConGiong.Content = $"Tổng số lượng con giống loại {GiongVatNuoiTraCuu.SelectedItem.ToString()} đã được sản xuất tinh phôi ấu trùng là: ";
+                numberOfBreed.Content = companies.Where(c => (c.TenLoaiConVat == GiongVatNuoiTraCuu.SelectedItem.ToString()) && (c.LinhVuc == "GiongVatNuoi") && (c.GiongVatNuoi == "SanXuatTinhPhoiAuTrung")).Sum(c => c.SoLuong);
+            }
         }
     }
 }
