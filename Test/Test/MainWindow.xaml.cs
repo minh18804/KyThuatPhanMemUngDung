@@ -38,42 +38,73 @@ namespace Test
             bool? isAdmin = admin.IsChecked;
             bool? isCapXa = capXa.IsChecked;
             bool? isCapHuyen = capHuyen.IsChecked;
+            bool? isCongTy = congTy.IsChecked;
 
             if (isAdmin == true) user.IsAdmin = true;
             else if (isCapXa == true) user.CapTrucThuoc = "Xa";
             else if (isCapHuyen == true) user.CapTrucThuoc = "Huyen";
+           
 
             if (String.IsNullOrEmpty(user.Username) || String.IsNullOrEmpty(user.Password))
             {
                 MessageBox.Show("Không được để trống Username hoặc Password", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            if (Provider.ValidateUser(user))
+
+            
+            if (isCongTy == true)
             {
-                Provider.SetLoginTime(user);
-                user = Provider.LoadUserData(user);
-                if (user.IsAdmin == true)
+                CongTy congTyUser = new CongTy();
+                congTyUser.Username = user.Username;
+                congTyUser.Password = user.Password;
+
+                
+                if (Provider.ValidateCompany(congTyUser))
                 {
-                    AdminWindow adminWindow = new AdminWindow(user);
-                    adminWindow.Show();
+                   
+                    CongTyWindow congTyWindow = new CongTyWindow(congTyUser);
+                    congTyWindow.Show();
                     Close();
                 }
-                else if (user.CapTrucThuoc == "Huyen")
-                {
-                    CapHuyenWindow capHuyenWindow = new CapHuyenWindow(user);
-                    capHuyenWindow.Show();
-                    Close();
-                }  
                 else
                 {
-                    CapXaWindow capXaWindow = new CapXaWindow(user);
-                    capXaWindow.Show();
-                    Close();
+                    MessageBox.Show("Username hoặc password không đúng cho công ty", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Question);
                 }
             }
+            else
+            {
+                
+                if (Provider.ValidateUser(user))
+                {
+                    Provider.SetLoginTime(user);
+                    user = Provider.LoadUserData(user);
 
-            else MessageBox.Show("Username hoặc password không đúng", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Question);
+                    if (user.IsAdmin == true)
+                    {
+                        AdminWindow adminWindow = new AdminWindow(user);
+                        adminWindow.Show();
+                        Close();
+                    }
+                    else if (user.CapTrucThuoc == "Huyen")
+                    {
+                        CapHuyenWindow capHuyenWindow = new CapHuyenWindow(user);
+                        capHuyenWindow.Show();
+                        Close();
+                    }
+                    else
+                    {
+                        CapXaWindow capXaWindow = new CapXaWindow(user);
+                        capXaWindow.Show();
+                        Close();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Username hoặc password không đúng", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Question);
+                }
+            }
         }
+
         /// <summary>
         /// Hàm xử lý sự kiện register: chuyển sang màn hình register
         /// </summary>

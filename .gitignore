@@ -19,5 +19,10 @@
 /Test/.vs/Test/copilot-chat/42c370bc/sessions
 /Test/Test/bin/Debug/Test.exe
 /Test/Test/bin/Debug/Test.pdb
+<<<<<<< HEAD
+/.vs/btl_ktpm/v17
+/.vs
+=======
 /Test/Test/obj/Debug/Admin.g.i.cs
 /Test/Test/obj/Debug/ChangePassword.g.i.cs
+>>>>>>> 65b0d682a0502960ee23a676e839714828bfaa4c
