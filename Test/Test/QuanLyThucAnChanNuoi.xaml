@@ -1,4 +1,4 @@
-﻿<Window x:Class="Test.QuanLyNguonGenGiongWindow"
+﻿<Window x:Class="Test.QuanLyThucAnChanNuoiWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -155,17 +155,18 @@
                     <Button x:Name="statisticButton"
                             Content="Thống kê"
                             Click="statisticButton_Click" Grid.Column="1"/>
-                    
+
                     <Button x:Name="speciesButton"
                             Content="Quản lý động vật cần bảo tồn"
                             Click="speciesButton_Click"/>
+
                 </StackPanel>
             </Popup>
 
             <Grid x:Name="CompanyTable"
                 Grid.Row="1" 
-              Grid.Column="1" 
-              Margin="10">
+                Grid.Column="1" 
+                Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
@@ -199,9 +200,9 @@
                         Width="70"
                         Content="Return" Click="returnToHuyenPage_Click"/>
 
-                <TextBlock Text="Trang quản lý nguồn gen giống" 
+                <TextBlock Text="Trang quản lý thức ăn chăn nuôi" 
                        FontSize="28" 
-                       FontWeight="Bold"
+                       FontWeight="Bold" 
                        Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="2"/>
                 <Label x:Name="NumberOfCongTyActive"
                         Grid.Row="2"
@@ -219,7 +220,7 @@
                     Width="100"
                     Click="search_Click"/>
                 <TextBox x:Name="searchbox"
-                     Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="5,0,95,0"/>
+                     Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="5,0,89,0"/>
                 <DataGrid x:Name="userDataGrid" 
                       IsReadOnly="true" 
                       Margin="5"
@@ -274,18 +275,17 @@
                         Content="loremipsum"
                         Grid.Column="0" 
                         Grid.Row="2"
-                       Margin="10,10,43,10"
+                       Margin="10,10,62,10"
                        FontSize="16"
-                       FontWeight="Bold"
+                       FontWeight="DemiBold"
                         Grid.ColumnSpan="3"/>
                 <Label x:Name="numberOfCompanyInField"
                     Content="loremipsum"
                        Grid.Column="2"
                        Grid.Row="2"
-                       Margin="170,10,10,10"
-                       FontWeight="Bold"
-                       FontSize="16"
-                       Grid.ColumnSpan="3"/>
+                       Margin="110,10,29,10"
+                       FontWeight="DemiBold"
+                       FontSize="16"/>
 
                 <Label Content="Loài vật muốn tra cứu: " 
                        Grid.Column="0"
@@ -300,10 +300,9 @@
                           Margin="10"
                           Grid.ColumnSpan="4"
                           Grid.Row="3"
-                          SelectionChanged="GiongVatNuoiTraCuu_SelectionChanged"/>
+                          SelectionChanged="GiongVatNuoiTraCuu_Selected"/>
 
-                <Label x:Name="LabelSoLuongConGiong" 
-                       Content="loremipsum"
+                <Label x:Name="LabelSanLuong" 
                        Grid.Column="0"
                        Grid.Row="4"
                        Margin="10"
@@ -311,49 +310,51 @@
                        FontSize="16"
                        Grid.ColumnSpan="3"/>
 
-                <Label x:Name="numberOfBreed" 
-                       Content="loremipsum"
+                <Label x:Name="numberOfFood" 
                        Grid.Column="1"
                        Grid.Row="4"
-                       Margin="173,10,0,10"
+                       Margin="10"
                        FontWeight="Bold"
                        FontSize="16"
-                       Grid.ColumnSpan="4"
+                       Grid.ColumnSpan="3"
                        HorizontalAlignment="Left"/>
 
-                <StackPanel Grid.Column="4"
-                            Grid.RowSpan="3"
-                            Margin="25,10,-59,29" Grid.ColumnSpan="5">
+                <StackPanel Grid.Column="8"
+                            Grid.RowSpan="4"
+                            Margin="10,10,-44,29">
                     <Label Content="Chọn nhiệm vụ của công ty"
                FontWeight="Bold" FontSize="18"/>
-                    <RadioButton x:Name="thuThapRadioButton"
-                     Content="Thu thập nguồn gen giống vật nuôi"
-                     Checked="thuThapRadioButton_Checked"
+                    <RadioButton x:Name="sanXuatThucAnChanNuoiRadioButton"
+                     Content="Sản xuất thức ăn chăn nuôi"
+                     Checked="sanXuatThucAnChanNuoiRadioButton_Checked"
                      IsChecked="True"
                      Margin="5" FontSize="14"/>
-                    <RadioButton x:Name="baoTonRadioButton"
-                     Content="Bảo tồn nguồn gen giống vật nuôi"
-                     Checked="baoTonRadioButton_Checked"
+                    <RadioButton x:Name="sanXuatCoGCNRadioButton"
+                     Content="Sản xuất thức ăn chăn nuôi có GCN"
+                     Checked="sanXuatCoGCNRadioButton_Checked"
                      Margin="5" FontSize="14"/>
-                    <RadioButton x:Name="khaiThacPhatTrienRadioButton"
-                     Content="Khai thác, phát triển nguồn gen giống"
-                     Checked="khaiThacPhatTrienRadioButton_Checked"
+                    <RadioButton x:Name="muaBanRadioButton"
+                     Content="Mua bán thức ăn chăn nuôi"
+                     Checked="muaBanRadioButton_Checked"
+                     Margin="5" FontSize="14"/>
+                    <RadioButton x:Name="khaoNghiemRadioButton"
+                     Content="Khảo nghiệm thức ăn chăn nuôi"
+                     Checked="khaoNghiemRadioButton_Checked"
                      Margin="5" FontSize="14"/>
                 </StackPanel>
                 <Button x:Name="returnToMain"
         Content="Quay lại" 
-                        HorizontalAlignment="Center" 
+                        HorizontalAlignment="Left" 
                         VerticalAlignment="Top"
                         Click="returnToMain_Click"
                         FontSize="18"
-                        Grid.Column="3"
+                        Grid.Column="8"
                         FontWeight="Bold"
-                        Grid.ColumnSpan="2"
-                        Grid.Row="5"
+                        Grid.Row="6"
                         BorderBrush="Transparent"
                         Width="100"
                         Height="30"
-                        Foreground="White">
+                        Foreground="White" Margin="94,7,0,0">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="15" >
@@ -369,7 +370,8 @@
             <Grid x:Name="AdministratorManagement"
                 Grid.Row="1" 
                 Grid.Column="1" 
-                Margin="10" Visibility="Collapsed" >
+                Margin="10" 
+                  Visibility="Collapsed">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -410,9 +412,9 @@
                 </DataGrid>
             </Grid>
             <Grid x:Name="EndangerSpecies"
-                  Grid.Row="1" 
-                  Grid.Column="1" 
-                  Margin="10"
+                 Grid.Row="1" 
+                 Grid.Column="1" 
+                 Margin="10"
                   Visibility="Collapsed">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -442,28 +444,28 @@
                 </Grid.RowDefinitions>
 
                 <Button x:Name="returnToHuyenPage_1"
-                        Grid.Column="6" 
-                        Grid.Row="3"
-                        Width="70"
-                        Content="Return" Click="returnToHuyenPage_Click"/>
+                       Grid.Column="6" 
+                       Grid.Row="3"
+                       Width="70"
+                       Content="Return" Click="returnToHuyenPage_Click"/>
 
                 <TextBlock Text="Trang quản lý động vật cần bảo tồn, cấm xuất khẩu" 
-                       FontSize="20" 
-                       FontWeight="Bold"
-                       Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="2"/>
+                      FontSize="20" 
+                      FontWeight="Bold"
+                      Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="2"/>
                 <Button Content="Tìm kiếm"
-                    x:Name="searchSpecies"
-                    Grid.Column="2" Grid.Row="3"
-                    Grid.ColumnSpan="2"
-                    Width="100"
-                    Click="searchSpecies_Click"/>
+                   x:Name="searchSpecies"
+                   Grid.Column="2" Grid.Row="3"
+                   Grid.ColumnSpan="2"
+                   Width="100"
+                   Click="searchSpecies_Click"/>
                 <TextBox x:Name="searchboxSpecies"
-                     Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="5,0,108,0"/>
+                    Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="5,0,108,0"/>
                 <DataGrid x:Name="speciesDataGrid" 
-                      IsReadOnly="true" 
-                      Margin="5"
-                      Grid.Row="4"
-                      AutoGenerateColumns="False" Grid.ColumnSpan="9" Grid.RowSpan="9">
+                     IsReadOnly="true" 
+                     Margin="5"
+                     Grid.Row="4"
+                     AutoGenerateColumns="False" Grid.ColumnSpan="9" Grid.RowSpan="9">
                 </DataGrid>
             </Grid>
 
@@ -473,4 +475,5 @@
                VerticalAlignment="Center"/>
         </Grid>
     </Grid>
+
 </Window>

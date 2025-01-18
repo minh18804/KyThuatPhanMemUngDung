@@ -100,8 +100,6 @@ C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\obj\Debug\C
 C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\obj\Debug\UserInfoConfig.baml
 C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\obj\Debug\ForgotPassword.baml
 C:\Users\User\source\repos\minh18804\KyThuatPhanMemUngDung\Test\Test\obj\Debug\QuanLyGiongVatNuoi.baml
-<<<<<<< HEAD
-=======
 D:\vscode\btl_ktpm\Test\Test\bin\Debug\Test.exe.config
 D:\vscode\btl_ktpm\Test\Test\bin\Debug\Test.exe
 D:\vscode\btl_ktpm\Test\Test\bin\Debug\Test.pdb
@@ -116,21 +114,12 @@ D:\vscode\btl_ktpm\Test\Test\obj\Debug\ChangePassword.g.cs
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\UserInfo.g.cs
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\UserInfoConfig.g.cs
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\ForgotPassword.g.cs
-<<<<<<< Updated upstream
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\QuanLyGiongVatNuoi.g.cs
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\App.g.cs
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\Test_MarkupCompile.cache
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\Test_MarkupCompile.lref
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\Test.exe
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\Test.pdb
-D:\vscode\btl_ktpm\Test\Test\bin\Debug\Test.exe.config
-D:\vscode\btl_ktpm\Test\Test\bin\Debug\Test.exe
-D:\vscode\btl_ktpm\Test\Test\bin\Debug\Test.pdb
-=======
-D:\vscode\btl_ktpm\Test\Test\obj\Debug\App.g.cs
-D:\vscode\btl_ktpm\Test\Test\obj\Debug\Test_MarkupCompile.cache
-D:\vscode\btl_ktpm\Test\Test\obj\Debug\Test_MarkupCompile.lref
->>>>>>> Stashed changes
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\MainWindow.baml
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\Register.baml
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\Admin.baml
@@ -140,27 +129,20 @@ D:\vscode\btl_ktpm\Test\Test\obj\Debug\ChangePassword.baml
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\UserInfo.baml
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\UserInfoConfig.baml
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\ForgotPassword.baml
-<<<<<<< Updated upstream
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\QuanLyGiongVatNuoi.baml
-=======
->>>>>>> Stashed changes
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\Test.g.resources
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\Test.Properties.Resources.resources
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\Test.csproj.GenerateResource.cache
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\Test.csproj.CoreCompileInputs.cache
-<<<<<<< Updated upstream
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\Window1.g.cs
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\Window1.baml
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\CongTyWindow.baml
 D:\vscode\btl_ktpm\Test\Test\obj\Debug\CongTyWindow.g.cs
-=======
-D:\vscode\btl_ktpm\Test\Test\obj\Debug\Test.exe
-D:\vscode\btl_ktpm\Test\Test\obj\Debug\Test.pdb
->>>>>>> Stashed changes
-=======
 C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\obj\Debug\QuanLyNguonGenGiong.g.cs
 C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\obj\Debug\QuanLyNguonGenGiong.baml
 C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\obj\Debug\QuanLyThucAnChanNuoi.g.cs
 C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\obj\Debug\QuanLyThucAnChanNuoi.baml
 C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\obj\Debug\Window1.g.cs
 >>>>>>> 65b0d682a0502960ee23a676e839714828bfaa4c
+C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\obj\Debug\CongTyWindow.baml
+C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\obj\Debug\CongTyWindow.g.cs

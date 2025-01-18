@@ -32,6 +32,7 @@ namespace Test
             public string TenHuyenTrucThuoc { get; set; }
         }
         List<Xa> tenXa;
+        List<LoaiConVat> loaiConVat;
         public QuanLyGiongVatNuoiWindow(CanBoNghiepVu user, Window previousWindow)
         {
             this.user = user;
@@ -48,6 +49,37 @@ namespace Test
             LoadXa();
             AddColumnsToBangHuyen();
             AddColumnsToBangXa();
+            LoadLoaiConVat();
+            ConfigSpeciesDataGrid();
+        }
+        private void LoadLoaiConVat()
+        {
+            SqlHelper.ExecuteReader(SqlHelper.connectionString, "SELECT TenConVat, TrangThaiConVat FROM LoaiConVat", cmd => { }, reader =>
+            {
+                loaiConVat = new List<LoaiConVat>();
+                while (reader.Read())
+                {
+                    loaiConVat.Add(new LoaiConVat
+                    {
+                        TenLoaiConVat = reader["TenConVat"].ToString(),
+                        TrangThai = reader["TrangThaiConVat"].ToString()
+                    });
+                }
+            });
+            speciesDataGrid.ItemsSource = loaiConVat;
+        }
+        private void ConfigSpeciesDataGrid()
+        {
+            speciesDataGrid.Columns.Add(new DataGridTextColumn
+            {
+                Header = "Tên con vật",
+                Binding = new Binding("TenLoaiConVat")
+            });
+            speciesDataGrid.Columns.Add(new DataGridTextColumn
+            {
+                Header = "Trạng thái",
+                Binding = new Binding("TrangThai")
+            });
         }
         private void AddColumnsToBangHuyen() { 
             DataGridTextColumn huyenColumn = new DataGridTextColumn 
@@ -70,7 +102,7 @@ namespace Test
         }
         private void LoadXa()
         {
-            SqlHelper.ExecuteReader(SqlHelper.connectionString, "SELECT x.TenXa, h.TenHuyen FROM Xa x JOIN Huyen h ON x.TrucThuocHuyen = h.IDHuyen ", cmd => { }, reader =>
+            SqlHelper.ExecuteReader(SqlHelper.connectionString, "SELECT x.TenXa, h.TenHuyen FROM Xa x JOIN Huyen h ON x.TrucThuocHuyen = h.IDHuyen WHERE x.IDXa != 0", cmd => { }, reader =>
             {
                 tenXa = new List<Xa>();
                 while (reader.Read())
@@ -85,7 +117,7 @@ namespace Test
         }
         private void LoadHuyen()
         {
-            SqlHelper.ExecuteReader(SqlHelper.connectionString, "SELECT TenHuyen FROM Huyen", cmd => { }, reader =>
+            SqlHelper.ExecuteReader(SqlHelper.connectionString, "SELECT TenHuyen FROM Huyen WHERE IDHuyen != 0", cmd => { }, reader =>
                 {
                     tenHuyen = new List<string>();
                     while (reader.Read())
@@ -95,7 +127,7 @@ namespace Test
                 });
             BangHuyen.ItemsSource = tenHuyen;
         }
-            private void LoadCompanyData()
+        private void LoadCompanyData()
         {
             companies = Provider.LoadCompaniesData();
 
@@ -270,7 +302,7 @@ namespace Test
             var companies = userDataGrid.ItemsSource as List<CongTy>;
             if (companies != null)
             {
-                int companiesCount = companies.Count(c => c.GiongVatNuoi == "SanXuat");
+                int companiesCount = companies.Count(c => ((c.GiongVatNuoi == "SanXuat") && (user.CapTrucThuoc == "Huyen" ? (c.TenHuyen == user.TenHuyen) : (c.TenXa == user.TenXa))));
                 numberOfCompanyInField.Content = companiesCount.ToString();
             }
             else
@@ -285,7 +317,7 @@ namespace Test
             var companies = userDataGrid.ItemsSource as List<CongTy>;
             if (companies != null)
             {
-                int companiesCount = companies.Count(c => c.GiongVatNuoi == "SanXuatTinhPhoiAuTrung");
+                int companiesCount = companies.Count(c => ((c.GiongVatNuoi == "SanXuatTinhPhoiAuTrung") && (user.CapTrucThuoc == "Huyen" ? (c.TenHuyen == user.TenHuyen) : (c.TenXa == user.TenXa))));
                 numberOfCompanyInField.Content = companiesCount.ToString();
             }
             else
@@ -300,7 +332,7 @@ namespace Test
             var companies = userDataGrid.ItemsSource as List<CongTy>;
             if (companies != null)
             {
-                int companiesCount = companies.Count(c => c.GiongVatNuoi == "MuaBan");
+                int companiesCount = companies.Count(c => ((c.GiongVatNuoi == "MuaBan") && (user.CapTrucThuoc == "Huyen" ? (c.TenHuyen == user.TenHuyen) : (c.TenXa == user.TenXa))));
                 numberOfCompanyInField.Content = companiesCount.ToString();
             }
             else
@@ -315,7 +347,7 @@ namespace Test
             var companies = userDataGrid.ItemsSource as List<CongTy>;
             if (companies != null)
             {
-                int companiesCount = companies.Count(c => c.GiongVatNuoi == "KhaoNghiem");
+                int companiesCount = companies.Count(c => ((c.GiongVatNuoi == "KhaoNghiem") && (user.CapTrucThuoc == "Huyen" ? (c.TenHuyen == user.TenHuyen) : (c.TenXa == user.TenXa))));
                 numberOfCompanyInField.Content = companiesCount.ToString();
             }
             else
@@ -329,7 +361,7 @@ namespace Test
             var companies = userDataGrid.ItemsSource as List<CongTy>;
             if (companies != null)
             {
-                int companiesCount = companies.Count(c => c.GiongVatNuoi == "SoHuuTrauBoDuc_Lon");
+                int companiesCount = companies.Count(c => ((c.GiongVatNuoi == "SoHuuTrauBoDuc_Lon") && (user.CapTrucThuoc == "Huyen" ? (c.TenHuyen == user.TenHuyen) : (c.TenXa == user.TenXa))));
                 numberOfCompanyInField.Content = companiesCount.ToString();
             }
             else
@@ -340,6 +372,7 @@ namespace Test
 
         private void statisticButton_Click(object sender, RoutedEventArgs e)
         {
+            EndangerSpecies.Visibility = Visibility.Collapsed;
             CompanyTable.Visibility = Visibility.Collapsed;
             AdministratorManagement.Visibility = Visibility.Collapsed;
             Statistic.Visibility = Visibility.Visible;
@@ -351,27 +384,31 @@ namespace Test
                     GiongVatNuoiTraCuu.Items.Add(reader["TenConVat"].ToString());
                 }
             });
-            numberOfCompanyInFieldLabel.Content = "Số lượng công ty có nhiệm vụ Sản xuất tinh phôi ấu trùng: ";
+            numberOfCompanyInFieldLabel.Content = "Số lượng công ty có nhiệm vụ Sản xuất con giống: ";
             var companies = userDataGrid.ItemsSource as List<CongTy>;
             if (companies != null)
             {
-                int companiesCount = companies.Count(c => c.GiongVatNuoi == "SanXuatTinhPhoiAuTrung");
+                int companiesCount = companies.Count(c => ((c.GiongVatNuoi == "SanXuat") && (user.CapTrucThuoc == "Huyen" ? (c.TenHuyen == user.TenHuyen) : (c.TenXa == user.TenXa))));
                 numberOfCompanyInField.Content = companiesCount.ToString();
             }
             else
             {
                 numberOfCompanyInField.Content = "0";
             }
+            popupInfoMenu.IsOpen = false;
         }
 
         private void returnToMain_Click(object sender, RoutedEventArgs e)
         {
+            EndangerSpecies.Visibility = Visibility.Collapsed;
+            AdministratorManagement.Visibility = Visibility.Collapsed;
             CompanyTable.Visibility = Visibility.Visible;
             Statistic.Visibility = Visibility.Collapsed;
         }
 
         private void administratorManageButton_Click(object sender, RoutedEventArgs e)
         {
+            EndangerSpecies.Visibility = Visibility.Collapsed;
             CompanyTable.Visibility = Visibility.Collapsed;
             Statistic.Visibility = Visibility.Collapsed;
             AdministratorManagement.Visibility = Visibility.Visible;
@@ -408,28 +445,54 @@ namespace Test
             if (sanXuatConGiongRadioButton.IsChecked == true)
             {
                 LabelSoLuongConGiong.Content = $"Tổng số lượng con giống loại {GiongVatNuoiTraCuu.SelectedItem.ToString()} đã được sản xuất là: ";
-                numberOfBreed.Content = companies.Where(c => (c.TenLoaiConVat == GiongVatNuoiTraCuu.SelectedItem.ToString()) && (c.LinhVuc == "GiongVatNuoi") && (c.GiongVatNuoi == "SanXuat")).Sum(c => c.SoLuong);
+                numberOfBreed.Content = companies.Where(c => (c.TenLoaiConVat == GiongVatNuoiTraCuu.SelectedItem.ToString()) && (c.LinhVuc == "GiongVatNuoi") && (c.GiongVatNuoi == "SanXuat") && (user.CapTrucThuoc == "Huyen" ? (c.TenHuyen == user.TenHuyen) : (c.TenXa == user.TenXa))).Sum(c => c.SoLuong);
             }
             else if (muaBanRadioButton.IsChecked == true)
             {
                 LabelSoLuongConGiong.Content = $"Tổng số lượng con giống loại {GiongVatNuoiTraCuu.SelectedItem.ToString()} đã được mua bán là: ";
-                numberOfBreed.Content = companies.Where(c => (c.TenLoaiConVat == GiongVatNuoiTraCuu.SelectedItem.ToString()) && (c.LinhVuc == "GiongVatNuoi") && (c.GiongVatNuoi == "MuaBan")).Sum(c => c.SoLuong);
+                numberOfBreed.Content = companies.Where(c => (c.TenLoaiConVat == GiongVatNuoiTraCuu.SelectedItem.ToString()) && (c.LinhVuc == "GiongVatNuoi") && (c.GiongVatNuoi == "MuaBan") && (user.CapTrucThuoc == "Huyen" ? (c.TenHuyen == user.TenHuyen) : (c.TenXa == user.TenXa))).Sum(c => c.SoLuong);
             }
             else if (khaoNghiemRadioButton.IsChecked == true)
             {
                 LabelSoLuongConGiong.Content = $"Tổng số lượng con giống loại {GiongVatNuoiTraCuu.SelectedItem.ToString()} đã được khảo nghiệm là: ";
-                numberOfBreed.Content = companies.Where(c => (c.TenLoaiConVat == GiongVatNuoiTraCuu.SelectedItem.ToString()) && (c.LinhVuc == "GiongVatNuoi") && (c.GiongVatNuoi == "KhaoNghiem")).Sum(c => c.SoLuong);
+                numberOfBreed.Content = companies.Where(c => (c.TenLoaiConVat == GiongVatNuoiTraCuu.SelectedItem.ToString()) && (c.LinhVuc == "GiongVatNuoi") && (c.GiongVatNuoi == "KhaoNghiem") && (user.CapTrucThuoc == "Huyen" ? (c.TenHuyen == user.TenHuyen) : (c.TenXa == user.TenXa))).Sum(c => c.SoLuong);
             }
             else if (soHuuTrauBoDucLonRadioButton.IsChecked == true)
             {
                 LabelSoLuongConGiong.Content = $"Tổng số lượng con giống loại {GiongVatNuoiTraCuu.SelectedItem.ToString()} đã được sở hữu là: ";
-                numberOfBreed.Content = companies.Where(c => (c.TenLoaiConVat == GiongVatNuoiTraCuu.SelectedItem.ToString()) && (c.LinhVuc == "GiongVatNuoi") && (c.GiongVatNuoi == "SoHuuTrauBoDuc_Lon")).Sum(c => c.SoLuong);
+                numberOfBreed.Content = companies.Where(c => (c.TenLoaiConVat == GiongVatNuoiTraCuu.SelectedItem.ToString()) && (c.LinhVuc == "GiongVatNuoi") && (c.GiongVatNuoi == "SoHuuTrauBoDuc_Lon") && (user.CapTrucThuoc == "Huyen" ? (c.TenHuyen == user.TenHuyen) : (c.TenXa == user.TenXa))).Sum(c => c.SoLuong);
             }
             else
             {
                 LabelSoLuongConGiong.Content = $"Tổng số lượng con giống loại {GiongVatNuoiTraCuu.SelectedItem.ToString()} đã được sản xuất tinh phôi ấu trùng là: ";
-                numberOfBreed.Content = companies.Where(c => (c.TenLoaiConVat == GiongVatNuoiTraCuu.SelectedItem.ToString()) && (c.LinhVuc == "GiongVatNuoi") && (c.GiongVatNuoi == "SanXuatTinhPhoiAuTrung")).Sum(c => c.SoLuong);
+                numberOfBreed.Content = companies.Where(c => (c.TenLoaiConVat == GiongVatNuoiTraCuu.SelectedItem.ToString()) && (c.LinhVuc == "GiongVatNuoi") && (c.GiongVatNuoi == "SanXuatTinhPhoiAuTrung") && (user.CapTrucThuoc == "Huyen" ? (c.TenHuyen == user.TenHuyen) : (c.TenXa == user.TenXa))).Sum(c => c.SoLuong);
             }
+        }
+        private List<LoaiConVat> SearchSpecies(string searchText)
+        {
+            return loaiConVat.Where(l => (l.TenLoaiConVat?.ToLower().Contains(searchText) ?? false)).ToList();
+        }
+
+        private void searchSpecies_Click(object sender, RoutedEventArgs e)
+        {
+            string searchText = searchbox.Text.ToLower();
+            if (string.IsNullOrEmpty(searchText))
+            {
+                speciesDataGrid.ItemsSource = loaiConVat;
+            }
+            else
+            {
+                var filteredSpecies = SearchUsers(searchText);
+                speciesDataGrid.ItemsSource = loaiConVat;
+            }
+        }
+
+        private void speciesButton_Click(object sender, RoutedEventArgs e)
+        {
+            CompanyTable.Visibility = Visibility.Collapsed;
+            EndangerSpecies.Visibility = Visibility.Visible;
+            Statistic.Visibility = Visibility.Collapsed;
+            AdministratorManagement.Visibility = Visibility.Collapsed;
         }
     }
 }

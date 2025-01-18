@@ -4,21 +4,17 @@
 winexe
 C#
 .cs
-D:\vscode\btl_ktpm\Test\Test\obj\Debug\
+C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\obj\Debug\
 Test
 none
 false
 DEBUG;TRACE
-D:\vscode\btl_ktpm\Test\Test\App.xaml
-<<<<<<< Updated upstream
-111515005144
-=======
-9-1252153220
->>>>>>> Stashed changes
+C:\Users\levie\OneDrive - Hanoi University of Science and Technology\Desktop\KyThuatPhanMem\Test\Test\App.xaml
+12-1444294308
 
-18-432245712
+19129060288
 13-1310406943
-MainWindow.xaml;Register.xaml;Admin.xaml;CapHuyen.xaml;CapXa.xaml;ChangePassword.xaml;UserInfo.xaml;UserInfoConfig.xaml;ForgotPassword.xaml;QuanLyGiongVatNuoi.xaml;CongTyWindow.xaml;
+CongTyWindow.xaml;MainWindow.xaml;Register.xaml;Admin.xaml;CapHuyen.xaml;CapXa.xaml;ChangePassword.xaml;UserInfo.xaml;ForgotPassword.xaml;QuanLyGiongVatNuoi.xaml;QuanLyNguonGenGiong.xaml;QuanLyThucAnChanNuoi.xaml;
 
 False
 

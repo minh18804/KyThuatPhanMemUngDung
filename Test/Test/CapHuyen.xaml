@@ -13,7 +13,7 @@
     </Window.Resources>
     <Grid>
         <Grid.Background>
-        <ImageBrush ImageSource="images/background-main.jpg"/>
+            <ImageBrush ImageSource="images/background-main.jpg"/>
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -144,12 +144,19 @@
             <StackPanel Background="LightGray"
                 Width="200" 
                 HorizontalAlignment="Left">
+                <Button x:Name="QuanLyHanhChinh"
+                        Content="Quản lý hành chính"
+                        Click="QuanLyHanhChinh_Click"/>
+                <Button x:Name="ThongKe"
+                        Content="Thống kê"
+                        Click="ThongKe_Click"/>
             </StackPanel>
         </Popup>
 
-        <Grid Grid.Row="1" 
-      Grid.Column="1" 
-      Margin="10">
+        <Grid x:Name="Main"
+            Grid.Row="1" 
+            Grid.Column="1" 
+            Margin="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -250,11 +257,11 @@
                     Content="Quản lý thức ăn chăn nuôi"
                     Click="quanLyThucAnChanNuoi_Click">
                 <Button.Template>
-                <ControlTemplate TargetType="Button">
+                    <ControlTemplate TargetType="Button">
                         <Border Background="#B3B3B3B3" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="15">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
-                </ControlTemplate>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
                 </Button.Template>
                 <Button.RenderTransform>
                     <TranslateTransform Y="500" />
@@ -314,6 +321,166 @@
                 </TextBox.Triggers>
             </TextBox>
 
+        </Grid>
+        <Grid x:Name="QuanLyHanhChinhGrid"
+              Grid.Row="1" 
+            Grid.Column="1" 
+            Margin="10"
+              Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Button x:Name="return_1"
+                       Content="Quay lại" 
+                   Click="return_1_Click" 
+                   Grid.Column="6"/>
+            <TextBlock Text="Quản lý hành chính" 
+                      FontSize="28" 
+                      FontWeight="Bold" 
+                      Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4"/>
+            <DataGrid x:Name="BangHuyen" 
+                         Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="12"
+                         MouseDoubleClick="BangHuyen_MouseDoubleClick"
+                         AutoGenerateColumns="False">
+            </DataGrid>
+            <DataGrid x:Name="BangXa" 
+                         Grid.Column="4" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="12"
+                         AutoGenerateColumns="False">
+            </DataGrid>
+        </Grid>
+        <Grid x:Name="ThongKeGrid"
+              Grid.Row="1" 
+            Grid.Column="1" 
+            Margin="10"
+              Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+
+            </Grid.RowDefinitions>
+            <Label Content="Thống kê"
+                      Grid.Column="0"
+                      FontWeight="Bold"
+                      FontSize="28"
+                      Grid.ColumnSpan="3"
+                      Grid.RowSpan="2"/>
+            <Label x:Name="numberOfCompanyInFieldLabel"
+                       Content="loremipsum"
+                       Grid.Column="0" 
+                       Grid.Row="3"
+                      Margin="10,10,62,10"
+                      FontSize="16"
+                      FontWeight="Bold"
+                       Grid.ColumnSpan="3"/>
+            <Label x:Name="numberOfCompanyInField"
+                   Content="loremipsum"
+                      Grid.Column="8"
+                      Grid.Row="3"
+                      Margin="10,10,205,10"
+                      FontWeight="Bold"
+                      FontSize="16"/>
+
+            <Label Content="Loài vật muốn tra cứu: " 
+                      Grid.Column="0"
+                      Grid.Row="4"
+                      Margin="10"
+                      FontWeight="Bold"
+                      FontSize="16"
+                      Grid.ColumnSpan="3"/>
+
+            <ComboBox x:Name="TraCuuLoaiConVat"
+                         Margin="222,10,308,10"
+                         Grid.ColumnSpan="9"
+                         Grid.Row="4"
+                         SelectionChanged="TraCuuLoaiConVat_SelectionChanged"/>
+
+            <Label x:Name="LabelSoLuongConGiong" 
+                   Content="Lorem ipsum"
+                      Grid.Column="0"
+                      Grid.Row="5"
+                      Margin="10"
+                      FontWeight="Bold"
+                      FontSize="16"
+                      Grid.ColumnSpan="3"/>
+
+            <Label x:Name="numberOfBreed" 
+                     Content="Lorem ipsum"
+                      Grid.Column="8"
+                      Grid.Row="5"
+                      Margin="10"
+                      FontWeight="Bold"
+                      FontSize="16"
+                      Grid.ColumnSpan="3"
+                      HorizontalAlignment="Left"/>
+
+            <StackPanel Grid.Column="8"
+                           Grid.RowSpan="3"
+                           Margin="10,10,-24,24">
+                <Label Content="Chọn lĩnh vực của công ty cần tra cứu"
+              FontWeight="Bold" FontSize="12"/>
+                <ComboBox x:Name="LinhVucTraCuuComboBox"
+                          SelectionChanged="LinhVucTraCuuComboBox_SelectionChanged"/>
+                <Label Content="Chọn nhiệm vụ của công ty cần tra cứu"
+              FontWeight="Bold" FontSize="12"/>
+                <ComboBox x:Name="NhiemVuTraCuuComboBox"
+                          SelectionChanged="NhiemVuTraCuuComboBox_SelectionChanged"/>
+            </StackPanel>
+            <Button x:Name="returnToMain"
+       Content="Quay lại" 
+                       HorizontalAlignment="Left" 
+                       VerticalAlignment="Top"
+                       Click="returnToMain_Click"
+                       FontSize="18"
+                       Grid.Column="8"
+                       FontWeight="Bold"
+                       Grid.Row="7"
+                       BorderBrush="Transparent"
+                       Width="100"
+                       Height="30"
+                       Foreground="White" Margin="94,7,0,0">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="15" >
+                            <Border.Background>
+                                <SolidColorBrush Color="Transparent" Opacity="0.8"/>
+                            </Border.Background>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
         </Grid>
         <Label Grid.Column="1" 
                x:Name="Greeting"

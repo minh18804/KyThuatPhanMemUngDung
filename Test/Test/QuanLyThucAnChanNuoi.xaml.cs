@@ -11,27 +11,26 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Test
 {
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class QuanLyNguonGenGiongWindow : Window
+    public partial class QuanLyThucAnChanNuoiWindow : Window
     {
         CanBoNghiepVu user;
         Window previousWindow;
         List<CongTy> companies;
         List<string> tenHuyen;
-        List<LoaiConVat> loaiConVat;
         struct Xa
         {
             public string TenXa { get; set; }
             public string TenHuyenTrucThuoc { get; set; }
         }
         List<Xa> tenXa;
-        public QuanLyNguonGenGiongWindow(CanBoNghiepVu user, Window previousWindow)
+        List<LoaiConVat> loaiConVat;
+        public QuanLyThucAnChanNuoiWindow(CanBoNghiepVu user, Window previousWindow)
         {
             this.user = user;
             this.previousWindow = previousWindow;
@@ -42,12 +41,12 @@ namespace Test
                 NumberOfCongTyActive.Content = $"Số công ty đang hoạt động trên xã {user.TenXa}: ";
             else
                 NumberOfCongTyActive.Content = $"Số công ty đang hoạt động trên {user.TenHuyen}: ";
-            LoadLoaiConVat();
             LoadCompanyData();
             LoadHuyen();
             LoadXa();
             AddColumnsToBangHuyen();
             AddColumnsToBangXa();
+            LoadLoaiConVat();
             ConfigSpeciesDataGrid();
         }
         private void LoadLoaiConVat()
@@ -71,14 +70,12 @@ namespace Test
             speciesDataGrid.Columns.Add(new DataGridTextColumn
             {
                 Header = "Tên con vật",
-                Binding = new Binding("TenLoaiConVat"),
-                Width = new DataGridLength(2, DataGridLengthUnitType.Star)
+                Binding = new Binding("TenLoaiConVat")
             });
             speciesDataGrid.Columns.Add(new DataGridTextColumn
             {
                 Header = "Trạng thái",
-                Binding = new Binding("TrangThai"),
-                Width = new DataGridLength(2, DataGridLengthUnitType.Star)
+                Binding = new Binding("TrangThai")
             });
         }
         private void AddColumnsToBangHuyen()
@@ -103,7 +100,7 @@ namespace Test
         }
         private void LoadXa()
         {
-            SqlHelper.ExecuteReader(SqlHelper.connectionString, "SELECT x.TenXa, h.TenHuyen FROM Xa x JOIN Huyen h ON x.TrucThuocHuyen = h.IDHuyen ", cmd => { }, reader =>
+            SqlHelper.ExecuteReader(SqlHelper.connectionString, "SELECT x.TenXa, h.TenHuyen FROM Xa x JOIN Huyen h ON x.TrucThuocHuyen = h.IDHuyen WHERE x.IDXa != 0", cmd => { }, reader =>
             {
                 tenXa = new List<Xa>();
                 while (reader.Read())
@@ -119,7 +116,7 @@ namespace Test
         }
         private void LoadHuyen()
         {
-            SqlHelper.ExecuteReader(SqlHelper.connectionString, "SELECT TenHuyen FROM Huyen", cmd => { }, reader =>
+            SqlHelper.ExecuteReader(SqlHelper.connectionString, "SELECT TenHuyen FROM Huyen WHERE IDHuyen != 0", cmd => { }, reader =>
             {
                 tenHuyen = new List<string>();
                 while (reader.Read())
@@ -135,12 +132,12 @@ namespace Test
 
             if (user.CapTrucThuoc == "Huyen")
             {
-                companies = companies.Where(c => (c.TenHuyen == user.TenHuyen) && (c.LinhVuc == "NguonGenGiong")).ToList();
+                companies = companies.Where(c => (c.TenHuyen == user.TenHuyen) && (c.LinhVuc == "GiongVatNuoi")).ToList();
                 numberOfCompany.Content = companies.Count;
             }
             else
             {
-                companies = companies.Where(c => (c.TenXa == user.TenXa) && (c.LinhVuc == "NguonGenGiong")).ToList();
+                companies = companies.Where(c => (c.TenXa == user.TenXa) && (c.LinhVuc == "GiongVatNuoi")).ToList();
                 numberOfCompany.Content = companies.Count;
             }
             userDataGrid.ItemsSource = companies;
@@ -179,7 +176,7 @@ namespace Test
             userDataGrid.Columns.Add(new DataGridTextColumn
             {
                 Header = "Nhiệm vụ",
-                Binding = new Binding("NguonGenGiong")
+                Binding = new Binding("GiongVatNuoi")
             });
             userDataGrid.Columns.Add(new DataGridTextColumn
             {
@@ -303,6 +300,7 @@ namespace Test
             CompanyTable.Visibility = Visibility.Collapsed;
             AdministratorManagement.Visibility = Visibility.Collapsed;
             Statistic.Visibility = Visibility.Visible;
+            popupInfoMenu.IsOpen = false;
             SqlHelper.ExecuteReader(SqlHelper.connectionString, "SELECT TenConVat FROM LoaiConVat", cmd => { }, reader =>
             {
                 while (reader.Read())
@@ -310,11 +308,11 @@ namespace Test
                     GiongVatNuoiTraCuu.Items.Add(reader["TenConVat"].ToString());
                 }
             });
-            numberOfCompanyInFieldLabel.Content = "Số lượng công ty có nhiệm vụ Thu thập nguồn gen giống: ";
+            numberOfCompanyInFieldLabel.Content = "Số lượng công ty có nhiệm vụ Sản xuất con giống: ";
             var companies = userDataGrid.ItemsSource as List<CongTy>;
             if (companies != null)
             {
-                int companiesCount = companies.Count(c => ((c.NguonGenGiong == "ThuThap") && (user.CapTrucThuoc == "Huyen" ? (c.TenHuyen == user.TenHuyen) : (c.TenXa == user.TenXa))));
+                int companiesCount = companies.Count(c => ((c.GiongVatNuoi == "SanXuat") && (user.CapTrucThuoc == "Huyen" ? (c.TenHuyen == user.TenHuyen) : (c.TenXa == user.TenXa))));
                 numberOfCompanyInField.Content = companiesCount.ToString();
             }
             else
@@ -364,70 +362,29 @@ namespace Test
             Close();
         }
 
-        private void thuThapRadioButton_Checked(object sender, RoutedEventArgs e)
+        private void GiongVatNuoiTraCuu_Selected(object sender, RoutedEventArgs e)
         {
-            numberOfCompanyInFieldLabel.Content = "Số lượng công ty có nhiệm vụ Thu thập nguồn gen giống: ";
-            var companies = userDataGrid.ItemsSource as List<CongTy>;
-            if (companies != null)
+            if (sanXuatThucAnChanNuoiRadioButton.IsChecked == true)
             {
-                int companiesCount = companies.Count(c => ((c.NguonGenGiong == "ThuThap") && (user.CapTrucThuoc == "Huyen" ? (c.TenHuyen == user.TenHuyen) : (c.TenXa == user.TenXa))));
-                numberOfCompanyInField.Content = companiesCount.ToString();
+                LabelSanLuong.Content = $"Tổng số lượng thực ăn chăn nuôi dành cho loài vật {GiongVatNuoiTraCuu.SelectedItem.ToString()} đã được sản xuất là: ";
+                numberOfFood.Content = companies.Where(c => (c.TenLoaiConVat == GiongVatNuoiTraCuu.SelectedItem.ToString()) && (c.LinhVuc == "ThucAnChanNuoi") && (c.GiongVatNuoi == "SanXuat") && (user.CapTrucThuoc == "Huyen" ? (c.TenHuyen == user.TenHuyen) : (c.TenXa == user.TenXa))).Sum(c => c.SoLuong);
+            }
+            else if (sanXuatCoGCNRadioButton.IsChecked == true)
+            {
+                LabelSanLuong.Content = $"Tổng số lượng thực ăn chăn nuôi dành cho loài vật {GiongVatNuoiTraCuu.SelectedItem.ToString()} đã được sản xuất và có GCN là: ";
+                numberOfFood.Content = companies.Where(c => (c.TenLoaiConVat == GiongVatNuoiTraCuu.SelectedItem.ToString()) && (c.LinhVuc == "ThucAnChanNuoi") && (c.GiongVatNuoi == "SanXuat_CoGiayChungNhan") && (user.CapTrucThuoc == "Huyen" ? (c.TenHuyen == user.TenHuyen) : (c.TenXa == user.TenXa))).Sum(c => c.SoLuong);
+            }
+            else if (muaBanRadioButton.IsChecked == true)
+            {
+                LabelSanLuong.Content = $"Tổng số lượng thực ăn chăn nuôi dành cho loài vật {GiongVatNuoiTraCuu.SelectedItem.ToString()} đã mua bán là: ";
+                numberOfFood.Content = companies.Where(c => (c.TenLoaiConVat == GiongVatNuoiTraCuu.SelectedItem.ToString()) && (c.LinhVuc == "ThucAnChanNuoi") && (c.GiongVatNuoi == "MuaBan") && (user.CapTrucThuoc == "Huyen" ? (c.TenHuyen == user.TenHuyen) : (c.TenXa == user.TenXa))).Sum(c => c.SoLuong);
             }
             else
             {
-                numberOfCompanyInField.Content = "0";
+                LabelSanLuong.Content = $"Tổng số lượng thực ăn chăn nuôi dành cho loài vật {GiongVatNuoiTraCuu.SelectedItem.ToString()} đã được khảo nghiệm là: ";
+                numberOfFood.Content = companies.Where(c => (c.TenLoaiConVat == GiongVatNuoiTraCuu.SelectedItem.ToString()) && (c.LinhVuc == "ThucAnChanNuoi") && (c.GiongVatNuoi == "KhaoNghiem") && (user.CapTrucThuoc == "Huyen" ? (c.TenHuyen == user.TenHuyen) : (c.TenXa == user.TenXa))).Sum(c => c.SoLuong);
             }
-        }
 
-        private void baoTonRadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-            numberOfCompanyInFieldLabel.Content = "Số lượng công ty có nhiệm vụ Bảo tồn nguồn gen giống: ";
-            var companies = userDataGrid.ItemsSource as List<CongTy>;
-            if (companies != null)
-            {
-                int companiesCount = companies.Count(c => ((c.NguonGenGiong == "BaoTon") && (user.CapTrucThuoc == "Huyen" ? (c.TenHuyen == user.TenHuyen) : (c.TenXa == user.TenXa))));
-                numberOfCompanyInField.Content = companiesCount.ToString();
-            }
-            else
-            {
-                numberOfCompanyInField.Content = "0";
-            }
-        }
-
-        private void khaiThacPhatTrienRadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-            numberOfCompanyInFieldLabel.Content = "Số lượng công ty có nhiệm vụ Khai thác, phát triển nguồn gen giống: ";
-            var companies = userDataGrid.ItemsSource as List<CongTy>;
-            if (companies != null)
-            {
-                int companiesCount = companies.Count(c => ((c.NguonGenGiong == "KhaiThac_PhatTrien") && (user.CapTrucThuoc == "Huyen" ? (c.TenHuyen == user.TenHuyen) : (c.TenXa == user.TenXa))));
-                numberOfCompanyInField.Content = companiesCount.ToString();
-            }
-            else
-            {
-                numberOfCompanyInField.Content = "0";
-            }
-        }
-
-        private void GiongVatNuoiTraCuu_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            {
-                if (thuThapRadioButton.IsChecked == true)
-                {
-                    LabelSoLuongConGiong.Content = $"Tổng số lượng con giống loại {GiongVatNuoiTraCuu.SelectedItem.ToString()} đã được thu thập là: ";
-                    numberOfBreed.Content = companies.Where(c => (c.TenLoaiConVat == GiongVatNuoiTraCuu.SelectedItem.ToString()) && (c.LinhVuc == "NguonGenGiong") && (c.NguonGenGiong == "ThuThap") && (user.CapTrucThuoc == "Huyen" ? (c.TenHuyen == user.TenHuyen) : (c.TenXa == user.TenXa))).Sum(c => c.SoLuong);
-                }
-                else if (baoTonRadioButton.IsChecked == true)
-                {
-                    LabelSoLuongConGiong.Content = $"Tổng số lượng con giống loại {GiongVatNuoiTraCuu.SelectedItem.ToString()} đã được bảo tồn là: ";
-                    numberOfBreed.Content = companies.Where(c => (c.TenLoaiConVat == GiongVatNuoiTraCuu.SelectedItem.ToString()) && (c.LinhVuc == "NguonGenGiong") && (c.NguonGenGiong == "BaoTon") && (user.CapTrucThuoc == "Huyen" ? (c.TenHuyen == user.TenHuyen) : (c.TenXa == user.TenXa))).Sum(c => c.SoLuong);
-                }
-                else
-                {
-                    LabelSoLuongConGiong.Content = $"Tổng số lượng con giống loại {GiongVatNuoiTraCuu.SelectedItem.ToString()} đã được khai thác, phát triển là: ";
-                    numberOfBreed.Content = companies.Where(c => (c.TenLoaiConVat == GiongVatNuoiTraCuu.SelectedItem.ToString()) && (c.LinhVuc == "NguonGenGiong") && (c.NguonGenGiong == "KhaiThac_PhatTrien") && (user.CapTrucThuoc == "Huyen" ? (c.TenHuyen == user.TenHuyen) : (c.TenXa == user.TenXa))).Sum(c => c.SoLuong);
-                }
-            }
         }
         private List<LoaiConVat> SearchSpecies(string searchText)
         {
@@ -454,6 +411,66 @@ namespace Test
             EndangerSpecies.Visibility = Visibility.Visible;
             Statistic.Visibility = Visibility.Collapsed;
             AdministratorManagement.Visibility = Visibility.Collapsed;
+        }
+
+        private void sanXuatThucAnChanNuoiRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            numberOfCompanyInFieldLabel.Content = "Số lượng công ty có nhiệm vụ Sản xuất thức ăn chăn nuôi: ";
+            var companies = userDataGrid.ItemsSource as List<CongTy>;
+            if (companies != null)
+            {
+                int companiesCount = companies.Count(c => ((c.ThucAnChanNuoi == "SanXuat") && (user.CapTrucThuoc == "Huyen" ? (c.TenHuyen == user.TenHuyen) : (c.TenXa == user.TenXa))));
+                numberOfCompanyInField.Content = companiesCount.ToString();
+            }
+            else
+            {
+                numberOfCompanyInField.Content = "0";
+            }
+        }
+
+        private void sanXuatCoGCNRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            numberOfCompanyInFieldLabel.Content = "Số lượng công ty có nhiệm vụ Sản xuất thức ăn chăn nuôi có GCN: ";
+            var companies = userDataGrid.ItemsSource as List<CongTy>;
+            if (companies != null)
+            {
+                int companiesCount = companies.Count(c => ((c.ThucAnChanNuoi == "SanXuat_CoGiayChungNhan") && (user.CapTrucThuoc == "Huyen" ? (c.TenHuyen == user.TenHuyen) : (c.TenXa == user.TenXa))));
+                numberOfCompanyInField.Content = companiesCount.ToString();
+            }
+            else
+            {
+                numberOfCompanyInField.Content = "0";
+            }
+        }
+
+        private void muaBanRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            numberOfCompanyInFieldLabel.Content = "Số lượng công ty có nhiệm vụ Mua bán thức ăn chăn nuôi: ";
+            var companies = userDataGrid.ItemsSource as List<CongTy>;
+            if (companies != null)
+            {
+                int companiesCount = companies.Count(c => ((c.ThucAnChanNuoi == "MuaBan") && (user.CapTrucThuoc == "Huyen" ? (c.TenHuyen == user.TenHuyen) : (c.TenXa == user.TenXa))));
+                numberOfCompanyInField.Content = companiesCount.ToString();
+            }
+            else
+            {
+                numberOfCompanyInField.Content = "0";
+            }
+        }
+
+        private void khaoNghiemRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            numberOfCompanyInFieldLabel.Content = "Số lượng công ty có nhiệm vụ Khảo nghiệm thức ăn chăn nuôi: ";
+            var companies = userDataGrid.ItemsSource as List<CongTy>;
+            if (companies != null)
+            {
+                int companiesCount = companies.Count(c => ((c.ThucAnChanNuoi == "KhaoNghiem") && (user.CapTrucThuoc == "Huyen" ? (c.TenHuyen == user.TenHuyen) : (c.TenXa == user.TenXa))));
+                numberOfCompanyInField.Content = companiesCount.ToString();
+            }
+            else
+            {
+                numberOfCompanyInField.Content = "0";
+            }
         }
     }
 }

@@ -155,14 +155,17 @@
                     <Button x:Name="statisticButton"
                             Content="Thống kê"
                             Click="statisticButton_Click" Grid.Column="1"/>
+
+                    <Button x:Name="speciesButton"
+                            Content="Quản lý động vật cần bảo tồn"
+                            Click="speciesButton_Click"/>
                 </StackPanel>
             </Popup>
 
             <Grid x:Name="CompanyTable"
                 Grid.Row="1" 
-              Grid.Column="1" 
-              Margin="10"
-                  Visibility="Collapsed">
+                Grid.Column="1" 
+                Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
@@ -216,7 +219,7 @@
                     Width="100"
                     Click="search_Click"/>
                 <TextBox x:Name="searchbox"
-                     Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"/>
+                     Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="5,0,89,0"/>
                 <DataGrid x:Name="userDataGrid" 
                       IsReadOnly="true" 
                       Margin="5"
@@ -239,7 +242,7 @@
             <Grid x:Name="Statistic" 
                   Grid.Row="1" 
                   Grid.Column="1"
-                  Visibility="Visible">
+                  Visibility="Collapsed">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="auto"/>
@@ -370,7 +373,8 @@
             <Grid x:Name="AdministratorManagement"
                 Grid.Row="1" 
                 Grid.Column="1" 
-                Margin="10" Visibility="Collapsed" >
+                Margin="10" 
+                  Visibility="Collapsed">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -388,14 +392,11 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
-
-
                 </Grid.RowDefinitions>
-
                 <Button x:Name="return_1"
                         Content="Quay lại" 
-                    Click="return_1_Click" 
-                    Grid.Column="1" Margin="524,29,0,0"/>
+                    Click="returnToMain_Click" 
+                    Grid.Column="6"/>
                 <TextBlock Text="Quản lý hành chính" 
                        FontSize="28" 
                        FontWeight="Bold" 
@@ -410,7 +411,63 @@
                           AutoGenerateColumns="False">
                 </DataGrid>
             </Grid>
+            <Grid x:Name="EndangerSpecies"
+                 Grid.Row="1" 
+                 Grid.Column="1" 
+                 Margin="10"
+                  Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
+                <Button x:Name="returnToCompanyTable"
+                       Grid.Column="6" 
+                       Grid.Row="3"
+                       Width="70"
+                       Content="Return" Click="returnToMain_Click"/>
+
+                <TextBlock Text="Trang quản lý động vật cần bảo tồn, cấm xuất khẩu" 
+                      FontSize="20" 
+                      FontWeight="Bold"
+                      Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="2"/>
+                <Button Content="Tìm kiếm"
+                   x:Name="searchSpecies"
+                   Grid.Column="2" Grid.Row="3"
+                   Grid.ColumnSpan="2"
+                   Width="100"
+                   Click="searchSpecies_Click"/>
+                <TextBox x:Name="searchboxSpecies"
+                    Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="5,0,108,0"/>
+                <DataGrid x:Name="speciesDataGrid" 
+                     IsReadOnly="true" 
+                     Margin="5"
+                     Grid.Row="4"
+                     AutoGenerateColumns="False" Grid.ColumnSpan="9" Grid.RowSpan="9">
+                </DataGrid>
+            </Grid>
 
             <Label Grid.Column="1" 
                x:Name="Greeting"

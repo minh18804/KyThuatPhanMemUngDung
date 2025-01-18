@@ -55,6 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CongTyWindow.xaml.cs">
+      <DependentUpon>CongTyWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tools\Provider.cs" />
     <Compile Include="Tools\SqlTools.cs" />
     <Compile Include="Tools\User.cs" />
@@ -85,6 +88,13 @@
     <Compile Include="QuanLyNguonGenGiong.xaml.cs">
       <DependentUpon>QuanLyNguonGenGiong.xaml</DependentUpon>
     </Compile>
+    <Compile Include="QuanLyThucAnChanNuoi.xaml.cs">
+      <DependentUpon>QuanLyThucAnChanNuoi.xaml</DependentUpon>
+    </Compile>
+    <Page Include="CongTyWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -130,6 +140,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="QuanLyNguonGenGiong.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="QuanLyThucAnChanNuoi.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
