@@ -397,7 +397,7 @@
                       Grid.ColumnSpan="3"
                       Grid.RowSpan="2"/>
             <Label x:Name="numberOfCompanyInFieldLabel"
-                       Content="loremipsum"
+                       Content=""
                        Grid.Column="0" 
                        Grid.Row="3"
                       Margin="10,10,62,10"
@@ -405,7 +405,7 @@
                       FontWeight="Bold"
                        Grid.ColumnSpan="3"/>
             <Label x:Name="numberOfCompanyInField"
-                   Content="loremipsum"
+                   Content=""
                       Grid.Column="8"
                       Grid.Row="3"
                       Margin="10,10,205,10"
@@ -427,7 +427,7 @@
                          SelectionChanged="TraCuuLoaiConVat_SelectionChanged"/>
 
             <Label x:Name="LabelSoLuongConGiong" 
-                   Content="Lorem ipsum"
+                   Content=""
                       Grid.Column="0"
                       Grid.Row="5"
                       Margin="10"
@@ -436,7 +436,7 @@
                       Grid.ColumnSpan="3"/>
 
             <Label x:Name="numberOfBreed" 
-                     Content="Lorem ipsum"
+                     Content=""
                       Grid.Column="8"
                       Grid.Row="5"
                       Margin="10"
