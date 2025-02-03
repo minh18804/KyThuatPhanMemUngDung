@@ -9,7 +9,7 @@ namespace Test
 {
     public static class SqlHelper
     {
-        public static string connectionString { get; } = "Data Source=MINH18804\\MSSQLSERVER01; Initial Catalog=contact; Integrated Security=True";
+        public static string connectionString { get; } = "Data Source=.\\MSSQLSERVER01; Initial Catalog=contact; Integrated Security=True";
         private static SqlConnection _connection;
 
         public static SqlConnection OpenConnection(string connectionString)
