@@ -72,7 +72,7 @@ namespace Test
         }
         private void LoadXa()
         {
-            SqlHelper.ExecuteReader(SqlHelper.connectionString, "SELECT x.TenXa, h.TenHuyen FROM Xa x JOIN Huyen h ON x.TrucThuocHuyen = h.IDHuyen ", cmd => { }, reader =>
+            SqlHelper.ExecuteReader(SqlHelper.connectionString, "SELECT x.TenXa, h.TenHuyen FROM Xa x JOIN Huyen h ON x.TrucThuocHuyen = h.IDHuyen WHERE x.IDXa != 0", cmd => { }, reader =>
             {
                 tenXa = new List<Xa>();
                 while (reader.Read())
@@ -88,7 +88,7 @@ namespace Test
         }
         private void LoadHuyen()
         {
-            SqlHelper.ExecuteReader(SqlHelper.connectionString, "SELECT TenHuyen FROM Huyen", cmd => { }, reader =>
+            SqlHelper.ExecuteReader(SqlHelper.connectionString, "SELECT TenHuyen FROM Huyen WHERE IDHuyen != 0", cmd => { }, reader =>
             {
                 tenHuyen = new List<string>();
                 while (reader.Read())
@@ -98,7 +98,6 @@ namespace Test
             });
             BangHuyen.ItemsSource = tenHuyen;
         }
-
         private void return_1_Click(object sender, RoutedEventArgs e)
         {
             QuanLyHanhChinhGrid.Visibility = Visibility.Collapsed;
@@ -516,7 +515,8 @@ namespace Test
 
         private void AdministratorManageButton_Click(object sender, RoutedEventArgs e)
         {
-
+            QuanLyHanhChinhGrid.Visibility = Visibility.Visible;
+            Main.Visibility = Visibility.Collapsed;
         }
 
         private void adminLevel_SelectionChanged(object sender, SelectionChangedEventArgs e)

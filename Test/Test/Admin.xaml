@@ -161,12 +161,12 @@
                 <Button x:Name="AdministratorManageButton"  
                         Content="Quản lý hành chính"
                         Click="AdministratorManageButton_Click"/>
-                <Button x:Name="testt" 
-                        Content="Test"
-                        Click="testt_Click"/>
             </StackPanel>
         </Popup>
-        <Grid x:Name="Main" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="6">
+        <Grid x:Name="Main" 
+              Grid.Row="1" 
+              Grid.Column="1" 
+              Grid.ColumnSpan="6">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -190,13 +190,14 @@
                    FontStyle="Italic"
                    FontSize="18"
                    FontWeight="DemiBold"
-                   Grid.Row="1" Grid.Column="0"/>
+                   Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left"/>
             <Label x:Name="numberOfUser"
                    Grid.Row="1"
+                   Grid.Column="1"
                    HorizontalAlignment="Left"
                    FontSize="18"/>
 
-            <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,95,0,45" Grid.RowSpan="2">
+            <Grid Grid.Row="2" Grid.Column="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -214,48 +215,53 @@
                         Background="LightCyan"
                         Click="searchButton_Click"/>
             </Grid>
-            <StackPanel x:Name="LinhVucHoatDongStackPanel"
-                    Grid.Row="0" Grid.Column="4" Margin="0,0,55,268" Grid.RowSpan="4" Grid.ColumnSpan="2">
-                <Label Content="Lĩnh vực hoạt động"
-                   FontWeight="Bold"/>
-                <RadioButton x:Name="Giong_Vat_Nuoi_RadioButton"
-                         Content="Giống vật nuôi"
-                         IsChecked="True"
-                         Checked="Giong_Vat_Nuoi_RadioButton_Checked"/>
-                <RadioButton x:Name="Nguon_Gen_Giong_RadioButton"
-                         Content="Nguồn gen giống"
-                         Checked="Nguon_Gen_Giong_RadioButton_Checked"/>
-                <RadioButton x:Name="Thuc_An_Chan_Nuoi_RadioButton"
-                         Content="Thức ăn chăn nuôi"
-                         Checked="Thuc_An_Chan_Nuoi_RadioButton_Checked"/>
-            </StackPanel>
-            <StackPanel Grid.Row="1" Grid.Column="5" >
-                <Label Content="Nhóm đối tượng tìm kiếm: "
+            <Grid Grid.Row="0" Grid.Column="5" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <Label Content="Nhóm đối tượng tìm kiếm: "
                    FontWeight="Bold"
                    FontSize="14"/>
-                <RadioButton x:Name="CongTy"
+                    <RadioButton x:Name="CongTy"
                          FontSize="12
                          "
                          Content="Công ty"
                          Checked="CongTy_Checked"/>
 
-                <RadioButton x:Name="CanBoNghiepVu"
+                    <RadioButton x:Name="CanBoNghiepVu"
                          Content="Cán bộ nghiệp vụ"   
                          FontSize="12
                          "
                          Checked="CanBoNghiepVu_Checked"
                          IsChecked="True"/>
-            </StackPanel>
+                </StackPanel>
 
+                <StackPanel x:Name="LinhVucHoatDongStackPanel" Grid.Column="1">
+                    <Label Content="Lĩnh vực hoạt động"
+                   FontWeight="Bold"/>
+                    <RadioButton x:Name="Giong_Vat_Nuoi_RadioButton"
+                         Content="Giống vật nuôi"
+                         IsChecked="True"
+                         Checked="Giong_Vat_Nuoi_RadioButton_Checked"/>
+                    <RadioButton x:Name="Nguon_Gen_Giong_RadioButton"
+                         Content="Nguồn gen giống"
+                         Checked="Nguon_Gen_Giong_RadioButton_Checked"/>
+                    <RadioButton x:Name="Thuc_An_Chan_Nuoi_RadioButton"
+                         Content="Thức ăn chăn nuôi"
+                         Checked="Thuc_An_Chan_Nuoi_RadioButton_Checked"/>
+                </StackPanel>
+            </Grid>
 
             <DataGrid x:Name="userDataGrid" 
-                  Grid.Row="2" 
-                  Grid.RowSpan="5"
+                  Grid.Row="3" 
+                  Grid.RowSpan="4"
                   Grid.ColumnSpan="3"
                   IsReadOnly="true"
                   AutoGenerateColumns="False"
                   Background="White"
-                  MouseDoubleClick="userDataGrid_MouseDoubleClick" Margin="0,28,-196,0">
+                  MouseDoubleClick="userDataGrid_MouseDoubleClick" Margin="0,0,-67,0">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="Hiện mật khẩu">
                         <DataGridTemplateColumn.CellTemplate>
@@ -273,7 +279,8 @@
         <Grid x:Name="QuanLyHanhChinhGrid"
               Grid.Row="1" 
             Grid.Column="1" 
-            Margin="10"
+              Grid.ColumnSpan="6"
+              Grid.RowSpan="9"
               Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -312,6 +319,10 @@
             </DataGrid>
         </Grid>
         <Grid x:Name="ConfigUserData"
+              Grid.Row="1"
+              Grid.Column="1"
+              Grid.ColumnSpan="6"
+              Grid.RowSpan="9"
               Visibility="Collapsed">
             <Grid Grid.Row="1" 
           Grid.Column="1" 
