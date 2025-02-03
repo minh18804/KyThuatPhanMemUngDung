@@ -14,8 +14,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -168,6 +166,8 @@
               Grid.Column="1" 
               Grid.ColumnSpan="6">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="50"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -180,10 +180,11 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Label Content="Trang chủ"
                FontWeight="Bold"
-               Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="23"
+               Grid.Row="0" Grid.Column="0"
                FontSize="33"/>
 
             <Label Content="Số lượng người dùng: "
@@ -195,7 +196,7 @@
                    Grid.Row="1"
                    Grid.Column="1"
                    HorizontalAlignment="Left"
-                   FontSize="18"/>
+                   FontSize="14"/>
 
             <Grid Grid.Row="2" Grid.Column="0">
                 <Grid.ColumnDefinitions>
@@ -215,25 +216,23 @@
                         Background="LightCyan"
                         Click="searchButton_Click"/>
             </Grid>
-            <Grid Grid.Row="0" Grid.Column="5" >
+            <Grid Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4" >
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel>
                     <Label Content="Nhóm đối tượng tìm kiếm: "
                    FontWeight="Bold"
                    FontSize="14"/>
                     <RadioButton x:Name="CongTy"
-                         FontSize="12
-                         "
+                         FontSize="12"
                          Content="Công ty"
                          Checked="CongTy_Checked"/>
 
                     <RadioButton x:Name="CanBoNghiepVu"
                          Content="Cán bộ nghiệp vụ"   
-                         FontSize="12
-                         "
+                         FontSize="12"
                          Checked="CanBoNghiepVu_Checked"
                          IsChecked="True"/>
                 </StackPanel>
@@ -256,12 +255,12 @@
 
             <DataGrid x:Name="userDataGrid" 
                   Grid.Row="3" 
-                  Grid.RowSpan="4"
-                  Grid.ColumnSpan="3"
+                  Grid.RowSpan="3"
+                  Grid.ColumnSpan="8"
                   IsReadOnly="true"
                   AutoGenerateColumns="False"
                   Background="White"
-                  MouseDoubleClick="userDataGrid_MouseDoubleClick" Margin="0,0,-67,0">
+                  MouseDoubleClick="userDataGrid_MouseDoubleClick" >
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="Hiện mật khẩu">
                         <DataGridTemplateColumn.CellTemplate>
