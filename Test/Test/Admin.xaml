@@ -8,37 +8,36 @@
         Icon="pack://application:,,,/imageicon/anh.png"
         Title="Trang chủ" Height="450" Width="800">
     <Grid>
-        <Grid x:Name="Main">
-            <Grid.Background>
-                <ImageBrush ImageSource="images/background-main.jpg"/>
-            </Grid.Background>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto" MinWidth="40"/>
-                <ColumnDefinition Width="Auto" MinWidth="40"/>
-            </Grid.ColumnDefinitions>
+        <Grid.Background>
+            <ImageBrush ImageSource="images/background-main.jpg"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto" MinWidth="40"/>
+            <ColumnDefinition Width="Auto" MinWidth="40"/>
+        </Grid.ColumnDefinitions>
 
-            <Label x:Name="Greeting" 
+        <Label x:Name="Greeting" 
                Grid.Column="1" 
                HorizontalAlignment="Center" 
                Width="572" 
                Height="30" 
                VerticalAlignment="Top" Margin="0,8,0,0"/>
 
-            <Button x:Name="LogoutButton" 
+        <Button x:Name="LogoutButton" 
                 Width="30" 
                 Height="30" 
                 Grid.Column="7"
@@ -52,47 +51,47 @@
                 BorderBrush="Black" 
                 Click="LogoutButton_Click"
                 BorderThickness="1">
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Background" Value="LightBlue"/>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Trigger.EnterActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="Red" Duration="0:0:0.3"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.EnterActions>
-                                <Trigger.ExitActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="LightBlue" Duration="0:0:0.3"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.ExitActions>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Grid>
-                            <Ellipse Fill="{TemplateBinding Background}" 
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="LightBlue"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="Red" Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="LightBlue" Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Ellipse Fill="{TemplateBinding Background}" 
                                  Stroke="{TemplateBinding BorderBrush}" 
                                  StrokeThickness="{TemplateBinding BorderThickness}"/>
-                            <ContentPresenter HorizontalAlignment="Center" 
+                        <ContentPresenter HorizontalAlignment="Center" 
                                           VerticalAlignment="Center"/>
-                            <Image Source="pack://application:,,,/imageicon/logout.png" 
+                        <Image Source="pack://application:,,,/imageicon/logout.png" 
                                Width="16" 
                                Height="16" 
                                Margin="0,0,5,0"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
 
-            <Button x:Name="InfoButton" 
+        <Button x:Name="InfoButton" 
                 Width="30" 
                 Height="30"
                 Grid.Column="8"
@@ -106,40 +105,40 @@
                 BorderBrush="Black" 
                 Click="InfoButton_Click"
                 BorderThickness="1">
-                <Popup  x:Name="popupInfoMenu" 
+            <Popup  x:Name="popupInfoMenu" 
                     PlacementTarget="{Binding ElementName=InfoButton}" 
                     StaysOpen="False" 
                     Placement="Bottom" 
                     HorizontalOffset="10" 
                     VerticalOffset="10">
-                    <StackPanel Background="LightGray" 
+                <StackPanel Background="LightGray" 
                             Width="200"
                             HorizontalAlignment="Right">
-                        <Button x:Name="changePassword"
+                    <Button x:Name="changePassword"
                             Content="Đổi mật khẩu" 
                             Click="changePassword_Click"
                             FontWeight="Normal"/>
 
-                        <Button x:Name="personInfo"
+                    <Button x:Name="personInfo"
                             Content="Thông tin người dùng " 
                             Click="personInfo_Click"
                             FontWeight="Normal"/>
-                    </StackPanel>
-                </Popup>
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Grid>
-                            <Ellipse Fill="{TemplateBinding Background}" 
+                </StackPanel>
+            </Popup>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Ellipse Fill="{TemplateBinding Background}" 
                                  Stroke="{TemplateBinding BorderBrush}" 
                                  StrokeThickness="{TemplateBinding BorderThickness}"/>
-                            <ContentPresenter HorizontalAlignment="Center" 
+                        <ContentPresenter HorizontalAlignment="Center" 
                                           VerticalAlignment="Center"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
 
-            <Button x:Name="hamburgerButton"
+        <Button x:Name="hamburgerButton"
                 Foreground="Blue"
                 Width="60" 
                 Height="30" 
@@ -151,73 +150,72 @@
                 FontSize="23"
                 Click="hamburgerButton_Click"/>
 
-            <Popup x:Name="popupMenu" 
+        <Popup x:Name="popupMenu" 
                PlacementTarget="{Binding ElementName=hamburgerButton}" 
                StaysOpen="False" 
                Placement="Bottom">
-                <StackPanel Background="LightGray"
+            <StackPanel Background="LightGray"
                         Width="200" 
                         HorizontalAlignment="Left">
 
-                    <Button x:Name="AdministratorManageButton"  
+                <Button x:Name="AdministratorManageButton"  
                         Content="Quản lý hành chính"
                         Click="AdministratorManageButton_Click"/>
-                    <Button x:Name="testt" 
+                <Button x:Name="testt" 
                         Content="Test"
                         Click="testt_Click"/>
-                </StackPanel>
-            </Popup>
-
-            <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="6">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Label Content="Trang chủ"
+            </StackPanel>
+        </Popup>
+        <Grid x:Name="Main" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Content="Trang chủ"
                FontWeight="Bold"
                Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="23"
                FontSize="33"/>
 
-                <Label Content="Số lượng người dùng: "
+            <Label Content="Số lượng người dùng: "
                    FontStyle="Italic"
                    FontSize="18"
                    FontWeight="DemiBold"
                    Grid.Row="1" Grid.Column="0"/>
-                <Label x:Name="numberOfUser"
-                   Grid.Row="1" Grid.Column="1"
+            <Label x:Name="numberOfUser"
+                   Grid.Row="1"
                    HorizontalAlignment="Left"
                    FontSize="18"/>
 
-                <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
-                    <TextBox x:Name="searchTextBox" 
+            <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,95,0,45" Grid.RowSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="searchTextBox" 
                          Width="173" 
                          Height="30"
-                         Margin="132,7,0,0" 
-                         VerticalAlignment="Top" 
+                         Grid.Column="1"
                          HorizontalAlignment="Left"/>
-                    <Button x:Name="searchButton" 
+                <Button x:Name="searchButton" 
                         Content="Tìm kiếm" 
                         Width="100" 
-                        Margin="5"
                         Height="30"
+                        Grid.Column="0"
                         Background="LightCyan"
-                        VerticalAlignment="Center" 
-                        HorizontalAlignment="Left" 
                         Click="searchButton_Click"/>
-                </Grid>
             </Grid>
             <StackPanel x:Name="LinhVucHoatDongStackPanel"
-                    Grid.Row="1" Grid.Column="4" Margin="0,0,55,268" Grid.RowSpan="4" Grid.ColumnSpan="2"
-                    Visibility="Collapsed">
+                    Grid.Row="0" Grid.Column="4" Margin="0,0,55,268" Grid.RowSpan="4" Grid.ColumnSpan="2">
                 <Label Content="Lĩnh vực hoạt động"
                    FontWeight="Bold"/>
                 <RadioButton x:Name="Giong_Vat_Nuoi_RadioButton"
@@ -231,11 +229,10 @@
                          Content="Thức ăn chăn nuôi"
                          Checked="Thuc_An_Chan_Nuoi_RadioButton_Checked"/>
             </StackPanel>
-            <StackPanel Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="3" HorizontalAlignment="Left" Margin="65,1,0,267" Grid.RowSpan="4" Width="195">
+            <StackPanel Grid.Row="1" Grid.Column="5" >
                 <Label Content="Nhóm đối tượng tìm kiếm: "
                    FontWeight="Bold"
-                   FontSize="14
-                   "/>
+                   FontSize="14"/>
                 <RadioButton x:Name="CongTy"
                          FontSize="12
                          "
@@ -253,13 +250,12 @@
 
             <DataGrid x:Name="userDataGrid" 
                   Grid.Row="2" 
-                  Grid.RowSpan="3"
-                  Grid.Column="1"
-                  Grid.ColumnSpan="6"
+                  Grid.RowSpan="5"
+                  Grid.ColumnSpan="3"
                   IsReadOnly="true"
                   AutoGenerateColumns="False"
                   Background="White"
-                  MouseDoubleClick="userDataGrid_MouseDoubleClick">
+                  MouseDoubleClick="userDataGrid_MouseDoubleClick" Margin="0,28,-196,0">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="Hiện mật khẩu">
                         <DataGridTemplateColumn.CellTemplate>
@@ -274,7 +270,47 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-
+        <Grid x:Name="QuanLyHanhChinhGrid"
+              Grid.Row="1" 
+            Grid.Column="1" 
+            Margin="10"
+              Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Button x:Name="return_1"
+                       Content="Quay lại" 
+                   Click="return_1_Click" 
+                   Grid.Column="6"/>
+            <TextBlock Text="Quản lý hành chính" 
+                      FontSize="28" 
+                      FontWeight="Bold" 
+                      Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4"/>
+            <DataGrid x:Name="BangHuyen" 
+                         Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="12"
+                         MouseDoubleClick="BangHuyen_MouseDoubleClick"
+                         AutoGenerateColumns="False">
+            </DataGrid>
+            <DataGrid x:Name="BangXa" 
+                         Grid.Column="4" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="12"
+                         AutoGenerateColumns="False">
+            </DataGrid>
+        </Grid>
         <Grid x:Name="ConfigUserData"
               Visibility="Collapsed">
             <Grid Grid.Row="1" 

@@ -26,6 +26,13 @@ namespace Test
         public CanBoNghiepVu AdminUser;
         private DispatcherTimer timer = new DispatcherTimer();
         bool isPasswordVisible = false;
+        List<string> tenHuyen;
+        struct Xa
+        {
+            public string TenXa { get; set; }
+            public string TenHuyenTrucThuoc { get; set; }
+        }
+        List<Xa> tenXa;
         public AdminWindow(CanBoNghiepVu adminUser)
         {
             InitializeComponent();
@@ -38,6 +45,77 @@ namespace Test
             numberOfUser.Content        = Provider.NumberOfUsersOrCompany("CanBoNghiepVu");
             users                       = Provider.LoadUsersData();
             companies                   = Provider.LoadCompaniesData();
+            LoadHuyen();
+            LoadXa();
+            AddColumnsToBangHuyen();
+            AddColumnsToBangXa();
+        }
+        private void AddColumnsToBangHuyen()
+        {
+            DataGridTextColumn huyenColumn = new DataGridTextColumn
+            {
+                Header = "Các huyện thuộc tỉnh Ninh Bình",
+                Binding = new Binding("."),
+                Width = new DataGridLength(1, DataGridLengthUnitType.Star)
+            };
+            BangHuyen.Columns.Add(huyenColumn);
+        }
+        private void AddColumnsToBangXa()
+        {
+            DataGridTextColumn xaColumn = new DataGridTextColumn
+            {
+                Header = "Các xã",
+                Binding = new Binding("TenXa"),
+                Width = new DataGridLength(1, DataGridLengthUnitType.Star)
+            };
+            BangXa.Columns.Add(xaColumn);
+        }
+        private void LoadXa()
+        {
+            SqlHelper.ExecuteReader(SqlHelper.connectionString, "SELECT x.TenXa, h.TenHuyen FROM Xa x JOIN Huyen h ON x.TrucThuocHuyen = h.IDHuyen ", cmd => { }, reader =>
+            {
+                tenXa = new List<Xa>();
+                while (reader.Read())
+                {
+                    tenXa.Add(new Xa
+                    {
+                        TenXa = reader["TenXa"].ToString(),
+                        TenHuyenTrucThuoc = reader["TenHuyen"].ToString()
+                    });
+                }
+            });
+            BangXa.ItemsSource = tenXa.Select(x => new { x.TenXa }).ToList();
+        }
+        private void LoadHuyen()
+        {
+            SqlHelper.ExecuteReader(SqlHelper.connectionString, "SELECT TenHuyen FROM Huyen", cmd => { }, reader =>
+            {
+                tenHuyen = new List<string>();
+                while (reader.Read())
+                {
+                    tenHuyen.Add(reader["TenHuyen"].ToString());
+                }
+            });
+            BangHuyen.ItemsSource = tenHuyen;
+        }
+
+        private void return_1_Click(object sender, RoutedEventArgs e)
+        {
+            QuanLyHanhChinhGrid.Visibility = Visibility.Collapsed;
+            Main.Visibility = Visibility.Visible;
+        }
+        private void BangHuyen_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (BangHuyen.SelectedItem is string selectedHuyen)
+            {
+                var column = BangXa.Columns[0] as DataGridTextColumn;
+                if (column != null)
+                {
+                    column.Header = $"Các xã thuộc {selectedHuyen}";
+                }
+                var filteredXa = tenXa.Where(x => x.TenHuyenTrucThuoc == selectedHuyen).Select(x => new { x.TenXa }).ToList();
+                BangXa.ItemsSource = filteredXa;
+            }
         }
         private void DataGridConfig(bool isCongTy)
         {

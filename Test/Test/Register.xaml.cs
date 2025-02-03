@@ -64,6 +64,12 @@ namespace Test
                 MessageBox.Show("Username hoặc password quá ngắn", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            if (SqlHelper.ExecuteScalar<int>(SqlHelper.connectionString, "SELECT COUNT(*) FROM CanBoNghiepVu WHERE Username = @username",
+                cmd => cmd.Parameters.AddWithValue("@username", Username.Text)) > 0)
+            {
+                MessageBox.Show("Username đã tồn tại. Vui lòng chọn username khác.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
             CanBoNghiepVu tempCanBoNghiepVu = new CanBoNghiepVu();
             tempCanBoNghiepVu.Username = Username.Text;
