@@ -424,7 +424,7 @@
                 <StackPanel x:Name="NewPasswordPanel" 
                     Orientation="Vertical" 
                     Grid.Row="8" Grid.Column="1" 
->
+                    Visibility="Collapsed">
                     <TextBlock Text="Mật khẩu mới:" 
                        FontWeight="Bold" 
                        Margin="0,10,0,0"/>
