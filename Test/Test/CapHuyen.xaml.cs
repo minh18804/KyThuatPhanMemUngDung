@@ -148,8 +148,8 @@ namespace Test
 
         private void quanLyThucAnChanNuoi_Click(object sender, RoutedEventArgs e)
         {
-            QuanLyGiongVatNuoiWindow quanLyGiongVatNuoiWindow = new QuanLyGiongVatNuoiWindow(user, this);
-            quanLyGiongVatNuoiWindow.Show();
+            QuanLyThucAnChanNuoiWindow quanLyThucAnChanNuoiWindow = new QuanLyThucAnChanNuoiWindow(user, this);
+            quanLyThucAnChanNuoiWindow.Show();
             Hide();
         }
 
